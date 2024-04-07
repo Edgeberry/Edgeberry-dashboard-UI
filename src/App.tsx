@@ -1,14 +1,18 @@
-import logo from './Edgeberry_logo_text.png';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import Home from './Pages/Home';
+import Login from './Pages/Login';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Kickstart your connected device adventure
-        </p>
-      </header>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
+      {/*<NavigationBar />
+      <br/>*/}
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/login' element={<Login user={null} onLogin={()=>{}}/>} />
+      </Routes>
+    </BrowserRouter>
     </div>
   );
 }
