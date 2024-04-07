@@ -25,6 +25,8 @@ code {
 }
 .App {
   text-align: center;
+  background-color: var(--edgeberry_black);
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -41,4 +43,35 @@ code {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: var(--edgeberry_silver);
+}
+
+/* Sign-in box */
+.centerbox{
+  width: 100%;
+  max-width: 350px;
+  padding: 15px;
+  margin: auto;
+  color: var(--edgeberry_silver);
+}
+/* Primary button */
+.btn{
+  min-width: 140px;
+}
+
+.btn-primary, .btn-primary:active, .btn-primary:visited {
+  background-color: var(--edgeberry_blue);
+  border-color: var(--edgeberry_darker_blue);
+  box-shadow: 0 0px 0px var(--edgeberry_blue) inset, 0,0,0px var(--edgeberry_darker_blue);
+}
+
+.btn-primary:hover {
+  background-color: var(--edgeberry_darker_blue);
+  border-color: var(--edgeberry_blue);
+  box-shadow: 0 0px 0px var(--edgeberry_darker_blue) inset, 0,0,3px var(--edgeberry_blue);
+
+}
+
+/* Danger button */
+.btn-danger, .btn-danger:active, .btn-danger:visited {
+  background-color: var(--edgeberry_red);
 }
