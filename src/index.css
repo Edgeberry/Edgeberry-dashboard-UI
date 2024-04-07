@@ -17,6 +17,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--edgeberry_silver);
 }
 
 code {
@@ -34,14 +35,12 @@ code {
   pointer-events: none;
 }
 
-.App-header {
-  background-color: var(--edgeberry_black);
+.App-centered {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: var(--edgeberry_silver);
 }
 
