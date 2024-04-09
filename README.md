@@ -1,1 +1,1 @@
-# Edge Gateway website
+# EdgeBerry.io UI
