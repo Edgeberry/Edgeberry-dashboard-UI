@@ -1,6 +1,7 @@
 import NavigationBar from "../components/Navigationbar";
 import { Col, Container, Row } from "react-bootstrap";
 import AssetList from "../components/AssetList";
+import AssetDetail from "../components/AssetDetail";
 
 function Dashboard() {
 
@@ -15,9 +16,7 @@ function Dashboard() {
                         <AssetList />
                     </Col>
                     <Col>
-                        <h1>Dashboard</h1>
-                        <p>Some usefull text</p>
-                        <hr/>
+                        <AssetDetail />
                     </Col>
                 </Row>
             </Container>

@@ -102,10 +102,11 @@ code {
   align-items: stretch;
   position: relative;
   background-color: var(--edgeberry_black);
-  border-radius: 7px;
+  border-radius: 5px;
   border: 1px solid var(--edgeberry_gray);
   margin: 2px;
   overflow: hidden;
+  color: var(--edgeberry_gray);
 }
 
 .asset-list-item:hover{

@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { api_things_getThingsList } from "../api/things";
 import NotificationBox from "./Notification";
-import { JsxElement } from "typescript";
 
 const AssetList = ()=>{
     const[ message, setMessage ] = useState<string>('');
@@ -20,7 +19,7 @@ const AssetList = ()=>{
         setThingElementList([]);
         if( thingList.length <= 0 ) return;
         thingList.map( (thing:any)=>{
-            setThingElementList(thingElementList => [...thingElementList, <AssetListItem thing={thing} key={thing.thingName}/>]);
+            return setThingElementList(thingElementList => [...thingElementList, <AssetListItem thing={thing} key={thing.thingName}/>]);
         });
     },[thingList]);
 
