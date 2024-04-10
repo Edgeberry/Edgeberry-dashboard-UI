@@ -45,6 +45,21 @@ code {
   color: var(--edgeberry_silver);
 }
 
+.container-fluid{
+  padding: 0px;
+  min-width: 100%;
+  width: 100%;
+  text-align: left;
+}
+
+.container-page {
+  text-align: left;
+  min-width: 100%;
+  max-width: 100%;
+  min-height: calc(100vh - 60px);
+  height: calc(100vh - 60px);
+}
+
 /* Sign-in box */
 .centerbox{
   width: 100%;
@@ -74,4 +89,49 @@ code {
 /* Danger button */
 .btn-danger, .btn-danger:active, .btn-danger:visited {
   background-color: var(--edgeberry_red);
+}
+
+/* Asset List */
+.asset-list-container{
+  padding:0;
+  margin: 0;
+}
+
+.asset-list-item{
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  background-color: var(--edgeberry_black);
+  border-radius: 7px;
+  border: 1px solid var(--edgeberry_gray);
+  margin: 2px;
+  overflow: hidden;
+}
+
+.asset-list-item:hover{
+  border-color: var(--edgeberry_blue);
+  background-color: var(--edgeberry_darker_blue);
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+}
+
+.asset-list-item-content{
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-right: 5px;
+}
+
+.asset-list-item-header{
+  color: var(--edgeberry_blue);
+  font-size: 1.2rem;
+}
+
+.asset-list-item-text{
+  font-size: 1.0rem;
+}
+
+.asset-list-item-indicator{
+  background-color: var(--edgeberry_blue);
+  min-width:1.3vw;
 }
