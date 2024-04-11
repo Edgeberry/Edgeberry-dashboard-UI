@@ -10,6 +10,11 @@ const Settings = (props:{user:any|null})=>{
     const[ keyId, setKeyId ] = useState<string>('');
     const[ key, setKey ] = useState<string>('');
 
+
+    if( !props.user ){
+        return <Navigate to='/dashboard/login' />;
+    }
+    
     return (
         <>
             <Container style={{textAlign:'left'}}>

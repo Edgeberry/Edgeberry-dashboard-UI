@@ -1,17 +1,20 @@
 import { Col, Container, Row } from "react-bootstrap";
 import AssetList from "./AssetList";
 import AssetDetail from "./AssetDetail";
-import { useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
-function Assets() {
+const Assets = (props:{user:any})=>{
     const { assetId } = useParams();
 
+    if( !props.user ){
+        return <Navigate to='/dashboard/login' />;
+    }
     return (
         <>
             <Container className="container-page">
                 <br/>
                 <Row>
-                    <Col sm={3}>
+                    <Col xs={6} sm={5} md={4} lg={3}>
                         <AssetList />
                     </Col>
                     <Col>

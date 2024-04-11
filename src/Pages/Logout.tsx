@@ -1,16 +1,25 @@
-
-import { Navigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { api_user_logout } from '../api/user';
 import { useEffect } from 'react';
 
-const Logout = (props:{user:any, onLogout:Function }) => {
+const Logout = (props:{user:any|null, onLogout:Function }) => {
     useEffect(()=>{
-        api_user_logout();
-    },[])
+        navigateToLogin();
+    },[]);
 
-    return(
-        <Navigate to='/dashboard/login' />
-    )
+
+    const navigate = useNavigate();
+
+    async function navigateToLogin(){
+        // Log out the user
+        await api_user_logout();
+        // Call the onLogout function
+        props.onLogout();
+        // Navigate to login
+        navigate('/dashboard/login');
+    }
+
+    return(<p>Logging out...</p>);
 }
 
 export default Logout;

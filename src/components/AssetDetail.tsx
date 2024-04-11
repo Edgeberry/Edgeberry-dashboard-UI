@@ -19,6 +19,7 @@ const AssetDetail = ( props:{assetId?:string})=>{
         }
         setDescription(result);
     }
+    
     if(!props.assetId) return <h1>No asset selected</h1>;
     return(
         <Container className="container-fluid">

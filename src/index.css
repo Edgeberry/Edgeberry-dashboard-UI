@@ -92,6 +92,10 @@ code {
   background-color: var(--edgeberry_red);
 }
 
+.navbar, .navbar-dark {
+  background-color: inherit !important;
+}
+
 /* Asset List */
 .asset-list-container{
   padding:0;
