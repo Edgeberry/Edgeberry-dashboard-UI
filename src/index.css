@@ -58,6 +58,7 @@ code {
   max-width: 100%;
   min-height: calc(100vh - 60px);
   height: calc(100vh - 60px);
+  overflow: hidden;
 }
 
 /* Sign-in box */
@@ -95,6 +96,13 @@ code {
 .asset-list-container{
   padding:0;
   margin: 0;
+  height: calc(100vh - 80px);
+  overflow-y: scroll;
+  -ms-overflow-style: none;   /* Hidden scrollbar: Internet Explorer 10+ */
+  scrollbar-width: none;      /* Hidden scrollbar: Firefox */
+}
+.asset-list-container::-webkit-scrollbar { 
+    display: none;            /* Hidden scrollbar: Safari and Chrome */
 }
 
 .asset-list-item{
@@ -124,7 +132,7 @@ code {
 }
 
 .asset-list-item-header{
-  color: var(--edgeberry_blue);
+  color: var(--edgeberry_silver);
   font-size: 1.2rem;
 }
 
