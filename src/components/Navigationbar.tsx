@@ -12,6 +12,12 @@ const NavigationBar = ()=>{
                     <img src={logo} alt="EdgeBerry.io" height={'32px'}/>
                 </Navbar.Brand>
                 <Nav>
+                    <Nav.Link href='/dashboard/assets'>
+                        Assets
+                    </Nav.Link>
+                    <Nav.Link href='/dashboard/settings'>
+                        Settings
+                    </Nav.Link>
                     <Nav.Link href='/dashboard/logout'>
                         Log out &nbsp;<FontAwesomeIcon icon={faSignOutAlt} />
                     </Nav.Link>
