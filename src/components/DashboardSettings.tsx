@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Col, Container, Form, Row } from "react-bootstrap";
+import { Navigate } from "react-router-dom";
 
-function Settings() {
+const Settings = (props:{user:any|null})=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
 
     const[ endpoint, setEndpoint ] = useState<string>('');
@@ -9,7 +10,6 @@ function Settings() {
     const[ keyId, setKeyId ] = useState<string>('');
     const[ key, setKey ] = useState<string>('');
 
-    
     return (
         <>
             <Container style={{textAlign:'left'}}>
@@ -48,6 +48,20 @@ function Settings() {
                 <hr/>
                 <h2>Account</h2>
                 <p>Your EdgeBerry.io account settings </p>
+                <Form>
+                    <Form.Group as={Row} className="mb-2">
+                        <Form.Label column sm={2}>Username</Form.Label>
+                        <Col sm={6}>
+                            <Form.Control type={'text'} placeholder={'Username'} value={props.user?.username} onChange={(e)=>{}} required disabled={disabled}/>
+                        </Col>
+                    </Form.Group>
+                    <Form.Group as={Row} className="mb-2">
+                        <Form.Label column sm={2}>E-mail</Form.Label>
+                        <Col sm={6}>
+                            <Form.Control type={'text'} placeholder={'E-mail'} value={props.user?.email} onChange={(e)=>{}} required disabled={disabled}/>
+                        </Col>
+                    </Form.Group>
+                </Form>
 
             </Container>
         </>

@@ -3,7 +3,7 @@ import logo from '../Edgeberry_logo_text.png';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 
-const NavigationBar = ()=>{
+const NavigationBar = (props:{user:any|null})=>{
 
     return(
         <Navbar sticky="top" bg={'dark'} data-bs-theme={'dark'}>
@@ -11,6 +11,7 @@ const NavigationBar = ()=>{
                 <Navbar.Brand href='/dashboard'>
                     <img src={logo} alt="EdgeBerry.io" height={'32px'}/>
                 </Navbar.Brand>
+                {props.user?
                 <Nav>
                     <Nav.Link href='/dashboard/assets'>
                         Assets
@@ -22,6 +23,7 @@ const NavigationBar = ()=>{
                         Log out &nbsp;<FontAwesomeIcon icon={faSignOutAlt} />
                     </Nav.Link>
                 </Nav>
+                :<></>}
             </Container>
         </Navbar>
     );
