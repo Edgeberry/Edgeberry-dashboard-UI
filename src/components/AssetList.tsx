@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
-import { api_things_getThingsList } from "../api/things";
+import { api_things_getThingIndex, api_things_getThingsList } from "../api/things";
 import NotificationBox from "./Notification";
 
 const AssetList = ()=>{
@@ -8,7 +8,6 @@ const AssetList = ()=>{
     const[ isError, setIsError ] = useState<boolean>(false);
     const[ thingList, setThingList ] = useState<any[]>([]);
     const[ thingElementList, setThingElementList ] = useState<JSX.Element[]>([]);
-
 
     useEffect(()=>{
         getThingsList();
@@ -45,14 +44,29 @@ const AssetList = ()=>{
 export default AssetList;
 
 const AssetListItem = (props:{thing:any})=>{
+    const[ connected, setConnected ] = useState<boolean>(false);
+
+    useEffect(()=>{
+        getThingIndex();
+    },[])
+
+    async function getThingIndex(){
+        const result = await api_things_getThingIndex(props.thing.thingName);
+        if( result.message ){
+            // TODO - do something with the error...
+            return;
+        }
+        setConnected(result?.connectivity?.connected);
+    }
+
     return(
         <div className="asset-list-item">
-            <div className="asset-list-item-indicator">
+            <div className="asset-list-item-indicator" style={{backgroundColor:connected?'#0007ff':'red'}}>
                 
             </div>
             <div className="asset-list-item-content">
                 <h1 className="asset-list-item-header">{props.thing.thingName}</h1>
-                <p className="asset-list-item-text">{true?"EdgeBerry Device":props.thing.thingArn}</p>
+                <p className="asset-list-item-text">{props.thing.thingTypeName?props.thing.thingTypeName:''}</p>
             </div>
         </div>
     );
