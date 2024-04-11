@@ -1,14 +1,9 @@
-import NavigationBar from "./Navigationbar";
-import { Col, Container, Row } from "react-bootstrap";
-import AssetList from "./AssetList";
-import AssetDetail from "./AssetDetail";
+import { Container } from "react-bootstrap";
 
 function Settings() {
-
-
     return (
         <>
-            <Container>
+            <Container style={{textAlign:'left'}}>
                 <h1>Settings</h1>
                 <p>Settings for your EdgeBerry.io stuff</p>
             </Container>

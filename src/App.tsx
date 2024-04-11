@@ -14,12 +14,16 @@ function App() {
       <br/>*/}
       <Routes>
         <Route path='/' element={<Home />} />
-        <Route path='/login' element={<Login user={null} onLogin={()=>{}}/>} />
+
         {/* Dashboard: nested routes */}
         <Route path='/dashboard' element={<Dashboard />}>
+          <Route path='/dashboard/login' element={<Login user={null} onLogin={()=>{}}/>} />
           <Route path='/dashboard/assets' element={<Assets />} />
+          <Route path='/dashboard/assets/:assetId' element={<Assets />} />
           <Route path='/dashboard/settings' element={<Settings />}/>
+          <Route path='/dashboard/*' element={<NotFound />} />
         </Route>
+
         <Route path='*' element={<NotFound />} />
       </Routes>
     </BrowserRouter>

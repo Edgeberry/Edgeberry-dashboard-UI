@@ -8,7 +8,7 @@ const NavigationBar = ()=>{
     return(
         <Navbar sticky="top" bg={'dark'} data-bs-theme={'dark'}>
             <Container className="container-fluid" style={{paddingRight:'10px', paddingLeft:'10px'}}>
-                <Navbar.Brand href='/'>
+                <Navbar.Brand href='/dashboard'>
                     <img src={logo} alt="EdgeBerry.io" height={'32px'}/>
                 </Navbar.Brand>
                 <Nav>

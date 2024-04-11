@@ -1,9 +1,7 @@
 import NavigationBar from "../components/Navigationbar";
 import { Outlet } from "react-router-dom";
 
-function Dashboard() {
-
-
+function Dashboard() {    
     return (
         <>
             <NavigationBar />

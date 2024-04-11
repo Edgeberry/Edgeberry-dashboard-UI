@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { api_things_getThingIndex, api_things_getThingsList } from "../api/things";
 import NotificationBox from "./Notification";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AssetList = ()=>{
     const[ message, setMessage ] = useState<string>('');
@@ -59,8 +60,13 @@ const AssetListItem = (props:{thing:any})=>{
         setConnected(result?.connectivity?.connected);
     }
 
+    const navigate = useNavigate();
+    function navigateToAssetDetails(){
+        navigate('/dashboard/assets/'+props.thing.thingName);
+    }
+
     return(
-        <div className="asset-list-item">
+        <div className="asset-list-item" onClick={navigateToAssetDetails}>
             <div className="asset-list-item-indicator" style={{backgroundColor:connected?'#0007ff':'red'}}>
                 
             </div>
