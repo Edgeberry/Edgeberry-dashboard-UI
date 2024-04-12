@@ -69,10 +69,6 @@ code {
   margin: auto;
   color: var(--edgeberry_silver);
 }
-/* Primary button */
-.btn{
-  min-width: 140px;
-}
 
 .btn-primary, .btn-primary:active, .btn-primary:visited {
   background-color: var(--edgeberry_blue);
