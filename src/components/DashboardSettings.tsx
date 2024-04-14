@@ -34,7 +34,6 @@ const Settings = (props:{user:any|null})=>{
             if(typeof(result.region) === 'string') setRegion( result.region );
             if(typeof(result.accessKeyId) === 'string') setKeyId( result.accessKeyId );
             if(typeof(result.secretAccessKey) === 'string') setKey( result.secretAccessKey );
-            console.log(result)
         }
     }
     
