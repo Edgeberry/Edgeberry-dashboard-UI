@@ -61,12 +61,19 @@ export async function api_things_getThingShadow( thingName:string ){
     }
 }
 
+
+
 /* Restart the application */
-export async function api_things_restart(){
-    const response = await fetch( window.location.origin+'/api/application/restart',{
+export async function api_things_invokeDirectMethod( deviceId:string, methodName:string, methodBody:string ){
+    const response = await fetch( window.location.origin+'/api/things/directmethod',{
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
-        credentials: 'include'
+        credentials: 'include',
+        body: JSON.stringify({
+            deviceId: deviceId,
+            methodName: methodName,
+            methodBody: methodBody
+        })
     });
     try{
         let content = await response.json();

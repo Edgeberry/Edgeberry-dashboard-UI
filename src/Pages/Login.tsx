@@ -29,7 +29,7 @@ const Login = (props:{user:any, onLogin:Function }) => {
     }
 
     return(
-        <main className="centerbox" style={{marginTop:'20%'}}>
+        <main className="centerbox" style={{marginTop:'6vh'}}>
             <Form onSubmit={submit}>
                 <img src={logo} width="100%" alt="logo" />
                 <br/>
