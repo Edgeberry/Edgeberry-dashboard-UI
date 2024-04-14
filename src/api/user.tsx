@@ -44,7 +44,7 @@ export async function api_user_logout(){
     }
 }
 
-/* Get list of all things */
+/* Get The authenticated user */
 export async function api_user_getAuthenticatedUser(){
     const response = await fetch( window.location.origin+'/api/user/user',{
         method: 'GET',
@@ -53,6 +53,43 @@ export async function api_user_getAuthenticatedUser(){
     });
     try{
         const content = await response.json();
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
+
+/* Get This user's AWS settings */
+export async function api_user_getAwsSettings(){
+    const response = await fetch( window.location.origin+'/api/user/awssettings',{
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include'
+    });
+    try{
+        const content = await response.json();
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
+
+/* Update This user's AWS settings */
+export async function api_user_updateAwsSettings( endpoint:string, region:string, accessKeyId:string, secretAccessKey:string ){
+    const response = await fetch( window.location.origin+'/api/user/awssettings',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({
+            endpoint:endpoint,
+            region: region,
+            accessKeyId: accessKeyId,
+            secretAccessKey: secretAccessKey
+        })
+    });
+    try{
+        let content = await response.json();
+        content.ok = response.ok;
         return content;
     } catch(err:any){
         return {message:err.toString()};
