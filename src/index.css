@@ -144,3 +144,10 @@ code {
   background-color: var(--edgeberry_blue);
   min-width:1.3vw;
 }
+
+/* Text styling */
+
+.text-subtitle{
+  font-size: 1.0rem;
+  color: var(--edgeberry_gray);
+}
