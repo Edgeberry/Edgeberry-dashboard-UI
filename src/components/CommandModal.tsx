@@ -13,12 +13,14 @@ const CommandModal = ( props:{ deviceId:string, show:boolean, onClose:Function }
     const[ disabled, setDisabled ] = useState<boolean>(false);
 
     // Disappearing messages
+    const[ timeoutKeeper, setTimeoutKeeper ] = useState<ReturnType<typeof setTimeout>|null>(null);
     useEffect(()=>{
         if( message === '' ) return;
-        setTimeout(()=>{
+        if( timeoutKeeper ) clearTimeout( timeoutKeeper );
+        setTimeoutKeeper(setTimeout(()=>{
             setMessage('');
             setIsError(false);
-        },3500);
+        },3500));
     },[message]);
 
     // Send the message
@@ -28,7 +30,7 @@ const CommandModal = ( props:{ deviceId:string, show:boolean, onClose:Function }
         setMessage("Executing command...");
 
         const result = await api_things_invokeDirectMethod( props.deviceId, methodName, body );
-        if( !result.ok ){
+        if( result.message ){
             setDisabled(false);
             setIsError(true);
             setMessage(result.message);
@@ -36,7 +38,7 @@ const CommandModal = ( props:{ deviceId:string, show:boolean, onClose:Function }
         else{
             setDisabled(false);
             setIsError(false);
-            setMessage(result.message);
+            setMessage(JSON.stringify(result.payload));
         }
     }
 
