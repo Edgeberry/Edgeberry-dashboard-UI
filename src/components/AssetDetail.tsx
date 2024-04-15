@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSmileBeam } from "@fortawesome/free-regular-svg-icons";
 import { faArrowRightArrowLeft, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import CommandModal from "./CommandModal";
+import AssetConnection from "./AssetConnection";
 
 const AssetDetail = ( props:{assetId?:string})=>{
     const[ description, setDescription ] = useState<any|null>(null);
@@ -75,6 +76,8 @@ const AssetDetail = ( props:{assetId?:string})=>{
                 {shadow && shadow?.state?.reported?.system?.system?.version? shadow?.state?.reported?.system?.system?.version:'No hardware platform'} &nbsp;
                 ({shadow && shadow?.state?.reported?.system?.system?.platform? shadow?.state?.reported?.system?.system?.platform:'No hardware platform'})
             </p>
+            <hr/>
+            <AssetConnection assetId={props.assetId} />
             <hr/>
         </Container>
     );

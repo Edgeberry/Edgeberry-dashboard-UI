@@ -61,6 +61,7 @@ const CommandModal = ( props:{ deviceId:string, show:boolean, onClose:Function }
                             <Form.Label>Command body</Form.Label>
                             <Form.Control as={'textarea'} rows={5} placeholder={'Command body'} value={body} onChange={(e)=>{setBody(e.target.value)}} disabled={disabled}/>
                         </Form.Group>
+                        {/*
                         <Row className="mb-2">
                         <Col sm={6}>
                             <Form.Control type={'text'} placeholder={'Key'} value={''} onChange={(e)=>{}}/>
@@ -68,7 +69,7 @@ const CommandModal = ( props:{ deviceId:string, show:boolean, onClose:Function }
                         <Col sm={6}>
                             <Form.Control type={'text'} placeholder={'Value'} value={''} onChange={(e)=>{}}/>
                         </Col>
-                        </Row>
+                        </Row>*/}
                     </Form>
                     <NotificationBox message={message} isError={isError} />
                 </Modal.Body>
