@@ -1,5 +1,5 @@
 import {useState, SyntheticEvent } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import logo from '../Edgeberry_logo_text.png';
 import { api_user_login } from '../api/user';
@@ -29,7 +29,7 @@ const Login = (props:{user:any, onLogin:Function }) => {
     }
 
     return(
-        <main className="centerbox" style={{marginTop:'6vh'}}>
+        <Container className="centerbox">
             <Form onSubmit={submit}>
                 <img src={logo} width="100%" alt="logo" />
                 <br/>
@@ -43,7 +43,7 @@ const Login = (props:{user:any, onLogin:Function }) => {
                 <NotificationBox message={message} isError={true} />
                 <Button variant={'primary'} className="w-100 btn btn-lg" type="submit">Log in</Button>
             </Form>
-        </main>
+        </Container>
     )
 }
 

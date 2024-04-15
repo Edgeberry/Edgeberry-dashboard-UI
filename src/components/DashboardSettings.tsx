@@ -5,8 +5,6 @@ import SettingsAWS from "./SettingsAWS";
 import SettingsAccount from "./SettingsAccount";
 
 const Settings = (props:{user:any|null})=>{
-    const[ disabled, setDisabled ] = useState<boolean>(false);
-
     // When no user is logged in, navigate to the
     // login page. Dashboard settings requires a user.
     if( !props.user ){
@@ -16,6 +14,7 @@ const Settings = (props:{user:any|null})=>{
     return (
         <>
             <Container style={{textAlign:'left'}}>
+                <br/>
                 <h1>Settings</h1>
                 <p className="text-subtitle">Settings for your EdgeBerry.io stuff</p>
                 <hr/>

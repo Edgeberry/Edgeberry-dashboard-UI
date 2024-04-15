@@ -69,25 +69,25 @@ const SettingsAWS = (props:{user:any|null})=>{
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Endpoint</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'e.g. a1fjdanvisao-ats.iot.eu-north-1.amazonaws.com'} value={endpoint} onChange={(e)=>{setEndpoint(e.target.value)}} disabled={disabled}/>
+                        <Form.Control type={'text'} placeholder={'e.g. a1fjdanvisao-ats.iot.eu-north-1.amazonaws.com'} value={endpoint} onChange={(e)=>{setEndpoint(e.target.value)}} spellCheck={false} disabled={disabled}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Region</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'e.g. eu-north-1'} value={region} onChange={(e)=>{setRegion(e.target.value)}} required disabled={disabled}/>
+                        <Form.Control type={'text'} placeholder={'e.g. eu-north-1'} value={region} onChange={(e)=>{setRegion(e.target.value)}} required spellCheck={false} disabled={disabled}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Access key ID</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'e.g. AKIA6ODUUGBDXB34OVH7O'} value={keyId} onChange={(e)=>{setKeyId(e.target.value)}} required disabled={disabled}/>
+                        <Form.Control type={'text'} placeholder={'e.g. AKIA6ODUUGBDXB34OVH7O'} value={keyId} onChange={(e)=>{setKeyId(e.target.value)}} required spellCheck={false} disabled={disabled}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Private access key</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'e.g. sxCynvJV3iAQbr485TlfRLw+9Nofonuwz5K+Kny7'} value={key} onChange={(e)=>{setKey(e.target.value)}} required disabled={disabled}/>
+                        <Form.Control type={'text'} placeholder={'e.g. sxCynvJV3iAQbr485TlfRLw+9Nofonuwz5K+Kny7'} value={key} onChange={(e)=>{setKey(e.target.value)}} required spellCheck={false} disabled={disabled}/>
                     </Col>
                 </Form.Group>
                 <NotificationBox message={message} isError={isError} />

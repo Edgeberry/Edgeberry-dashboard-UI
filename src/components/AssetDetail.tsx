@@ -64,14 +64,14 @@ const AssetDetail = ( props:{assetId?:string})=>{
     return(
         <Container className="container-fluid">
             <div style={{float:'right'}}>
-                <Button variant={'primary'} onClick={()=>{setShow(true)}}><FontAwesomeIcon icon={faArrowRightArrowLeft}/> Command</Button> &nbsp;
-                <Button variant={'primary'} onClick={()=>{identify()}}><FontAwesomeIcon icon={faSmileBeam}/></Button> &nbsp;
+                <Button variant={'primary'} onClick={()=>{setShow(true)}}><FontAwesomeIcon icon={faArrowRightArrowLeft}/> Command</Button>
+                <Button variant={'primary'} className="mx-1" onClick={()=>{identify()}}><FontAwesomeIcon icon={faSmileBeam}/></Button>
                 <Button variant={'danger'} onClick={()=>{restart()}}><FontAwesomeIcon icon={faPowerOff}/></Button>
             </div>
             <CommandModal show={show} deviceId={description?.thingName?description.thingName:''} onClose={()=>{setShow(false)}}/>
 
             <h1>{description && description?.thingName?description.thingName:'No asset ID'}</h1>
-            <p style={{color:'#808080'}}>
+            <p className="text-subtitle">
                 {description && description?.thingTypeName? description.thingTypeName:'No asset type'} &nbsp;
                 {shadow && shadow?.state?.reported?.system?.system?.version? shadow?.state?.reported?.system?.system?.version:'No hardware platform'} &nbsp;
                 ({shadow && shadow?.state?.reported?.system?.system?.platform? shadow?.state?.reported?.system?.system?.platform:'No hardware platform'})

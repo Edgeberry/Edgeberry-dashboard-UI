@@ -8,7 +8,7 @@ function NotFound() {
             <br/>
             <img src={logo} className="App-logo" alt="logo" />
             <h1>404 Not Found</h1>
-            <p>
+            <p className="text-subtitle">
             I don't know what you're looking for, <br/>
             You haven't found it, baby, that's for sure.
             </p>

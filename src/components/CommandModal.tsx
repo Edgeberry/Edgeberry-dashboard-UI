@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Form, Modal, Row } from "react-bootstrap";
+import { Button, Form, Modal } from "react-bootstrap";
 import NotificationBox from "./Notification";
 import { api_things_invokeDirectMethod } from "../api/things";
 
@@ -55,11 +55,11 @@ const CommandModal = ( props:{ deviceId:string, show:boolean, onClose:Function }
                         </Form.Group>
                         <Form.Group className="mb-2">
                             <Form.Label>Command name</Form.Label>
-                            <Form.Control type={'text'} placeholder={'Command name'} value={methodName} onChange={(e)=>{setMethodName(e.target.value)}} disabled={disabled}/>
+                            <Form.Control type={'text'} placeholder={'Command name'} value={methodName} onChange={(e)=>{setMethodName(e.target.value)}} spellCheck={false} disabled={disabled}/>
                         </Form.Group>
                         <Form.Group className="mb-2">
                             <Form.Label>Command body</Form.Label>
-                            <Form.Control as={'textarea'} rows={5} placeholder={'Command body'} value={body} onChange={(e)=>{setBody(e.target.value)}} disabled={disabled}/>
+                            <Form.Control as={'textarea'} rows={5} placeholder={'Command body'} value={body} onChange={(e)=>{setBody(e.target.value)}} spellCheck={false} disabled={disabled}/>
                         </Form.Group>
                         {/*
                         <Row className="mb-2">

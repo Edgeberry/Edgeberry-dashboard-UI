@@ -38,6 +38,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         {/* Dashboard: nested routes */}
+        <Route path='/dashboard/login' element={<Login user={user} onLogin={()=>{onLogin()}}/>} />
         <Route path='/dashboard' element={<Dashboard user={user}/>}>
           <Route index element={<Navigate to="/dashboard/assets" />} />
           <Route path='/dashboard/login' element={<Login user={user} onLogin={()=>{onLogin()}}/>} />

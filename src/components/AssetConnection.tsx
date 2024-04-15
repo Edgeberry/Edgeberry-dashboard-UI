@@ -76,13 +76,13 @@ const AssetConnection = ( props:{assetId:string|null})=>{
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Hostname</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'Hostname'} value={hostname} onChange={(e)=>{setHostname(e.target.value)}} required disabled={disabled}/>
+                        <Form.Control type={'text'} placeholder={'Hostname'} value={hostname} onChange={(e)=>{setHostname(e.target.value)}} required spellCheck={false} disabled={disabled}/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Device ID</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'Device ID'} value={deviceId} onChange={(e)=>{setDeviceId(e.target.value)}} required disabled={disabled}/>
+                        <Form.Control type={'text'} placeholder={'Device ID'} value={deviceId} onChange={(e)=>{setDeviceId(e.target.value)}} required spellCheck={false} disabled={disabled}/>
                     </Col>
                 </Form.Group>
                     <Form.Group as={Row} className="mb-2">

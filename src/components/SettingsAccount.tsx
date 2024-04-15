@@ -1,7 +1,6 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
-import SettingsAWS from "./SettingsAWS";
 
 const SettingsAccount = (props:{user:any|null})=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);

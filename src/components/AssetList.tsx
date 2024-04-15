@@ -67,7 +67,7 @@ const AssetListItem = (props:{thing:any})=>{
 
     return(
         <div className="asset-list-item" onClick={navigateToAssetDetails}>
-            <div className="asset-list-item-indicator" style={{backgroundColor:connected?'#0007ff':'red'}}>
+            <div className="asset-list-item-indicator" style={{backgroundColor:connected?'#007fff':'red'}}>
                 
             </div>
             <div className="asset-list-item-content">
