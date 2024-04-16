@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
-import { Button, Container } from "react-bootstrap";
+import { Button, Container, Tab, Tabs } from "react-bootstrap";
 import { api_things_delete, api_things_getThingDescription, api_things_getThingShadow, api_things_invokeDirectMethod } from "../api/things";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSmileBeam } from "@fortawesome/free-regular-svg-icons";
 import { faArrowRightArrowLeft, faPowerOff, faTrash } from "@fortawesome/free-solid-svg-icons";
 import CommandModal from "./CommandModal";
 import AssetConnection from "./AssetConnection";
+import AssetSystem from "./AssetSystem";
 
 const AssetDetail = ( props:{assetId?:string})=>{
     const[ description, setDescription ] = useState<any|null>(null);
@@ -41,46 +42,12 @@ const AssetDetail = ( props:{assetId?:string})=>{
         setShadow(result);
     }
 
-    // Identify the device 
-    async function identify(){
-        const result = await api_things_invokeDirectMethod( description.thingName, 'identify', '');
-        if( result.message ){
-            // TODO: do something with the error
-            return;
-        }
-        return;
-    }
-
-    // Reboot the device
-    async function restart(){
-        const result = await api_things_invokeDirectMethod( description.thingName, 'reboot', '');
-        if( result.message ){
-            // TODO: do something with the error
-            return;
-        }
-    }
-
-    // Delete Asset
-    async function deleteAsset(){
-        if( !window.confirm("Delete '"+description.thingName+"'?")) return;
-
-        const result = await api_things_delete( description.thingName);
-        if( result.message ){
-            // TODO: do something with the error
-            console.log(result.message);
-            return;
-        }
-
-    }
     
     if(!props.assetId) return <h1>No asset selected</h1>;
     return(
         <Container className="container-fluid">
             <div style={{float:'right'}}>
                 <Button variant={'primary'} onClick={()=>{setShow(true)}}><FontAwesomeIcon icon={faArrowRightArrowLeft}/> Command</Button>
-                <Button variant={'primary'} className="mx-1" onClick={()=>{identify()}}><FontAwesomeIcon icon={faSmileBeam}/></Button>
-                <Button variant={'danger'} className="mx-1" onClick={()=>{deleteAsset()}}><FontAwesomeIcon icon={faTrash}/></Button>
-                <Button variant={'danger'} onClick={()=>{restart()}}><FontAwesomeIcon icon={faPowerOff}/></Button>
             </div>
             <CommandModal show={show} deviceId={description?.thingName?description.thingName:''} onClose={()=>{setShow(false)}}/>
 
@@ -90,9 +57,18 @@ const AssetDetail = ( props:{assetId?:string})=>{
                 {shadow && shadow?.state?.reported?.system?.system?.version? shadow?.state?.reported?.system?.system?.version:'No hardware platform'} &nbsp;
                 ({shadow && shadow?.state?.reported?.system?.system?.platform? shadow?.state?.reported?.system?.system?.platform:'No hardware platform'})
             </p>
-            <hr/>
-            <AssetConnection assetId={props.assetId} />
-            <hr/>
+        
+            <Tabs defaultActiveKey="application" className="mb-3">
+                <Tab eventKey="application" title={"Application"}>
+                    Tab content for application
+                </Tab>
+                <Tab eventKey="connection" title={"Connection"}>
+                    <AssetConnection assetId={props.assetId} />
+                </Tab>
+                <Tab eventKey="System" title={"System"}>
+                    <AssetSystem assetId={props.assetId} />
+                </Tab>
+            </Tabs>
         </Container>
     );
 }
