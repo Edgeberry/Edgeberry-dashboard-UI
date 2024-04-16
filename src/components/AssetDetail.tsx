@@ -8,6 +8,7 @@ import CommandModal from "./CommandModal";
 import AssetConnection from "./AssetConnection";
 import AssetSystem from "./AssetSystem";
 import StatusIndicator from "./StatusIndicator";
+import AssetProvisioning from "./AssetProvisioning";
 
 const AssetDetail = ( props:{assetId?:string})=>{
     const[ description, setDescription ] = useState<any|null>(null);
@@ -47,7 +48,7 @@ const AssetDetail = ( props:{assetId?:string})=>{
     
     if(!props.assetId) return <h1>No asset selected</h1>;
     return(
-        <Container className="container-fluid">
+        <Container className="scroll-container">
             <div style={{float:'right'}}>
                 <Button variant={'primary'} onClick={()=>{setShow(true)}}><FontAwesomeIcon icon={faArrowRightArrowLeft}/> Command</Button>
             </div>
@@ -66,6 +67,7 @@ const AssetDetail = ( props:{assetId?:string})=>{
                 </Tab>
                 <Tab eventKey="connection" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.connection?.connection === 'connected')?'success':'danger'}/> Connection</>}>
                     <AssetConnection assetId={props.assetId} />
+                    <AssetProvisioning assetId={props.assetId} />
                 </Tab>
                 <Tab eventKey="System" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.system?.state === 'running')?'success':'danger'}/> System</>}>
                     <AssetSystem assetId={props.assetId} />

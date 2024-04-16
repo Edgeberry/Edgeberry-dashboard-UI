@@ -35,7 +35,7 @@ const AssetList = ()=>{
     }
 
     return(
-        <Container className="asset-list-container">
+        <Container className="scroll-container">
             <NotificationBox message={message} isError={isError}/>
             {thingElementList}
         </Container>

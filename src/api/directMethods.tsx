@@ -10,3 +10,9 @@ export async function direct_getConnectionParameters( deviceId:string ){
     if( result.message ) return result;
     return result.payload;
 }
+
+export async function direct_getProvisioningParameters( deviceId:string ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'getProvisioningParameters', '');
+    if( result.message ) return result;
+    return result.payload;
+}
