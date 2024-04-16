@@ -33,6 +33,10 @@ body {
   min-height: 100vh;
 }
 
+.App-dark {
+  background-color: var(--edgeberry_black);
+}
+
 .App-logo {
   height: 18vmin;
   pointer-events: none;

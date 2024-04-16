@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button, Container } from "react-bootstrap";
-import { api_things_getThingDescription, api_things_getThingShadow, api_things_invokeDirectMethod } from "../api/things";
+import { api_things_delete, api_things_getThingDescription, api_things_getThingShadow, api_things_invokeDirectMethod } from "../api/things";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSmileBeam } from "@fortawesome/free-regular-svg-icons";
-import { faArrowRightArrowLeft, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightArrowLeft, faPowerOff, faTrash } from "@fortawesome/free-solid-svg-icons";
 import CommandModal from "./CommandModal";
 import AssetConnection from "./AssetConnection";
 
@@ -59,6 +59,19 @@ const AssetDetail = ( props:{assetId?:string})=>{
             return;
         }
     }
+
+    // Delete Asset
+    async function deleteAsset(){
+        if( !window.confirm("Delete '"+description.thingName+"'?")) return;
+
+        const result = await api_things_delete( description.thingName);
+        if( result.message ){
+            // TODO: do something with the error
+            console.log(result.message);
+            return;
+        }
+
+    }
     
     if(!props.assetId) return <h1>No asset selected</h1>;
     return(
@@ -66,6 +79,7 @@ const AssetDetail = ( props:{assetId?:string})=>{
             <div style={{float:'right'}}>
                 <Button variant={'primary'} onClick={()=>{setShow(true)}}><FontAwesomeIcon icon={faArrowRightArrowLeft}/> Command</Button>
                 <Button variant={'primary'} className="mx-1" onClick={()=>{identify()}}><FontAwesomeIcon icon={faSmileBeam}/></Button>
+                <Button variant={'danger'} className="mx-1" onClick={()=>{deleteAsset()}}><FontAwesomeIcon icon={faTrash}/></Button>
                 <Button variant={'danger'} onClick={()=>{restart()}}><FontAwesomeIcon icon={faPowerOff}/></Button>
             </div>
             <CommandModal show={show} deviceId={description?.thingName?description.thingName:''} onClose={()=>{setShow(false)}}/>

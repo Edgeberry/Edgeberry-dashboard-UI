@@ -2,7 +2,7 @@ import logo from '../Edgeberry_logo_text.png';
 
 function Home() {
   return (
-    <div className="App">
+    <div className="App App-dark">
       <div className="App-centered">
         <img src={logo} className="App-logo" alt="logo" />
         <br/>

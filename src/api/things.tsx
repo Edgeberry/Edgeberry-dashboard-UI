@@ -61,9 +61,7 @@ export async function api_things_getThingShadow( thingName:string ){
     }
 }
 
-
-
-/* Restart the application */
+/* Invoke Direct Method */
 export async function api_things_invokeDirectMethod( deviceId:string, methodName:string, methodBody:string ){
     const response = await fetch( window.location.origin+'/api/things/directmethod',{
         method: 'POST',
@@ -74,6 +72,22 @@ export async function api_things_invokeDirectMethod( deviceId:string, methodName
             methodName: methodName,
             methodBody: methodBody
         })
+    });
+    try{
+        let content = await response.json();
+        content.ok = response.ok;
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
+
+/* Delete thing */
+export async function api_things_delete( thingName:string ){
+    const response = await fetch( window.location.origin+'/api/things/delete?thingName='+thingName,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include'
     });
     try{
         let content = await response.json();
