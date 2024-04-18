@@ -8,7 +8,7 @@
   --edgeberry_dark_gray: #636363;
   --edgeberry_gray: #808080;
   --edgeberry_silver: #c0c0c0;
-  --edgeberry_light_gray: #fefefe;
+  --edgeberry_light_gray: #efefef;
   --edgeberry_white: #ffffff;
   --edgeberry_red: #dc143c;
   --edgeberry_green: #00ff00;
@@ -136,6 +136,13 @@ body {
   cursor: pointer;
   box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
 }
+
+.asset-list-item.selected{
+  border-color: var(--edgeberry_dark_gray);
+  border-width: 2px;
+  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+}
+
 
 .asset-list-item-content{
   padding-top: 5px;

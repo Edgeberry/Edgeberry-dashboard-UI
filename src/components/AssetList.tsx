@@ -2,26 +2,16 @@ import { useEffect, useState } from "react";
 import { Container } from "react-bootstrap";
 import { api_things_getThingIndex, api_things_getThingsList } from "../api/things";
 import NotificationBox from "./Notification";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-const AssetList = ()=>{
+const AssetList = (props:{selected?:string})=>{
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
     const[ thingList, setThingList ] = useState<any[]>([]);
-    const[ thingElementList, setThingElementList ] = useState<JSX.Element[]>([]);
 
     useEffect(()=>{
         getThingsList();
     },[]);
-
-    /* Visual elements for each Thing */
-    useEffect(()=>{
-        setThingElementList([]);
-        if( thingList.length <= 0 ) return;
-        thingList.map( (thing:any)=>{
-            return setThingElementList(thingElementList => [...thingElementList, <AssetListItem thing={thing} key={thing.thingName}/>]);
-        });
-    },[thingList]);
 
     /* Get the list of thins from the API */
     async function getThingsList(){
@@ -37,19 +27,19 @@ const AssetList = ()=>{
     return(
         <Container className="scroll-container">
             <NotificationBox message={message} isError={isError}/>
-            {thingElementList}
+            {thingList.map((thing:any, index:number)=>{return <AssetListItem thing={thing} key={thing.name+'-'+index} selected={props.selected===thing.thingName}/>})}
         </Container>
     );
 }
 
 export default AssetList;
 
-const AssetListItem = (props:{thing:any})=>{
+const AssetListItem = (props:{thing:any, selected:boolean})=>{
     const[ connected, setConnected ] = useState<boolean>(false);
 
     useEffect(()=>{
         getThingIndex();
-    },[])
+    },[]);
 
     async function getThingIndex(){
         const result = await api_things_getThingIndex(props.thing.thingName);
@@ -66,10 +56,8 @@ const AssetListItem = (props:{thing:any})=>{
     }
 
     return(
-        <div className="asset-list-item" onClick={navigateToAssetDetails}>
-            <div className="asset-list-item-indicator" style={{backgroundColor:connected?'#0007ff':'red'}}>
-                
-            </div>
+        <div className={`asset-list-item ${props.selected?'selected':''}`} onClick={navigateToAssetDetails}>
+            <div className="asset-list-item-indicator" style={{backgroundColor:connected?'#0007ff':'red'}}/>
             <div className="asset-list-item-content">
                 <h1 className="asset-list-item-header">{props.thing.thingName}</h1>
                 <p className="asset-list-item-text">{props.thing.thingTypeName?props.thing.thingTypeName:''}</p>

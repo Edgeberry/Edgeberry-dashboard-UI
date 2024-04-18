@@ -15,7 +15,7 @@ const Assets = (props:{user:any})=>{
                 <br/>
                 <Row>
                     <Col xs={6} sm={5} md={4} lg={3}>
-                        <AssetList />
+                        <AssetList selected={assetId}/>
                     </Col>
                     <Col>
                         <AssetDetail assetId={assetId}/>
