@@ -13,7 +13,7 @@ const StatusIndicator = ( props:{ message:string, type?:string, noText?:boolean}
             case 'warning': setColor('#ffc107');
                             break;
             default:        //setColor('#28a745');
-                            setColor('#007fff');
+                            setColor('#0007ff');
                             break;
         }
     },[props.type]);

@@ -1,7 +1,7 @@
 import {useState, SyntheticEvent } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
-import logo from '../Edgeberry_logo_text.png';
+import logo from '../EdgeBerry_Logo_text.svg';
 import { api_user_login } from '../api/user';
 import NotificationBox from '../components/Notification';
 

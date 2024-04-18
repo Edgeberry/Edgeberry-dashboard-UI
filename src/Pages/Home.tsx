@@ -1,4 +1,4 @@
-import logo from '../Edgeberry_logo_text.png';
+import logo from '../EdgeBerry_Logo_text.svg';
 
 function Home() {
   return (

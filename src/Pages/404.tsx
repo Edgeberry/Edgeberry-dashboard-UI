@@ -1,5 +1,5 @@
 import { Container } from 'react-bootstrap';
-import logo from '../EdgeBerry_logo.png';
+import logo from '../EdgeBerry_logo.svg';
 
 function NotFound() {
   return (
