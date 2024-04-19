@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Container, Tab, Tabs } from "react-bootstrap";
-import { api_things_delete, api_things_getThingDescription, api_things_getThingShadow, api_things_invokeDirectMethod } from "../api/things";
+import { api_things_getThingDescription, api_things_getThingShadow } from "../api/things";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSmileBeam } from "@fortawesome/free-regular-svg-icons";
-import { faArrowRightArrowLeft, faPowerOff, faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import CommandModal from "./CommandModal";
 import AssetConnection from "./AssetConnection";
 import AssetSystem from "./AssetSystem";
@@ -46,7 +45,17 @@ const AssetDetail = ( props:{assetId?:string})=>{
     }
 
     
-    if(!props.assetId) return <h1>No asset selected</h1>;
+    if(!props.assetId){
+        return (
+            <Container>
+                <h1>Assets</h1>
+                <p className="text-subtitle">
+                    Manage your individual assets.
+                </p>
+            </Container>
+        )
+    };
+
     return(
         <Container className="scroll-container">
             <div style={{float:'right'}}>

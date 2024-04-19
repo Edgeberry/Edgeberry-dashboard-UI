@@ -6,15 +6,13 @@ import { faPowerOff, faTrash } from "@fortawesome/free-solid-svg-icons";
 import StatusIndicator from "../components/StatusIndicator";
 import { faSmileBeam } from "@fortawesome/free-regular-svg-icons";
 import { api_things_delete, api_things_invokeDirectMethod } from "../api/things";
+import { direct_getSystemApplicationInfo, direct_getSystemNetworkInfo, direct_updateSystemApplication } from "../api/directMethods";
 
 const AssetSystem = (props:{assetId:string})=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
     // Error or success messages
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
-
-    // System
-    const[ hwPlatform, setHwPlatform ] = useState<string>('');
 
     // Network
     const[ ssid, setSsid ] = useState<string>('');
@@ -26,6 +24,11 @@ const AssetSystem = (props:{assetId:string})=>{
     const[ memUsage, setMemUsage ] = useState<string>('');
     const[ appStatus, setAppStatus ] = useState<string>('');
 
+    useEffect(()=>{
+        getSystemNetworkInfo();
+        getSystemApplicationInfo();
+    },[])
+
     // Disappearing messages
     useEffect(()=>{
         if( message === '' ) return;
@@ -34,6 +37,50 @@ const AssetSystem = (props:{assetId:string})=>{
             setIsError(false);
         },3500);
     },[message]);
+
+    // Get system application info
+    async function getSystemNetworkInfo(){
+        if( !props.assetId ) return;
+        setDisabled(true);
+        const result = await direct_getSystemNetworkInfo( props.assetId );
+        if(!result){
+            setDisabled(false);
+            return;
+        }          
+        if(result.message){
+            setIsError(true);
+            setMessage(result.message);
+        }
+        else {
+            // Set the parameters in the fields
+            if( typeof(result.ssid) === 'string' ) setSsid(result.ssid);
+            if( typeof(result.ipAddress) === 'string' ) setIpAddress(result.ipAddress);
+        }
+        setDisabled(false);
+    }
+
+    // Get system application info
+    async function getSystemApplicationInfo(){
+        if( !props.assetId ) return;
+        setDisabled(true);
+        const result = await direct_getSystemApplicationInfo( props.assetId );
+        if(!result){
+            setDisabled(false);
+            return;
+        }          
+        if(result.message){
+            setIsError(true);
+            setMessage(result.message);
+        }
+        else {
+            // Set the parameters in the fields
+            if( typeof(result.version) === 'string' ) setAppVersion(result.version);
+            if( typeof(result.cpuUsage) === 'string' ) setCpuUsage(result.cpuUsage);
+            if( typeof(result.memUsage) === 'string' ) setMemUsage(result.memUsage);
+            if( typeof(result.status) === 'string' ) setAppStatus(result.status);
+        }
+        setDisabled(false);
+    }
 
     // Request system restart
     async function requestSystemRestart(){
@@ -54,7 +101,7 @@ const AssetSystem = (props:{assetId:string})=>{
         return;
     }
 
-        // Request system identification
+    // Request system identification
     async function requestSystemIdentifycation(){
         const result = await api_things_invokeDirectMethod( props.assetId, 'identify', '');
 
@@ -74,8 +121,8 @@ const AssetSystem = (props:{assetId:string})=>{
         // Check if user is sure about this action
         if( !window.confirm("Update system software?") ) return;
         setDisabled(true);
-/*
-        const result = await api_system_updateSystemSoftware();
+
+        const result = await direct_updateSystemApplication(props.assetId);
         if( !result.ok ){
             setIsError(true);
             setMessage(result.message);
@@ -83,11 +130,10 @@ const AssetSystem = (props:{assetId:string})=>{
         else{
             setIsError(false);
             setMessage(result.message);
-        }*/
+        }
         setDisabled(false);
         return;
     }
-
 
     // Delete Asset
     async function deleteAsset(){
@@ -106,17 +152,9 @@ const AssetSystem = (props:{assetId:string})=>{
                 <Button variant={'danger'} className="mb-2" onClick={()=>{requestSystemRestart()}} disabled={disabled}><FontAwesomeIcon icon={faPowerOff}/> Restart</Button>&nbsp;
                 <Button variant={'primary'} className="mb-2" onClick={()=>{requestSystemIdentifycation()}} disabled={disabled}><FontAwesomeIcon icon={faSmileBeam}/> Identify</Button>
             </div>
-
             <h1>System</h1>
-            <br/>
-            <Form.Group as={Row} className="mb-2">
-                <Form.Label column sm={2}>Hardware platform</Form.Label>
-                <Col sm={6}>
-                    <Form.Control type={'text'} placeholder={'Hardware Platform'} value={hwPlatform} disabled/>
-                </Col>
-            </Form.Group>
-
-            <br/>
+            <p className="text-subtitle">Everything related to this device and the EdgeBerry system software</p>
+            <NotificationBox message={message} isError={isError} />
             <h2>Network</h2>
             <Form.Group as={Row} className="mb-2">
                 <Form.Label column sm={2}>SSID</Form.Label>
@@ -130,7 +168,7 @@ const AssetSystem = (props:{assetId:string})=>{
                     <Form.Control type={'text'} placeholder={'IP address'} value={ipAddress} disabled/>
                 </Col>
             </Form.Group>
-            <hr/>
+            <br/>
 
             <h2>System software</h2>
             <StatusIndicator message={appStatus==='online'?'Running':appStatus} type={appStatus==='online'?'success':'danger'}/>
@@ -159,8 +197,10 @@ const AssetSystem = (props:{assetId:string})=>{
                     <Button variant={'danger'} onClick={()=>{requestSystemSoftwareUpdate()}} disabled={disabled}>Update</Button>
                 </Col>
             </Form.Group>
-            <hr/>
+            <br/>
+
             <h2>Delete</h2>
+            <p className="text-subtitle">Delete this device from the platform.</p>
             <Button variant={'danger'} onClick={()=>{deleteAsset()}}><FontAwesomeIcon icon={faTrash}/> Delete</Button>
         </>
     );
