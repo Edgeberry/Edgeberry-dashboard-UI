@@ -47,3 +47,30 @@ export async function direct_getSystemNetworkInfo( deviceId:string ){
     if( result.message ) return result;
     return result.payload;
 }
+
+/*
+ *  Application
+ */
+
+// Get application info
+export async function direct_getApplicationInfo( deviceId:string ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'getApplicationInfo', '');
+    if( result.message ) return result;
+    return result.payload;
+}
+
+// Restart the application
+export async function direct_restartApplication( deviceId:string ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'restartApplication', '');
+    if( result.message ) return result;
+    return result.payload;
+}
+
+// Restart the application
+export async function direct_stopApplication( deviceId:string ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'stopApplication', '');
+    if( result.message ) return result;
+    return result.payload;
+}
+
+

@@ -8,6 +8,7 @@ import AssetConnection from "./AssetConnection";
 import AssetSystem from "./AssetSystem";
 import StatusIndicator from "./StatusIndicator";
 import AssetProvisioning from "./AssetProvisioning";
+import AssetApplication from "./AssetApplication";
 
 const AssetDetail = ( props:{assetId?:string})=>{
     const[ description, setDescription ] = useState<any|null>(null);
@@ -72,7 +73,7 @@ const AssetDetail = ( props:{assetId?:string})=>{
         
             <Tabs defaultActiveKey="application" className="mb-3">
                 <Tab eventKey="application" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.application?.state === 'running')?'success':'danger'}/> Application</>}>
-                    Tab content for application
+                    <AssetApplication assetId={props.assetId} />
                 </Tab>
                 <Tab eventKey="connection" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.connection?.connection === 'connected')?'success':'danger'}/> Connection</>}>
                     <AssetConnection assetId={props.assetId} />
