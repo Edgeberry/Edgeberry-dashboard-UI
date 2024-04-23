@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 
 const Assets = (props:{user:any})=>{
     const { assetId } = useParams();
-    const[ selectedAsset, setSelectedAsset] = useState<string|null>()
+    const[ selectedAsset, setSelectedAsset] = useState<string|null>('');
 
     // Dirty fix for refreshing asset details
     useEffect(()=>{
         setSelectedAsset(null);
+        if(assetId)
         setTimeout(()=>{
             setSelectedAsset(assetId);
         });
@@ -28,7 +29,7 @@ const Assets = (props:{user:any})=>{
                         <AssetList selected={assetId}/>
                     </Col>
                     <Col>
-                        {selectedAsset?<AssetDetail assetId={selectedAsset}/>:<></>}
+                        {typeof(selectedAsset) === 'string'?<AssetDetail assetId={selectedAsset?selectedAsset:''}/>:<></>}
                     </Col>
                 </Row>
             </Container>    
