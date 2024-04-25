@@ -16,12 +16,27 @@ export async function direct_getConnectionParameters( deviceId:string ){
     return result.payload;
 }
 
+// Update connection parameters
+export async function direct_updateConnectionParameters( deviceId:string, parameters:any ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'updateConnectionParameters', JSON.stringify(parameters) );
+    if( result.message ) return result;
+    return result.payload;
+}
+
 // Get provisioning parameters
 export async function direct_getProvisioningParameters( deviceId:string ){
     const result = await api_things_invokeDirectMethod( deviceId, 'getProvisioningParameters', '');
     if( result.message ) return result;
     return result.payload;
 }
+
+// Update connection parameters
+export async function direct_updateProvisioningParameters( deviceId:string, parameters:any ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'updateProvisioningParameters', JSON.stringify(parameters) );
+    if( result.message ) return result;
+    return result.payload;
+}
+
 
 /*
  *  System

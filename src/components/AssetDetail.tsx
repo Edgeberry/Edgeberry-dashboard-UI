@@ -77,6 +77,7 @@ const AssetDetail = ( props:{assetId?:string})=>{
                 </Tab>
                 <Tab eventKey="connection" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.connection?.connection === 'connected')?'success':'danger'}/> Connection</>}>
                     <AssetConnection assetId={props.assetId} />
+                    <br/>
                     <AssetProvisioning assetId={props.assetId} />
                 </Tab>
                 <Tab eventKey="System" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.system?.state === 'running')?'success':'danger'}/> System</>}>

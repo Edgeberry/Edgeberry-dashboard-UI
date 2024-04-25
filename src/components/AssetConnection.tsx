@@ -1,8 +1,10 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
-import { direct_getConnectionParameters } from "../api/directMethods";
+import { direct_getConnectionParameters, direct_updateConnectionParameters } from "../api/directMethods";
 import CertificateControl from "./CertificateControl";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faRetweet } from "@fortawesome/free-solid-svg-icons";
 
 const AssetConnection = ( props:{assetId:string|null})=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
@@ -50,25 +52,41 @@ const AssetConnection = ( props:{assetId:string|null})=>{
         setDisabled(false);
     }
     
-    // on submit, update the AWS settings
+    // on submit, update connection parameters
     const updateConnectionSettings = async (e:SyntheticEvent) =>{
         setDisabled(true);
         e.preventDefault();   // prevents page refresh
-        /*const content = await api_user_updateAwsSettings( endpoint, region, keyId, key );
 
-        if(content.message !== 'success'){
+        const parameters = {
+            hostName: hostname,
+            deviceId: deviceId,
+            certificate: cert,
+            privateKey: pKey,
+            rootCertificate: rootca
+        }
+        const result = await direct_updateConnectionParameters( deviceId, parameters );
+
+        if(result.message !== 'success'){
             setIsError(true);
-            setMessage(content.message);
+            setMessage(result.message);
         }
         else {
             setIsError(false);
-            setMessage('AWS settings succesfully updated!');
-        }*/
+            setMessage('Connection parameters succesfully updated!');
+        }
         setDisabled(false);
+    }
+
+    async function requestReconnect(){
+
     }
 
     return (
         <>
+            <div style={{float:'right'}}>
+                <Button variant={'danger'} className="mb-2" onClick={()=>{requestReconnect()}} disabled={disabled}><FontAwesomeIcon icon={faRetweet}/> Reconnect</Button>&nbsp;
+            </div>
+
             <h2>Connection</h2>
             <p className="text-subtitle">The settings of the device's cloud connection.</p>
             
@@ -105,9 +123,9 @@ const AssetConnection = ( props:{assetId:string|null})=>{
                     </Form.Group>
 
                 <NotificationBox message={message} isError={isError} />
-                <div style={{width:'100%', textAlign:'right'}}>
+                {/*<div style={{width:'100%', textAlign:'right'}}>
                     <Button variant={'primary'} type={'submit'} disabled={disabled}>Save</Button>
-                </div>
+                </div>*/}
             </Form>
         </>
     );
