@@ -23,6 +23,14 @@ export async function direct_updateConnectionParameters( deviceId:string, parame
     return result.payload;
 }
 
+// Request reconnect
+export async function direct_reconnect( deviceId:string ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'reconnect', '');
+    if( result.message ) return result;
+    return result.payload;
+}
+
+
 // Get provisioning parameters
 export async function direct_getProvisioningParameters( deviceId:string ){
     const result = await api_things_invokeDirectMethod( deviceId, 'getProvisioningParameters', '');
@@ -30,9 +38,16 @@ export async function direct_getProvisioningParameters( deviceId:string ){
     return result.payload;
 }
 
-// Update connection parameters
+// Update provisioning parameters
 export async function direct_updateProvisioningParameters( deviceId:string, parameters:any ){
     const result = await api_things_invokeDirectMethod( deviceId, 'updateProvisioningParameters', JSON.stringify({parameters: parameters}) );
+    if( result.message ) return result;
+    return result.payload;
+}
+
+// Request reprovision
+export async function direct_reprovision( deviceId:string ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'reprovision', '');
     if( result.message ) return result;
     return result.payload;
 }
@@ -81,7 +96,7 @@ export async function direct_restartApplication( deviceId:string ){
     return result.payload;
 }
 
-// Restart the application
+// Stop the application
 export async function direct_stopApplication( deviceId:string ){
     const result = await api_things_invokeDirectMethod( deviceId, 'stopApplication', '');
     if( result.message ) return result;

@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
-import { direct_getConnectionParameters, direct_updateConnectionParameters } from "../api/directMethods";
+import { direct_getConnectionParameters, direct_reconnect, direct_updateConnectionParameters } from "../api/directMethods";
 import CertificateControl from "./CertificateControl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRetweet } from "@fortawesome/free-solid-svg-icons";
@@ -63,7 +63,7 @@ const AssetConnection = ( props:{assetId:string|null})=>{
             privateKey: pKey,
             rootCertificate: rootca
         }
-        
+
         const result = await direct_updateConnectionParameters( deviceId, parameters );
 
         if(result.message !== 'success'){
@@ -78,7 +78,10 @@ const AssetConnection = ( props:{assetId:string|null})=>{
     }
 
     async function requestReconnect(){
-        updateConnectionParameters()
+        // First update the connection parameters
+        await updateConnectionParameters();
+        // Then reconnect
+        direct_reconnect(deviceId);
     }
 
     return (

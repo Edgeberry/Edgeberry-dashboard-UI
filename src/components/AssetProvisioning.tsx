@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
-import { direct_getProvisioningParameters, direct_updateProvisioningParameters } from "../api/directMethods";
+import { direct_getProvisioningParameters, direct_reprovision, direct_updateProvisioningParameters } from "../api/directMethods";
 import CertificateControl from "./CertificateControl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRetweet } from "@fortawesome/free-solid-svg-icons";
@@ -82,7 +82,8 @@ const AssetProvisioning = ( props:{assetId:string|null})=>{
     }
 
     async function requestReprovision(){
-        updateProvisioningParameters();
+        await updateProvisioningParameters();
+        direct_reprovision(deviceId);
     }
 
     return (
