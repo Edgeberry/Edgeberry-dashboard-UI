@@ -18,7 +18,7 @@ export async function direct_getConnectionParameters( deviceId:string ){
 
 // Update connection parameters
 export async function direct_updateConnectionParameters( deviceId:string, parameters:any ){
-    const result = await api_things_invokeDirectMethod( deviceId, 'updateConnectionParameters', JSON.stringify(parameters) );
+    const result = await api_things_invokeDirectMethod( deviceId, 'updateConnectionParameters', JSON.stringify({parameters: parameters}) );
     if( result.message ) return result;
     return result.payload;
 }
@@ -32,7 +32,7 @@ export async function direct_getProvisioningParameters( deviceId:string ){
 
 // Update connection parameters
 export async function direct_updateProvisioningParameters( deviceId:string, parameters:any ){
-    const result = await api_things_invokeDirectMethod( deviceId, 'updateProvisioningParameters', JSON.stringify(parameters) );
+    const result = await api_things_invokeDirectMethod( deviceId, 'updateProvisioningParameters', JSON.stringify({parameters: parameters}) );
     if( result.message ) return result;
     return result.payload;
 }

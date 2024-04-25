@@ -53,9 +53,8 @@ const AssetConnection = ( props:{assetId:string|null})=>{
     }
     
     // on submit, update connection parameters
-    const updateConnectionSettings = async (e:SyntheticEvent) =>{
+    async function updateConnectionParameters(){
         setDisabled(true);
-        e.preventDefault();   // prevents page refresh
 
         const parameters = {
             hostName: hostname,
@@ -64,6 +63,7 @@ const AssetConnection = ( props:{assetId:string|null})=>{
             privateKey: pKey,
             rootCertificate: rootca
         }
+        
         const result = await direct_updateConnectionParameters( deviceId, parameters );
 
         if(result.message !== 'success'){
@@ -78,7 +78,7 @@ const AssetConnection = ( props:{assetId:string|null})=>{
     }
 
     async function requestReconnect(){
-
+        updateConnectionParameters()
     }
 
     return (
@@ -90,7 +90,7 @@ const AssetConnection = ( props:{assetId:string|null})=>{
             <h2>Connection</h2>
             <p className="text-subtitle">The settings of the device's cloud connection.</p>
             
-            <Form onSubmit={updateConnectionSettings}>
+            <Form>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Hostname</Form.Label>
                     <Col sm={6}>

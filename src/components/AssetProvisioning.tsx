@@ -57,10 +57,8 @@ const AssetProvisioning = ( props:{assetId:string|null})=>{
     }
     
     // on submit, update the provisioning parameters
-    const updateProvisioningSettings = async (e:SyntheticEvent) =>{
+    async function updateProvisioningParameters(){
         setDisabled(true);
-        e.preventDefault();   // prevents page refresh
-
         // Create parameters object
         const parameters = {
             hostName: hostname,
@@ -84,7 +82,7 @@ const AssetProvisioning = ( props:{assetId:string|null})=>{
     }
 
     async function requestReprovision(){
-
+        updateProvisioningParameters();
     }
 
     return (
@@ -96,7 +94,7 @@ const AssetProvisioning = ( props:{assetId:string|null})=>{
             <h2>Provisioning</h2>
             <p className="text-subtitle">The settings of the device's cloud provisioning.</p>
             
-            <Form onSubmit={updateProvisioningSettings}>
+            <Form>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Hostname</Form.Label>
                     <Col sm={6}>
