@@ -106,6 +106,50 @@ body {
   background-color: var(--edgeberry_black) !important;
 }
 
+/* Asset List Cards */
+
+.asset-cartdeck{
+  color: var(--edgeberry_black);
+}
+
+.asset-card-container{
+  padding: 2px;
+}
+
+.asset-card{
+  width:100%;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+}
+
+.asset-card:hover{
+  border-color: var(--edgeberry_blue);
+  background-color: var(--edgeberry_lighter_blue);
+  cursor: pointer;
+  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+}
+
+.asset-card-menu{
+  position: absolute;
+  width: 100%;
+  display: inline;
+  text-align: right;
+}
+
+.asset-card-body{
+  background-color: var(--edgeberry_black);
+  color: var(--edgeberry_light_gray);
+  text-align: left;
+}
+
+.asset-card-title{
+  font-Size: 1.3rem;
+  font-weight:bold;
+  color: var(--edgeberry_blue);
+}
+
+
 /* Asset List */
 .scroll-container{
   padding:0;
@@ -117,53 +161,6 @@ body {
 }
 .asset-list-container::-webkit-scrollbar { 
     display: none;            /* Hidden scrollbar: Safari and Chrome */
-}
-
-.asset-list-item{
-  display: flex;
-  align-items: stretch;
-  position: relative;
-  background-color: inherit;
-  border-radius: 5px;
-  border: 1px solid var(--edgeberry_gray);
-  margin: 2px;
-  overflow: hidden;
-  color: var(--edgeberry_dark_gray);
-}
-
-.asset-list-item:hover{
-  border-color: var(--edgeberry_blue);
-  background-color: var(--edgeberry_lighter_blue);
-  cursor: pointer;
-  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
-}
-
-.asset-list-item.selected{
-  border-color: var(--edgeberry_dark_gray);
-  border-width: 2px;
-  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
-}
-
-
-.asset-list-item-content{
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left: 15px;
-  padding-right: 5px;
-}
-
-.asset-list-item-header{
-  color: var(--edgeberry_black);
-  font-size: 1.2rem;
-}
-
-.asset-list-item-text{
-  font-size: 1.0rem;
-}
-
-.asset-list-item-indicator{
-  background-color: var(--edgeberry_blue);
-  min-width:1.3vw;
 }
 
 /* Text styling */

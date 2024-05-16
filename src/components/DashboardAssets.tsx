@@ -1,8 +1,9 @@
 import { Col, Container, Row } from "react-bootstrap";
 import AssetList from "./AssetList";
-import AssetDetail from "./AssetDetail";
-import { Navigate, useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
+import AssetDetailModal from "./AssetDetailModal";
+import AssetListHeader from "./AssetListHeader";
 
 const Assets = (props:{user:any})=>{
     const { assetId } = useParams();
@@ -15,24 +16,28 @@ const Assets = (props:{user:any})=>{
         setTimeout(()=>{
             setSelectedAsset(assetId);
         });
-    },[assetId])
+    },[assetId]);
+
+    const navigate = useNavigate();
+    function clearSelected(){
+        navigate('/dashboard/assets');
+    }
 
     if( !props.user ){
         return <Navigate to='/dashboard/login' />;
     }
     return (
         <>
-            <Container className="container-page">
+            <Container>
                 <br/>
-                <Row>
-                    <Col xs={6} sm={5} md={4} lg={3}>
-                        <AssetList selected={assetId}/>
-                    </Col>
-                    <Col>
-                        {typeof(selectedAsset) === 'string'?<AssetDetail assetId={selectedAsset?selectedAsset:''}/>:<></>}
-                    </Col>
-                </Row>
-            </Container>    
+                <AssetListHeader />
+                <hr/>
+                <AssetList selected={assetId}/>
+            </Container>
+
+            {/*Asset details Modal*/}
+            <AssetDetailModal assetId={selectedAsset?selectedAsset:''} show={selectedAsset?true:false} onClose={()=>{clearSelected()}}/>
+
         </>
     );
 }

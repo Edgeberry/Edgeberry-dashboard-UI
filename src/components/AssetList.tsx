@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
-import { Container } from "react-bootstrap";
+import { Button, Card, Col, Container, Row } from "react-bootstrap";
 import { api_things_getThingIndex, api_things_getThingsList } from "../api/things";
 import NotificationBox from "./Notification";
 import { useNavigate } from "react-router-dom";
+import StatusIndicator from "./StatusIndicator";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 
 const AssetList = (props:{selected?:string})=>{
     const[ message, setMessage ] = useState<string>('');
@@ -25,9 +28,11 @@ const AssetList = (props:{selected?:string})=>{
     }
 
     return(
-        <Container className="scroll-container">
+        <Container>
             <NotificationBox message={message} isError={isError}/>
-            {thingList.map((thing:any, index:number)=>{return <AssetListItem thing={thing} key={thing.name+'-'+index} selected={props.selected===thing.thingName}/>})}
+            <Row className="asset-cartdeck" >
+                {thingList.map((thing:any, index:number)=>{return <AssetListItem thing={thing} key={thing.name+'-'+index} selected={props.selected===thing.thingName}/>})}
+            </Row>
         </Container>
     );
 }
@@ -56,12 +61,22 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     }
 
     return(
-        <div className={`asset-list-item ${props.selected?'selected':''}`} onClick={navigateToAssetDetails}>
-            <div className="asset-list-item-indicator" style={{backgroundColor:connected?'#0007ff':'red'}}/>
-            <div className="asset-list-item-content">
-                <h1 className="asset-list-item-header">{props.thing.thingName}</h1>
-                <p className="asset-list-item-text">{props.thing.thingTypeName?props.thing.thingTypeName:''}</p>
+        <Col className="asset-card-container" xl='3' lg='4' md='6' sm='6' xs='12'>
+            <Card className="asset-card">
+            <div className="asset-card-menu" onClick={navigateToAssetDetails}>
+                <Button variant={'primary'} ><FontAwesomeIcon icon={faEllipsisVertical}/></Button>
             </div>
-        </div>
+            <Card.Img variant="top" src={process.env.PUBLIC_URL+'/Edgeberry_rendering.png'} style={{minHeight:'200px'}}/>
+            <Card.Body className="asset-card-body">
+            <Card.Title className="asset-card-title">
+                <StatusIndicator noText message={connected?"Online":"Offline"} type={connected?"success":"danger"} />&nbsp;
+                {props.thing.thingName}
+            </Card.Title>
+            <Card.Text>
+                {props.thing.thingTypeName?props.thing.thingTypeName:''}
+            </Card.Text>
+            </Card.Body>
+        </Card>
+      </Col>
     );
 }
