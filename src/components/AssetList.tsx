@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { api_things_getThingIndex, api_things_getThingsList } from "../api/things";
+import { api_things_getThingIndex, api_things_getThingsList, api_things_invokeDirectMethod } from "../api/things";
 import NotificationBox from "./Notification";
 import { useNavigate } from "react-router-dom";
 import StatusIndicator from "./StatusIndicator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { direct_identifySystem } from "../api/directMethods";
 
 const AssetList = (props:{selected?:string})=>{
     const[ message, setMessage ] = useState<string>('');
@@ -37,6 +38,7 @@ const AssetList = (props:{selected?:string})=>{
     );
 }
 
+
 export default AssetList;
 
 const AssetListItem = (props:{thing:any, selected:boolean})=>{
@@ -66,7 +68,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
             <div className="asset-card-menu" onClick={navigateToAssetDetails}>
                 <Button variant={'primary'} ><FontAwesomeIcon icon={faEllipsisVertical}/></Button>
             </div>
-            <Card.Img variant="top" src={process.env.PUBLIC_URL+'/Edgeberry_rendering.png'} style={{minHeight:'200px'}}/>
+            <Card.Img variant="top" src={process.env.PUBLIC_URL+'/Edgeberry_rendering.png'} style={{minHeight:'200px'}} onClick={()=>{direct_identifySystem(props.thing.thingName)}} />
             <Card.Body className="asset-card-body">
             <Card.Title className="asset-card-title">
                 <StatusIndicator noText message={connected?"Online":"Offline"} type={connected?"success":"danger"} />&nbsp;

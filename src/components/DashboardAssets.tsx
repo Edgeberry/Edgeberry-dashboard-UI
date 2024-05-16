@@ -1,4 +1,4 @@
-import { Col, Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import AssetList from "./AssetList";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";

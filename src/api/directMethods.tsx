@@ -58,6 +58,13 @@ export async function direct_reprovision( deviceId:string ){
  */
 
 // Get system application info
+export async function direct_identifySystem( deviceId:string ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'identify', '');
+    if( result.message ) return result;
+    return result.payload;
+}
+
+// Get system application info
 export async function direct_getSystemApplicationInfo( deviceId:string ){
     const result = await api_things_invokeDirectMethod( deviceId, 'getSystemApplicationInfo', '');
     if( result.message ) return result;
