@@ -65,6 +65,7 @@ const AssetDetail = ( props:{assetId?:string})=>{
             <CommandModal show={show} deviceId={description?.thingName?description.thingName:''} onClose={()=>{setShow(false)}}/>
 
             <h1>{description && description?.thingName?description.thingName:'No asset ID'}</h1>
+            <p style={{fontWeight:'bold'}}>{shadow?.state?.reported?.system?.system?.uuid}</p>
             <p className="text-subtitle">
                 {description && description?.thingTypeName? description.thingTypeName:'No asset type'} &nbsp;
                 {shadow && shadow?.state?.reported?.system?.system?.version? shadow?.state?.reported?.system?.system?.version:'No hardware platform'} &nbsp;
@@ -81,7 +82,7 @@ const AssetDetail = ( props:{assetId?:string})=>{
                     <AssetProvisioning assetId={props.assetId} />
                 </Tab>
                 <Tab eventKey="System" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.system?.state === 'running')?'success':'danger'}/> System</>}>
-                    <AssetSystem assetId={props.assetId} />
+                    <AssetSystem assetId={props.assetId} assetShadow={shadow} />
                 </Tab>
             </Tabs>
         </Container>

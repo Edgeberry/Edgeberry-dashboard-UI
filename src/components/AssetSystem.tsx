@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -8,7 +8,7 @@ import { faSmileBeam } from "@fortawesome/free-regular-svg-icons";
 import { api_things_delete, api_things_invokeDirectMethod } from "../api/things";
 import { direct_getSystemApplicationInfo, direct_getSystemNetworkInfo, direct_updateSystemApplication } from "../api/directMethods";
 
-const AssetSystem = (props:{assetId:string})=>{
+const AssetSystem = (props:{assetId:string, assetShadow:any })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
     // Error or success messages
     const[ message, setMessage ] = useState<string>('');
@@ -168,7 +168,26 @@ const AssetSystem = (props:{assetId:string})=>{
                     <Form.Control type={'text'} placeholder={'IP address'} value={ipAddress} disabled/>
                 </Col>
             </Form.Group>
-            <br/>
+
+            <h2>Hardware</h2>
+            <Form.Group as={Row} className="mb-2">
+                <Form.Label column sm={2}>Computing Platform</Form.Label>
+                <Col sm={6}>
+                    <Form.Control type={'text'} placeholder={'Hardware Platform'} value={props.assetShadow?.state?.reported?.system?.system?.platform} disabled/>
+                </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-2">
+                <Form.Label column sm={2}>Hardware Board</Form.Label>
+                <Col sm={6}>
+                    <Form.Control type={'text'} placeholder={'Hardware board'} value={props.assetShadow?.state?.reported?.system?.system?.board !== 'unknown' ?props.assetShadow?.state?.reported?.system?.system?.board +' Rev '+props.assetShadow?.state?.reported?.system?.system?.board_version:'unknown'} disabled/>
+                </Col>
+            </Form.Group>
+            <Form.Group as={Row} className="mb-2">
+                <Form.Label column sm={2}>Hardware UUID</Form.Label>
+                <Col sm={6}>
+                    <Form.Control type={'text'} placeholder={'Hardware UUID'} value={props.assetShadow?.state?.reported?.system?.system?.uuid} disabled/>
+                </Col>
+            </Form.Group>
 
             <h2>System software</h2>
             <StatusIndicator message={appStatus==='online'?'Running':appStatus} type={appStatus==='online'?'success':'danger'}/>
