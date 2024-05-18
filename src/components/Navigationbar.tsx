@@ -16,9 +16,6 @@ const NavigationBar = (props:{user:any|null})=>{
                     <Nav.Link href='/dashboard/assets'>
                         Assets
                     </Nav.Link>
-                    <Nav.Link href='/dashboard/groups'>
-                        Groups
-                    </Nav.Link>
                     <Nav.Link href='/dashboard/settings'>
                         Settings
                     </Nav.Link>
