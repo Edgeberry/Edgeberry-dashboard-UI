@@ -57,12 +57,20 @@ export async function direct_reprovision( deviceId:string ){
  *  System
  */
 
-// Get system application info
+// Request physical system identification (tsjeeptsjeep & bleepbleep)
 export async function direct_identifySystem( deviceId:string ){
     const result = await api_things_invokeDirectMethod( deviceId, 'identify', '');
     if( result.message ) return result;
     return result.payload;
 }
+
+// Request system reboot
+export async function direct_restartSystem( deviceId:string ){
+    const result = await api_things_invokeDirectMethod( deviceId, 'reboot', '');
+    if( result.message ) return result;
+    return result.payload;
+}
+
 
 // Get system application info
 export async function direct_getSystemApplicationInfo( deviceId:string ){
