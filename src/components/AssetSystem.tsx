@@ -6,7 +6,7 @@ import { faPowerOff, faTrash } from "@fortawesome/free-solid-svg-icons";
 import StatusIndicator from "../components/StatusIndicator";
 import { faSmileBeam } from "@fortawesome/free-regular-svg-icons";
 import { api_things_delete, api_things_invokeDirectMethod } from "../api/things";
-import { direct_getSystemApplicationInfo, direct_getSystemNetworkInfo, direct_updateSystemApplication } from "../api/directMethods";
+import { direct_getSystemApplicationInfo, direct_getSystemNetworkInfo, direct_identifySystem, direct_restartSystem, direct_updateSystemApplication } from "../api/directMethods";
 
 const AssetSystem = (props:{assetId:string, assetShadow:any })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
@@ -88,7 +88,7 @@ const AssetSystem = (props:{assetId:string, assetShadow:any })=>{
         if( !window.confirm("Restart system?") ) return;
         setDisabled(true);
 
-        const result = await api_things_invokeDirectMethod( props.assetId, 'reboot', '');
+        const result = await direct_restartSystem( props.assetId );
         if( !result.ok ){
             setIsError(true);
             setMessage(result.message);
@@ -103,7 +103,7 @@ const AssetSystem = (props:{assetId:string, assetShadow:any })=>{
 
     // Request system identification
     async function requestSystemIdentifycation(){
-        const result = await api_things_invokeDirectMethod( props.assetId, 'identify', '');
+        const result = await direct_identifySystem( props.assetId );
 
         if( !result.ok ){
             setIsError(true);
