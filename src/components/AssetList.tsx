@@ -5,7 +5,7 @@ import NotificationBox from "./Notification";
 import { useNavigate } from "react-router-dom";
 import StatusIndicator from "./StatusIndicator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { faPencil, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { direct_identifySystem } from "../api/directMethods";
 
 const AssetList = (props:{selected?:string})=>{
@@ -17,7 +17,7 @@ const AssetList = (props:{selected?:string})=>{
         getThingsList();
     },[]);
 
-    /* Get the list of thins from the API */
+    /* Get the list of things from the API */
     async function getThingsList(){
         const result = await api_things_getThingsList();
         if( result.message ){
@@ -57,6 +57,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
         setConnected(result?.connectivity?.connected);
     }
 
+    // When 'edit' is clicked, navigate to details
     const navigate = useNavigate();
     function navigateToAssetDetails(){
         navigate('/dashboard/assets/'+props.thing.thingName);
@@ -66,7 +67,8 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
         <Col className="asset-card-container" xl='3' lg='4' md='6' sm='6' xs='12'>
             <Card className="asset-card">
             <div className="asset-card-menu" onClick={navigateToAssetDetails}>
-                <Button variant={'primary'} ><FontAwesomeIcon icon={faEllipsisVertical}/></Button>
+                <Button variant={'primary'} className="asset-card-menu-btn"><FontAwesomeIcon icon={faPencil}/></Button>
+                <Button variant={'danger'} className="asset-card-menu-btn"><FontAwesomeIcon icon={faPowerOff}/></Button>
             </div>
             <Card.Img variant="top" src={process.env.PUBLIC_URL+'/Edgeberry_rendering.png'} style={{minHeight:'200px'}} onClick={()=>{direct_identifySystem(props.thing.thingName)}} />
             <Card.Body className="asset-card-body">
