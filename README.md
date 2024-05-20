@@ -1,7 +1,7 @@
-![EdgeBerry](assets/EdgeBerry_banner.png)
+![EdgeBerry](assets/Edgeberry_banner.png)
 
 
-The user interface for [EdgeBerry.io](https://github.com/SpuQ/EdgeBerry-io) web application.
+The user interface for the [Edgeberry Dashboard](https://github.com/SpuQ/Edgeberry-dashboard) web application.
 
 ## License & Collaboration
 **Copyright© 2024 Sanne 'SpuQ' Santens**. The Edgeberry Dashboard project is licensed under the **[GNU GPLv3](LICENSE.txt)**.
