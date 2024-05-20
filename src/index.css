@@ -148,7 +148,7 @@ body {
 }
 
 .asset-card-menu{
-  position: absolute;
+  /*position: absolute;*/
   width: 100%;
   padding: 7px;
   display: inline;
@@ -164,6 +164,7 @@ body {
   color: var(--edgeberry_dark_gray);
   padding: 4px;
   margin: 1px;
+  min-width: 2.3rem;
 }
 
 .asset-card-body{
