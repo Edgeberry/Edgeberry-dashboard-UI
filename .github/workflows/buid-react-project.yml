@@ -34,5 +34,5 @@ jobs:
         with:
           upload_url: ${{ github.event.release.upload_url }}
           asset_path: build.tar.gz
-          asset_name: EdgeBerry-io-UI.tar.gz
+          asset_name: Edgeberry-dashboard-UI.tar.gz
           asset_content_type: application/gzip
