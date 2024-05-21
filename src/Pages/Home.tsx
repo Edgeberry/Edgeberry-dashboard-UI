@@ -1,3 +1,4 @@
+import { Col, Container, Row } from 'react-bootstrap';
 import logo from '../EdgeBerry_Logo_text.svg';
 
 function Home() {
@@ -19,6 +20,25 @@ function Home() {
         software tools like the online device management platform <a href={"https://edgeberry.io/dashboard"}>Edgeberry Dashboard</a> and 
         publicly available development resources to support a diverse array of applications and use cases.
         </p>
+
+        <Container>
+        <Row>
+          <Col md={4}>
+            <h3>Configure devices</h3>
+            <img src={process.env.PUBLIC_URL+'/Edgeberry_insert_cartridge.png'} width={"100%"}/>
+          </Col>
+          <Col md={4}>
+          <h3>Deploy application</h3>
+            <img src={process.env.PUBLIC_URL+'/device_translucent_white.png'} width={"100%"}/>
+          </Col>
+          <Col md={4}>
+          <h3>Manage anywhere</h3>
+            <br/>
+            <img src={process.env.PUBLIC_URL+'/dashboard.png'} width={"100%"}/>
+          </Col>
+          
+        </Row>
+        </Container>
       </div>
     </div>
   );
