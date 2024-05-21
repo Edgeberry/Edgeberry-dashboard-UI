@@ -1,7 +1,5 @@
-import { useState } from "react";
 import { Container } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
-import SettingsAWS from "./SettingsAWS";
 import SettingsAccount from "./SettingsAccount";
 
 const Settings = (props:{user:any|null})=>{
@@ -16,9 +14,7 @@ const Settings = (props:{user:any|null})=>{
             <Container style={{textAlign:'left'}}>
                 <br/>
                 <h1>Settings</h1>
-                <p className="text-subtitle">Settings for your EdgeBerry.io stuff</p>
-                <hr/>
-                <SettingsAWS user={props.user} />
+                <p className="text-subtitle">Settings for your Edgeberry Dashboard</p>
                 <hr/>
                 <SettingsAccount user={props.user} />
             </Container>
