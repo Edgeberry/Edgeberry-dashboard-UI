@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { api_things_getThingIndex, api_things_getThingsList, api_things_invokeDirectMethod } from "../api/things";
+import { api_things_getThingDescription, api_things_getThingIndex, api_things_getThingsList, api_things_invokeDirectMethod } from "../api/things";
 import NotificationBox from "./Notification";
 import { useNavigate } from "react-router-dom";
 import StatusIndicator from "./StatusIndicator";
@@ -43,8 +43,10 @@ export default AssetList;
 
 const AssetListItem = (props:{thing:any, selected:boolean})=>{
     const[ connected, setConnected ] = useState<boolean>(false);
+    const[ deviceName, setDeviceName ] = useState<string>('');
 
     useEffect(()=>{
+        getThingDescription();
         getThingIndex();
     },[]);
 
@@ -55,6 +57,15 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
             return;
         }
         setConnected(result?.connectivity?.connected);
+    }
+
+    async function getThingDescription(){
+        const result = await api_things_getThingDescription(props.thing.thingName);
+        if( result.message ){
+            // TODO - do something with the error...
+            return;
+        }
+        setDeviceName(result?.attributes?.deviceName);
     }
 
     // When 'edit' is clicked, navigate to details
@@ -82,7 +93,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
             <Card.Body className="asset-card-body">
             <Card.Title className="asset-card-title">
                 <StatusIndicator noText message={connected?"Online":"Offline"} type={connected?"success":"danger"} />&nbsp;
-                {props.thing.thingName}
+                {deviceName?deviceName:props.thing.thingName}
             </Card.Title>
             <Card.Text>
                 {props.thing.thingTypeName?props.thing.thingTypeName:''}
