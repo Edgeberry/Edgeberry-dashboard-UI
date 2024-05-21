@@ -34,7 +34,13 @@ const AssetAttributes = ( props:{assetId:string })=>{
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Device location</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'Device location'} value={deviceLocation} onChange={(e)=>{setDeviceLocation(e.target.value)}} required disabled={disabled}/>
+                        <Form.Control type={'text'} placeholder={'Device location'} value={deviceLocation} onChange={(e)=>{setDeviceLocation(e.target.value)}} disabled={disabled}/>
+                    </Col>
+                </Form.Group>
+                <Form.Group as={Row} className="mb-2">
+                    <Form.Label column sm={2}>Device owner ID</Form.Label>
+                    <Col sm={6}>
+                        <Form.Control type={'text'} placeholder={'Device owner ID'} value={deviceLocation} onChange={(e)=>{setDeviceLocation(e.target.value)}} disabled/>
                     </Col>
                 </Form.Group>
                 <NotificationBox message={message} isError={isError} />
