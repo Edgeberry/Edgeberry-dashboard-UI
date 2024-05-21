@@ -84,7 +84,7 @@ const AssetSystem = (props:{assetId:string, assetShadow:any })=>{
             <br/>
             <AssetSystemHardware assetId={props.assetId} assetShadow={props.assetShadow} />
             <br/>
-            <AssetAttributes assetId={props.assetId} />
+            <AssetAttributes assetId={props.assetId} assetShadow={props.assetShadow} />
             <br/>
             <AssetSystemSoftware assetId={props.assetId} assetShadow={props.assetShadow} />
             <br/>
