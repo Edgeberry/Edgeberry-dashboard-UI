@@ -5,8 +5,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPowerOff, faTrash } from "@fortawesome/free-solid-svg-icons";
 import StatusIndicator from "../components/StatusIndicator";
 import { faSmileBeam } from "@fortawesome/free-regular-svg-icons";
-import { api_things_delete, api_things_invokeDirectMethod } from "../api/things";
+import { api_things_delete } from "../api/things";
 import { direct_getSystemApplicationInfo, direct_getSystemNetworkInfo, direct_identifySystem, direct_restartSystem, direct_updateSystemApplication } from "../api/directMethods";
+import AssetAttributes from "./AssetAttributes";
 
 const AssetSystem = (props:{assetId:string, assetShadow:any })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
@@ -217,7 +218,8 @@ const AssetSystem = (props:{assetId:string, assetShadow:any })=>{
                 </Col>
             </Form.Group>
             <br/>
-
+            <AssetAttributes assetId={props.assetId} />
+            <br/>
             <h2>Delete</h2>
             <p className="text-subtitle">Delete this device from the platform.</p>
             <Button variant={'danger'} onClick={()=>{deleteAsset()}}><FontAwesomeIcon icon={faTrash}/> Delete</Button>
