@@ -177,6 +177,8 @@ body {
   font-Size: 1.3rem;
   font-weight:bold;
   color: var(--edgeberry_blue);
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 
