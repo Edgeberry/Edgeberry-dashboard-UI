@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
-import { api_things_getThingDescription } from "../api/things";
+import { api_things_getThingDescription, api_things_updateThingDescription } from "../api/things";
 
 const AssetAttributes = ( props:{assetId:string, assetShadow:any })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
@@ -45,9 +45,16 @@ const AssetAttributes = ( props:{assetId:string, assetShadow:any })=>{
     // Save the device attributes
     async function saveAttributes(){
         setDisabled(true);
-        // ToDo: actually implement
-        setTimeout(()=>{setDisabled(false)},700);
 
+        const result = await api_things_updateThingDescription(props.assetId, deviceName, deviceOwnerId);
+        if( result.message ){
+            setIsError(true);
+            setMessage(result.message);
+            return setDisabled(false);
+        }
+        setIsError(false);
+        setMessage("Device attributes successfully updated!");
+        return setDisabled(false);
     }
 
     return (

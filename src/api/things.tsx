@@ -32,6 +32,25 @@ export async function api_things_getThingDescription( thingName:string ){
     }
 }
 
+/* Update thing description */
+export async function api_things_updateThingDescription( thingName:string, deviceName:string, deviceOwner:string ){
+    const response = await fetch( window.location.origin+'/api/things/description?thingName='+thingName,{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({
+            deviceOwner: deviceOwner,
+            deviceName: deviceName
+        })
+    });
+    try{
+        let content = await response.json();
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
+
 /* Get Thing Fleet index */
 export async function api_things_getThingIndex( thingName:string ){
     const response = await fetch( window.location.origin+'/api/things/index?thingName='+thingName,{
