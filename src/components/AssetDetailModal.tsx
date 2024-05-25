@@ -48,7 +48,7 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
     return(<>
             <Modal size={'xl'} onHide={()=>{props.onClose()}} show={props.show} >
                 <Modal.Header style={{paddingLeft:'2rem'}} closeButton>
-                    <Modal.Title>{description && description?.thingName?description.thingName:'No asset ID'}</Modal.Title>
+                    <Modal.Title>{description && description?.attributes?.deviceName?description.attributes.deviceName:props.assetId}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                         <div style={{float:'right'}}>
