@@ -1,11 +1,16 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import SettingsAccountDeleteModal from "./SettingsAccountDeleteModal";
 
 const SettingsAccount = (props:{user:any|null})=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
+
+    const[ deleteModalShow, setDDeleteModalShow ] = useState<boolean>(false);
 
     // Disappearing messages
     useEffect(()=>{
@@ -33,8 +38,12 @@ const SettingsAccount = (props:{user:any|null})=>{
                         <Form.Control type={'text'} placeholder={'E-mail'} value={props.user?.email} onChange={(e)=>{}} required disabled={disabled}/>
                     </Col>
                 </Form.Group>
+                <Button variant={'primary'}>Save</Button>
+                <Button variant={'danger'} style={{float:'right'}} onClick={()=>{setDDeleteModalShow(true)}}><FontAwesomeIcon icon={faTrash} /> Delete account</Button>
                 <NotificationBox message={message} isError={isError} />
             </Form>
+
+            <SettingsAccountDeleteModal show={deleteModalShow} onClose={()=>{setDDeleteModalShow(false)}}/>
         </>
     );
 }
