@@ -42,16 +42,18 @@ const SettingsAccountDeleteModal = ( props:{ show:boolean, onClose:Function })=>
                 <Modal.Body>
                     <Form>
                         <Alert variant={'danger'}>
-                            <strong><FontAwesomeIcon icon={faWarning}/> Deleting your account is irreversible!</strong><br/>
-                            The following actions will be taken when you continue deleting:
+                            <p>
+                                <strong><FontAwesomeIcon icon={faWarning}/> Deleting your account is irreversible!</strong><br/>
+                                The following actions will be taken when you continue the deletion of this user account:
+                            </p>
                             <ul>
-                                <li>All your user data will be deleted</li>
+                                <li>All your user data will be deleted beyond recovery</li>
                                 <li>All devices owned by you will become available again to be claimed</li>
                             </ul>
                         </Alert>
                         <Form.Group className="mb-2">
-                            <Form.Label>Type 'delete' to permanently delete this account</Form.Label>
-                            <Form.Control type={'text'} placeholder={'type "delete" to continue'} value={deletePhrase} onChange={(e)=>{checkDeletePhrase(e.target.value)}}/>
+                            <Form.Label>Type 'delete' to continue permanently deleting this account</Form.Label>
+                            <Form.Control type={'text'} placeholder={''} value={deletePhrase} onChange={(e)=>{checkDeletePhrase(e.target.value)}}/>
                         </Form.Group>
                     </Form>
                     <NotificationBox message={message} isError={isError} />
