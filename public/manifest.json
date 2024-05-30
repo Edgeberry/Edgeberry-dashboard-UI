@@ -1,25 +1,25 @@
 {
-  "short_name": "EdgeBerry",
-  "name": "EdgeBerry",
+  "short_name": "Edgeberry",
+  "name": "Edgeberry Dashboard",
   "icons": [
     {
-      "src": "EdgeBerry_logo.png",
+      "src": "favicon.ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "EdgeBerry_logo.png",
+      "src": "Edgeberry_logo.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "EdgeBerry_logo.png",
+      "src": "Edgeberry_logo.png",
       "type": "image/png",
       "sizes": "512x512"
     }
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#1e1e1e",
+  "background_color": "#1e1e1e"
 }
