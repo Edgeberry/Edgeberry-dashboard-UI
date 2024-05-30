@@ -1,6 +1,6 @@
 import {useState, SyntheticEvent } from 'react';
 import { Button, Container, Form } from 'react-bootstrap';
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import logo from '../EdgeBerry_Logo_text.svg';
 import { api_user_login } from '../api/user';
 import NotificationBox from '../components/Notification';
@@ -29,20 +29,22 @@ const Login = (props:{user:any, onLogin:Function }) => {
     }
 
     return(
-        <Container className="centerbox">
-            <Form onSubmit={submit}>
-                <img src={logo} width="100%" alt="logo" />
-                <br/>
-                <br/>
-                <Form.Group className="mb-2">
-                    <Form.Control type={'text'} placeholder={'E-mail'} value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
-                </Form.Group>
-                <Form.Group className="mb-2">
-                    <Form.Control type={'password'} placeholder={'Password'} value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
-                </Form.Group>
-                <NotificationBox message={message} isError={true} />
-                <Button variant={'primary'} className="w-100 btn btn-lg" type="submit">Log in</Button>
-            </Form>
+        <Container className="container-page">
+            <Container className="centerbox">
+                <Form onSubmit={submit}>
+                    <img src={logo} width="100%" alt="logo" />
+                    <br/>
+                    <br/>
+                    <Form.Group className="mb-2">
+                        <Form.Control type={'text'} placeholder={'E-mail'} value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
+                    </Form.Group>
+                    <Form.Group className="mb-2">
+                        <Form.Control type={'password'} placeholder={'Password'} value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
+                    </Form.Group>
+                    <NotificationBox message={message} isError={true} />
+                    <Button variant={'primary'} className="w-100 btn btn-lg" type="submit">Log in</Button>
+                </Form>
+            </Container>
         </Container>
     )
 }
