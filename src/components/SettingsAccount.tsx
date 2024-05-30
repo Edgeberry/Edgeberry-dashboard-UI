@@ -24,7 +24,7 @@ const SettingsAccount = (props:{user:any|null})=>{
     return (
         <>
             <h2>Account</h2>
-            <p className="text-subtitle">Your Edgeberry Dasboard user account settings </p>
+            <p className="text-subtitle">Your Edgeberry Dashboard user account settings </p>
             <Form>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Username</Form.Label>

@@ -42,8 +42,8 @@ const Login = (props:{user:any, onLogin:Function }) => {
                         <Form.Control type={'password'} placeholder={'Password'} value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
                     </Form.Group>
                     <NotificationBox message={message} isError={true} />
-                    <Button variant={'primary'} className="w-100 btn btn-lg" type="submit">Log in</Button>
-                    No account yet? <Link to='/dashboard/register'>Register</Link> now
+                    <Button variant={'primary'} className="w-100 btn btn-lg mb-2" type="submit">Log in</Button>
+                    <p>No account yet? <Link to='/dashboard/register'>Register</Link> now</p>
                 </Form>
             </Container>
         </Container>
