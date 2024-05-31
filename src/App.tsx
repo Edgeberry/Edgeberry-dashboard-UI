@@ -20,7 +20,6 @@
  */
 
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Home from './Pages/Home';
 import Login from './Pages/Login';
 import NotFound from './Pages/404';
 import Dashboard from './Pages/Dashboard';
@@ -58,7 +57,7 @@ function App() {
     <div className="App">
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-        <Route path='/' element={<Home />} />
+      <Route index element={<Navigate to="/dashboard/assets" />} />
         {/* Dashboard: nested routes */}
         <Route path='/dashboard/login' element={<Login user={user} onLogin={()=>{onLogin()}}/>} />
         <Route path='/dashboard/register' element={<Register user={user} onLogin={()=>{onLogin()}}/>} />
