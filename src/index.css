@@ -181,6 +181,10 @@ body {
   white-space: nowrap;
 }
 
+.asset-card-text{
+  color: var(--edgeberry_silver);
+}
+
 
 /* Individually scrolling container */
 .scroll-container{

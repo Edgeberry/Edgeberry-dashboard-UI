@@ -43,8 +43,10 @@ const AssetList = (props:{selected?:string})=>{
 export default AssetList;
 
 const AssetListItem = (props:{thing:any, selected:boolean})=>{
-    const[ connected, setConnected ] = useState<boolean>(false);
-    const[ deviceName, setDeviceName ] = useState<string>('');
+    // First-sight info about the device
+    const[ connected, setConnected ] = useState<boolean>(false);        // the current connection state
+    const[ deviceName, setDeviceName ] = useState<string>('');          // the name the user gave to the device
+    const[ devicePlatform, setDevicePlatform ] = useState<string>('');  // the platform (e.g. Raspberry Pi 3B+)
 
     // Overlay
     const[ hidden, setHidden ] = useState<boolean>(true);
@@ -97,6 +99,9 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
             // although this rarely/never errors. Low priority
             return setSpinner(true, result.message, 'Retry later...');
         }
+        // The device hardware platform is also in this info
+        setDevicePlatform(result?.state?.reported?.system?.system?.platform);
+
         // The system state is maybe too deeply nested in the
         // 'thing shadow', but here it is. If the system is not 'running',
         // keep the spinner going and report the last known system state
@@ -135,8 +140,8 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
                     <StatusIndicator noText message={connected?"Online":"Offline"} type={connected?"success":"danger"} />&nbsp;
                     {deviceName?deviceName:props.thing.thingName}
                 </Card.Title>
-                <Card.Text>
-                    {props.thing.thingTypeName?props.thing.thingTypeName:''}
+                <Card.Text className="asset-card-text">
+                    {devicePlatform?devicePlatform:props?.thing?.thingTypeName}
                 </Card.Text>
                 </Card.Body>
             </Card>
