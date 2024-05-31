@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { api_things_getThingDescription, api_things_getThingIndex, api_things_getThingsList, api_things_invokeDirectMethod } from "../api/things";
+import { api_things_getThingDescription, api_things_getThingIndex, api_things_getThingShadow, api_things_getThingsList, api_things_invokeDirectMethod } from "../api/things";
 import NotificationBox from "./Notification";
 import { useNavigate } from "react-router-dom";
 import StatusIndicator from "./StatusIndicator";
@@ -52,7 +52,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     const[ subText, setSubText ] = useState<string>('Loading');
 
     useEffect(()=>{
-        getThingIndex();
+        updateAsset();
     },[]);
 
     // Set the spinner
@@ -62,14 +62,19 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
         setSubText(subtext?subtext:'');
     }
 
+    // Update Asset
+    async function updateAsset(){
+        setSpinner( true );
+        await getThingIndex();
+        await getThingShadow();
+    }
+
     // The 'Thing Index' contains information like
     // the connection state (+ timestamp), thing type, ... . And our
     // custom attributes 'deviceName' and 'deviceOwner' from the thing
     // template. Note that the 'thingId' from the result is not the
     // deviceId from the device EEPROM (!). - TODO: check possibilities
     async function getThingIndex(){
-        setSpinner(true);
-
         const result = await api_things_getThingIndex(props.thing.thingName);
         if( result.message ){
             // TODO - do something with the error...
@@ -79,6 +84,23 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
         setConnected(result?.connectivity?.connected);
         setDeviceName(result?.attributes?.deviceName);
         return setSpinner(false);
+    }
+
+    // The 'Thing Shadow' contains information about the device state
+    // like what the last known state is of the system (e.g. 'rebooting',
+    // 'updating', 'running')
+    async function getThingShadow(){
+        const result = await api_things_getThingShadow(props.thing.thingName);
+        if( result.message ){
+            // TODO - do something with the error...
+            // although this rarely/never errors. Low priority
+            return setSpinner(false);
+        }
+        if( result?.state?.reported?.system?.system?.state !== 'running'){
+            return setSpinner(true, result?.state?.reported?.system?.system?.state );
+        }
+        console.log(result);
+        return setSpinner(false, result?.state?.reported?.system?.system?.state );
     }
 
     // When 'edit' is clicked, navigate to details
