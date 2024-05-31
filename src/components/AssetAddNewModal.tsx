@@ -57,17 +57,17 @@ const AssetAddNewModal = ( props:{ show:boolean, onClose:Function })=>{
                 <Modal.Body style={{minHeight:'250px'}}>
                 <Carousel controls={false} indicators={false} interval={null} activeIndex={index} slide={false}>
                     <Carousel.Item style={{minHeight:'250px'}}>
-                        <Form>
+                        <Form onSubmit={(e)=>{e.preventDefault(); setIndex(index+1)}}>
                             <Alert variant={'primary'}>
                                 <FontAwesomeIcon icon={faInfoCircle} /> <strong>Make sure your device is connected to the internet</strong>,
                                 and you have physical access to the device.
                             </Alert>
                             <FormGroup className="mb-2">
                                 <Form.Label>Enter the device serial number</Form.Label>
-                                <Form.Control type="text" value={deviceId} onChange={(e)=>{setDeviceId(e.target.value)}} placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"></Form.Control>
+                                <Form.Control type="text" value={deviceId} onChange={(e)=>{setDeviceId(e.target.value)}} placeholder="xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx" minLength={36}></Form.Control>
                             </FormGroup>
                             <div style={{width:'100%', textAlign:'right', position:'absolute', bottom:'0' }}>
-                                <Button variant={'danger'} onClick={()=>{setIndex(index+1)}}>Next</Button>
+                                <Button variant={'danger'} type={'submit'}>Next</Button>
                                 <Button variant={'danger'} onClick={()=>{onClose()}} style={{float:'left'}}>Cancel</Button>
                             </div>
                         </Form>
@@ -78,7 +78,6 @@ const AssetAddNewModal = ( props:{ show:boolean, onClose:Function })=>{
                                 you will have <strong>10 seconds</strong> to press the button on the front of your Edgeberry device once the 
                                 status indicator flashed green.
                             </Alert>
-                            <p>TODO: picture of the button </p>
                             <div style={{width:'100%', textAlign:'right', position:'absolute', bottom:'0' }}>
                                 <Button variant={'danger'} onClick={()=>{setIndex(index+1); claimDevice();}}>Next</Button>
                                 <Button variant={'danger'} onClick={()=>{setIndex(index-1)}} style={{float:'left'}}>Back</Button>
