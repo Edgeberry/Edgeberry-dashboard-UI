@@ -7,6 +7,7 @@ import StatusIndicator from "./StatusIndicator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocation, faLocationDot, faPencil, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { direct_identifySystem, direct_restartSystem } from "../api/directMethods";
+import LoaderOverlay from "./LoadingOverlay";
 
 const AssetList = (props:{selected?:string})=>{
     const[ message, setMessage ] = useState<string>('');
@@ -84,22 +85,23 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     return(
         <Col className="asset-card-container" xl='3' lg='4' md='6' sm='6' xs='12'>
             <Card className="asset-card">
-            <div className="asset-card-menu">
-                <Button variant={'primary'} className="asset-card-menu-btn" onClick={()=>{direct_identifySystem(props.thing.thingName)}}><FontAwesomeIcon icon={faLocationDot}/></Button>
-                <Button variant={'primary'} className="asset-card-menu-btn" onClick={navigateToAssetDetails}><FontAwesomeIcon icon={faPencil}/></Button>
-                <Button variant={'danger'} className="asset-card-menu-btn" onClick={restartDevice}><FontAwesomeIcon icon={faPowerOff}/></Button>
-            </div>
-            <Card.Img variant="top" src={process.env.PUBLIC_URL+'/Edgeberry_rendering.png'} style={{minHeight:'200px'}} onClick={()=>{direct_identifySystem(props.thing.thingName)}} />
-            <Card.Body className="asset-card-body">
-            <Card.Title className="asset-card-title">
-                <StatusIndicator noText message={connected?"Online":"Offline"} type={connected?"success":"danger"} />&nbsp;
-                {deviceName?deviceName:props.thing.thingName}
-            </Card.Title>
-            <Card.Text>
-                {props.thing.thingTypeName?props.thing.thingTypeName:''}
-            </Card.Text>
-            </Card.Body>
-        </Card>
-      </Col>
+                <LoaderOverlay text={'Restarting'} subtext={'This may take a while...'} spinner hidden/>
+                <div className="asset-card-menu">
+                    <Button variant={'primary'} className="asset-card-menu-btn" onClick={()=>{direct_identifySystem(props.thing.thingName)}}><FontAwesomeIcon icon={faLocationDot}/></Button>
+                    <Button variant={'primary'} className="asset-card-menu-btn" onClick={navigateToAssetDetails}><FontAwesomeIcon icon={faPencil}/></Button>
+                    <Button variant={'danger'} className="asset-card-menu-btn" onClick={restartDevice}><FontAwesomeIcon icon={faPowerOff}/></Button>
+                </div>
+                <Card.Img variant="top" src={process.env.PUBLIC_URL+'/Edgeberry_rendering.png'} style={{minHeight:'200px'}} onClick={()=>{direct_identifySystem(props.thing.thingName)}} />
+                <Card.Body className="asset-card-body">
+                <Card.Title className="asset-card-title">
+                    <StatusIndicator noText message={connected?"Online":"Offline"} type={connected?"success":"danger"} />&nbsp;
+                    {deviceName?deviceName:props.thing.thingName}
+                </Card.Title>
+                <Card.Text>
+                    {props.thing.thingTypeName?props.thing.thingTypeName:''}
+                </Card.Text>
+                </Card.Body>
+            </Card>
+        </Col>
     );
 }
