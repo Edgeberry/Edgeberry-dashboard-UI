@@ -55,6 +55,8 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
 
     useEffect(()=>{
         updateAsset();
+        // Poll the device info... bad idea... use sockets...
+        // setInterval(()=>{updateAsset(false)},2000);
     },[]);
 
     // Set the spinner
@@ -65,8 +67,8 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     }
 
     // Update Asset
-    async function updateAsset(){
-        setSpinner( true );
+    async function updateAsset( show?:boolean ){
+        setSpinner( show?true:false );
         await getThingIndex();
         await getThingShadow();
         // Spinner is hidden (or kept) by result
@@ -121,7 +123,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     // When 'power' is clicked, reboot the device
     function restartDevice(){
         // Ask the user if they are sure; they love that
-        if( !window.confirm("Restart "+deviceName?deviceName:props.thing.thingName+"?")) return;
+        if( !window.confirm("Restart '"+deviceName?deviceName:props.thing.thingName+"'?")) return;
         direct_restartSystem(props.thing.thingName);
     }
 
