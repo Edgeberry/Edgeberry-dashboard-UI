@@ -5,7 +5,7 @@ import NotificationBox from "./Notification";
 import { useNavigate } from "react-router-dom";
 import StatusIndicator from "./StatusIndicator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocation, faLocationDot, faPencil, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faLocationDot, faPencil, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { direct_identifySystem, direct_restartSystem } from "../api/directMethods";
 import LoaderOverlay from "./LoadingOverlay";
 
@@ -46,27 +46,39 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     const[ connected, setConnected ] = useState<boolean>(false);
     const[ deviceName, setDeviceName ] = useState<string>('');
 
+    // Overlay
+    const[ hidden, setHidden ] = useState<boolean>(true);
+    const[ text, setText ] = useState<string>('Loading');
+    const[ subText, setSubText ] = useState<string>('Loading');
+
     useEffect(()=>{
-        getThingDescription();
         getThingIndex();
     },[]);
 
+    // Set the spinner
+    function setSpinner( visible:boolean, text?:string, subtext?:string ){
+        setHidden(!visible);
+        setText(text?text:'');
+        setSubText(subtext?subtext:'');
+    }
+
+    // The 'Thing Index' contains information like
+    // the connection state (+ timestamp), thing type, ... . And our
+    // custom attributes 'deviceName' and 'deviceOwner' from the thing
+    // template. Note that the 'thingId' from the result is not the
+    // deviceId from the device EEPROM (!). - TODO: check possibilities
     async function getThingIndex(){
+        setSpinner(true);
+
         const result = await api_things_getThingIndex(props.thing.thingName);
         if( result.message ){
             // TODO - do something with the error...
-            return;
+            // although this rarely/never errors. Low priority
+            return setSpinner(false);
         }
         setConnected(result?.connectivity?.connected);
-    }
-
-    async function getThingDescription(){
-        const result = await api_things_getThingDescription(props.thing.thingName);
-        if( result.message ){
-            // TODO - do something with the error...
-            return;
-        }
         setDeviceName(result?.attributes?.deviceName);
+        return setSpinner(false);
     }
 
     // When 'edit' is clicked, navigate to details
@@ -77,7 +89,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
 
     // When 'power' is clicked, reboot the device
     function restartDevice(){
-        // Ask the user if they are sure, they love that
+        // Ask the user if they are sure; they love that
         if( !window.confirm("Restart "+props.thing.thingName+"?")) return;
         direct_restartSystem(props.thing.thingName);
     }
@@ -85,7 +97,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     return(
         <Col className="asset-card-container" xl='3' lg='4' md='6' sm='6' xs='12'>
             <Card className="asset-card">
-                <LoaderOverlay text={'Restarting'} subtext={'This may take a while...'} spinner hidden/>
+                <LoaderOverlay text={text} subtext={subText} spinner hidden={hidden}/>
                 <div className="asset-card-menu">
                     <Button variant={'primary'} className="asset-card-menu-btn" onClick={()=>{direct_identifySystem(props.thing.thingName)}}><FontAwesomeIcon icon={faLocationDot}/></Button>
                     <Button variant={'primary'} className="asset-card-menu-btn" onClick={navigateToAssetDetails}><FontAwesomeIcon icon={faPencil}/></Button>
