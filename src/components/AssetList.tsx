@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { api_things_getThingDescription, api_things_getThingIndex, api_things_getThingShadow, api_things_getThingsList, api_things_invokeDirectMethod } from "../api/things";
+import { api_things_getThingIndex, api_things_getThingShadow, api_things_getThingsList } from "../api/things";
 import NotificationBox from "./Notification";
 import { useNavigate } from "react-router-dom";
 import StatusIndicator from "./StatusIndicator";
@@ -67,6 +67,8 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
         setSpinner( true );
         await getThingIndex();
         await getThingShadow();
+        // Spinner is hidden (or kept) by result
+        // from the device shadow system state (!)
     }
 
     // The 'Thing Index' contains information like
@@ -79,11 +81,10 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
         if( result.message ){
             // TODO - do something with the error...
             // although this rarely/never errors. Low priority
-            return setSpinner(false);
+            return setSpinner(true, result.message, 'Retry later...');
         }
         setConnected(result?.connectivity?.connected);
         setDeviceName(result?.attributes?.deviceName);
-        return setSpinner(false);
     }
 
     // The 'Thing Shadow' contains information about the device state
@@ -94,8 +95,11 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
         if( result.message ){
             // TODO - do something with the error...
             // although this rarely/never errors. Low priority
-            return setSpinner(false);
+            return setSpinner(true, result.message, 'Retry later...');
         }
+        // The system state is maybe too deeply nested in the
+        // 'thing shadow', but here it is. If the system is not 'running',
+        // keep the spinner going and report the last known system state
         if( result?.state?.reported?.system?.system?.state !== 'running'){
             return setSpinner(true, result?.state?.reported?.system?.system?.state );
         }
