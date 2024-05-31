@@ -1,31 +1,50 @@
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Button, Container, ListGroup, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import logo from '../EdgeBerry_Logo_text.svg';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faGear, faMicrochip, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const NavigationBar = (props:{user:any|null})=>{
 
+    // Offcanvas menu
+    const[ show, setShow ] = useState<boolean>(false);
     return(
-        <Navbar sticky="top" bg={'dark'} data-bs-theme={'dark'}>
-            <Container className="container-fluid" style={{paddingRight:'10px', paddingLeft:'10px'}}>
-                <Navbar.Brand href='/dashboard'>
-                    <img src={logo} alt="EdgeBerry.io" height={'32px'}/>
-                </Navbar.Brand>
-                {props.user?
-                <Nav>
-                    <Nav.Link href='/dashboard/assets'>
-                        Assets
-                    </Nav.Link>
-                    <Nav.Link href='/dashboard/settings'>
-                        Settings
-                    </Nav.Link>
-                    <Nav.Link href='/dashboard/logout'>
-                        Log out &nbsp;<FontAwesomeIcon icon={faSignOutAlt} />
-                    </Nav.Link>
-                </Nav>
-                :<></>}
-            </Container>
-        </Navbar>
+        <>
+            <Navbar sticky="top" bg={'dark'} data-bs-theme={'dark'}>
+                <Container className="container-fluid" style={{paddingRight:'10px', paddingLeft:'10px'}}>
+                    <Navbar.Brand href='/dashboard'>
+                        <img src={logo} alt="EdgeBerry.io" height={'32px'}/>
+                    </Navbar.Brand>
+
+                    {props.user?<>
+                        <Nav>
+                            <Button variant={'transparent'} className="btn-outline-light" onClick={()=>{setShow(true)}}><FontAwesomeIcon icon={faBars}/></Button>
+                        </Nav>
+                    </>:<></>}
+                </Container>
+            </Navbar>
+
+            {/* The menu sliding out from the right */}
+            <Offcanvas show={show} onHide={()=>{setShow(false)}} placement={'end'} style={{maxWidth:'300px'}}>
+                <Offcanvas.Header closeButton>
+                    <Offcanvas.Title>Menu</Offcanvas.Title>
+                </Offcanvas.Header>
+                <Offcanvas.Body style={{padding:'0px'}}>
+                    <ListGroup>
+                        <ListGroup.Item as={Link} to='/dashboard/settings' onClick={()=>{setShow(false)}}>
+                            <FontAwesomeIcon icon={faGear} /> Settings
+                        </ListGroup.Item>
+                        <ListGroup.Item as={Link} to='/dashboard/assets' onClick={()=>{setShow(false)}}>
+                            <FontAwesomeIcon icon={faMicrochip} /> Assets
+                        </ListGroup.Item>
+                        <ListGroup.Item as={Link} to='/dashboard/logout' onClick={()=>{setShow(false)}}>
+                            <FontAwesomeIcon icon={faSignOutAlt} /> Log out
+                        </ListGroup.Item>
+                    </ListGroup>
+                </Offcanvas.Body>
+            </Offcanvas>
+        </>
     );
 }
 
