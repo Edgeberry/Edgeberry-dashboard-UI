@@ -110,7 +110,6 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
         if( result?.state?.reported?.system?.system?.state !== 'running'){
             return setSpinner(true, result?.state?.reported?.system?.system?.state );
         }
-        console.log(result);
         return setSpinner(false, result?.state?.reported?.system?.system?.state );
     }
 
