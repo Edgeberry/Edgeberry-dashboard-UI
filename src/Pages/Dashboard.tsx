@@ -1,10 +1,8 @@
-import { Button, Offcanvas } from "react-bootstrap";
 import NavigationBar from "../components/Navigationbar";
 import { Outlet } from "react-router-dom";
-import { useState } from "react";
 
 const Dashboard = (props:{user:any|null}) => {
-    // Change the tab title to 'Dashboard'
+    // Change the browser tab name to 'Dashboard'
     document.title = 'Dashboard';
 
     return (
@@ -13,7 +11,6 @@ const Dashboard = (props:{user:any|null}) => {
             <Outlet />
         </>
     );
-
 }
 
 export default Dashboard;
