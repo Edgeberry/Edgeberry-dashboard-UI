@@ -67,8 +67,8 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     }
 
     // Update Asset
-    async function updateAsset( show?:boolean ){
-        setSpinner( show?true:false );
+    async function updateAsset(){
+        setSpinner( true );
         await getThingIndex();
         await getThingShadow();
         // Spinner is hidden (or kept) by result
