@@ -116,3 +116,21 @@ export async function api_things_delete( thingName:string ){
         return {message:err.toString()};
     }
 }
+
+/* 
+ *  Claim Thing
+ *  Claim a device by UUID to link to the user account
+ */
+export async function api_things_claim( thingName:string ){
+    const response = await fetch( window.location.origin+'/api/things/claim?thingName='+thingName,{
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include'
+    });
+    try{
+        let content = await response.json();
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
