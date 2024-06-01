@@ -42,6 +42,10 @@ const NavigationBar = (props:{user:any|null})=>{
                             <FontAwesomeIcon icon={faSignOutAlt} /> Log out
                         </ListGroup.Item>
                     </ListGroup>
+                    <Container className="container-bottom" style={{fontSize:'0.8vw'}}>
+                        <hr/>
+                        <p>Edgeberry Dashboard is open-source software. The source code is available on the <a href={'https://github.com/edgeberry/'} target={'_blank'}>Edgeberry GitHub</a>.</p>
+                    </Container>
                 </Offcanvas.Body>
             </Offcanvas>
         </>

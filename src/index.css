@@ -188,6 +188,12 @@ body {
 }
 
 
+/* Container on the bottom */
+.container-bottom {
+  position: absolute;
+  bottom:0;
+}
+
 /* Individually scrolling container */
 .scroll-container{
   padding:0;
