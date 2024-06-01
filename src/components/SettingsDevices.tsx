@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrochip, faTrash, faWarning } from "@fortawesome/free-solid-svg-icons";
 import SettingsAccountDeleteModal from "./SettingsAccountDeleteModal";
 import CertificateControl from "./CertificateControl";
+import { api_dashboard_provisioningParameters } from "../api/dashboard";
 
 const SettingsDevices = (props:{user:any|null})=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
@@ -12,6 +13,15 @@ const SettingsDevices = (props:{user:any|null})=>{
     const[ isError, setIsError ] = useState<boolean>(false);
 
     const[ deleteModalShow, setDDeleteModalShow ] = useState<boolean>(false);
+
+    // Parameters
+    const[ hostname, setHostname ] = useState<string>('');
+    const[ cert, setCert ] = useState<string>('');
+    const[ key, setKey ] = useState<string>('');
+
+    useEffect(()=>{
+        getDashboardProvisioningParameters();
+    },[]);
 
     // Disappearing messages
     useEffect(()=>{
@@ -21,6 +31,20 @@ const SettingsDevices = (props:{user:any|null})=>{
             setIsError(false);
         },3500);
     },[message]);
+
+    // Get the provisioning parameters for the
+    // Edgeberry Dashboard connection
+    async function getDashboardProvisioningParameters(){
+        const result = await api_dashboard_provisioningParameters();
+        if( result.message ){
+            setIsError(true);
+            setMessage( result.message );
+            return;
+        }
+        if( typeof(result.endpoint) === 'string' ) setHostname( result.endpoint );
+        if( typeof(result.certificate) === 'string') setCert( result.certificate );
+        if( typeof(result.privateKey) === 'string') setKey( result.privateKey );
+    }
 
     return (
         <>
@@ -37,19 +61,19 @@ const SettingsDevices = (props:{user:any|null})=>{
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Hostname</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder="a11fkxltf4r89e-ats.iot.eu-north-1.amazonaws.com" disabled/>
+                        <Form.Control type={'text'} placeholder="a11fkxltf4r89e-ats.iot.eu-north-1.amazonaws.com" value={hostname} disabled/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Provisioning certificate</Form.Label>
                     <Col sm={6}>
-                        <CertificateControl name={'Provisioning Certificate'} value={''} onChange={()=>{}} disabled/>
+                        <CertificateControl name={'Provisioning Certificate'} value={cert} onChange={(e:any)=>{setCert(e.target.value)}} disabled/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Provisioning private key</Form.Label>
                     <Col sm={6}>
-                        <CertificateControl name={'Provisioning Private Key'} value={''} onChange={()=>{}} disabled/>
+                        <CertificateControl name={'Provisioning Private Key'} value={key} onChange={(e:any)=>{setKey(e.target.value)}} disabled/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-2">
