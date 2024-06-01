@@ -36,7 +36,7 @@ const NavigationBar = (props:{user:any|null})=>{
                             <FontAwesomeIcon icon={faGear} /> Settings
                         </ListGroup.Item>
                         <ListGroup.Item as={Link} to='/dashboard/assets' onClick={()=>{setShow(false)}}>
-                            <FontAwesomeIcon icon={faMicrochip} /> Assets
+                            <FontAwesomeIcon icon={faMicrochip} /> Devices
                         </ListGroup.Item>
                         <ListGroup.Item as={Link} to='/dashboard/logout' onClick={()=>{setShow(false)}}>
                             <FontAwesomeIcon icon={faSignOutAlt} /> Log out

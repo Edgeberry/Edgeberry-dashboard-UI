@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import { Button, Modal, Tab, Tabs } from "react-bootstrap";
 import CommandModal from "./CommandModal";
 import AssetApplication from "./AssetApplication";
-import { faArrowRightArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightArrowLeft, faLocationDot, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AssetConnection from "./AssetConnection";
-import AssetProvisioning from "./AssetProvisioning";
 import AssetSystem from "./AssetSystem";
 import StatusIndicator from "./StatusIndicator";
 import { api_things_getThingDescription, api_things_getThingShadow } from "../api/things";
+import AssetSystemNetwork from "./AssetSystemNetwork";
+import NotificationBox from "./Notification";
+import { direct_identifySystem, direct_restartSystem } from "../api/directMethods";
 
 const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Function })=>{
     const[ description, setDescription ] = useState<any|null>(null);
@@ -16,6 +18,20 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
 
     // Command Modal
     const[ show, setShow ] = useState<boolean>(false);
+    const[ disabled, setDisabled ] = useState<boolean>(false);
+
+    // Error or success messages
+    const[ message, setMessage ] = useState<string>('');
+    const[ isError, setIsError ] = useState<boolean>(false);
+
+    // Disappearing messages
+    useEffect(()=>{
+        if( message === '' ) return;
+        setTimeout(()=>{
+            setMessage('');
+            setIsError(false);
+        },3500);
+    },[message]);
 
     useEffect(()=>{
         getThingDescription();
@@ -32,7 +48,7 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
         }
         setDescription(result);
     }
-
+    
     async function getThingShadow(){
         if( !props.assetId ) return;
         const result = await api_things_getThingShadow(props.assetId);
@@ -45,22 +61,56 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
         console.log(result);
     }
 
+        // Request system restart
+        async function requestSystemRestart(){
+            // Check if user is sure about this action
+            if( !window.confirm("Restart system?") ) return;
+            setDisabled(true);
+    
+            const result = await direct_restartSystem( props.assetId );
+            if( !result.ok ){
+                setIsError(true);
+                setMessage(result.message);
+            }
+            else{
+                setIsError(false);
+                setMessage(result.message);
+            }
+            setDisabled(false);
+            return;
+        }
+    
+        // Request system identification
+        async function requestSystemIdentifycation(){
+            const result = await direct_identifySystem( props.assetId );
+    
+            if( !result.ok ){
+                setIsError(true);
+                setMessage(result.message);
+            }
+            else{
+                setIsError(false);
+                setMessage(result.message);
+            }
+            return;
+        }
+
     return(<>
             <Modal size={'xl'} onHide={()=>{props.onClose()}} show={props.show} >
-                <Modal.Header style={{paddingLeft:'2rem'}} closeButton>
-                    <Modal.Title>{description && description?.attributes?.deviceName?description.attributes.deviceName:props.assetId}</Modal.Title>
-                </Modal.Header>
                 <Modal.Body>
                         <div style={{float:'right'}}>
-                            <Button variant={'primary'} onClick={()=>{setShow(true)}}><FontAwesomeIcon icon={faArrowRightArrowLeft}/> Command</Button>
+                            <Button variant={'primary'} className="mb-2" onClick={()=>{setShow(true)}}><FontAwesomeIcon icon={faArrowRightArrowLeft}/></Button>&nbsp;
+                            <Button variant={'primary'} className="mb-2" onClick={()=>{requestSystemIdentifycation()}} disabled={disabled}><FontAwesomeIcon icon={faLocationDot}/></Button>&nbsp;
+                            <Button variant={'danger'} className="mb-2" onClick={()=>{requestSystemRestart()}} disabled={disabled}><FontAwesomeIcon icon={faPowerOff}/></Button>
                         </div>
-
+                        <h2>{description && description?.attributes?.deviceName?description.attributes.deviceName:props.assetId}</h2>
                         <p className="text-subtitle">
-                            <b>{shadow?.state?.reported?.system?.system?.uuid}</b><br/>
+                            {/*<b>{shadow?.state?.reported?.system?.system?.uuid}</b><br/>*/}
                             {description && description?.thingTypeName? description.thingTypeName:'No asset type'} &nbsp;
                             {shadow && shadow?.state?.reported?.system?.system?.version? shadow?.state?.reported?.system?.system?.version:'No hardware platform'} &nbsp;
                             ({shadow && shadow?.state?.reported?.system?.system?.platform? shadow?.state?.reported?.system?.system?.platform:'No hardware platform'})
-                         </p>
+                        </p>
+                        <NotificationBox message={message} isError={isError} />
                          <CommandModal show={show} deviceId={description?.thingName?description.thingName:''} onClose={()=>{setShow(false)}}/>
 
                         <Tabs defaultActiveKey="application" className="mb-3">
@@ -68,15 +118,18 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
                                 <AssetApplication assetId={props.assetId} />
                             </Tab>
                             <Tab eventKey="connection" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.connection?.connection === 'connected')?'success':'danger'}/> Connection</>}>
+                                <AssetSystemNetwork assetId={props.assetId} assetShadow={shadow} />
+                                <hr/>
                                 <AssetConnection assetId={props.assetId} />
-                                <br/>
-                                <AssetProvisioning assetId={props.assetId} />
                             </Tab>
                             <Tab eventKey="System" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.system?.state === 'running')?'success':'danger'}/> System</>}>
                                 <AssetSystem assetId={props.assetId} assetShadow={shadow} />
                             </Tab>
                         </Tabs>
                 </Modal.Body>
+                <Modal.Footer>
+                    <Button variant={'danger'} onClick={()=>{props.onClose()}} disabled={disabled}>Close</Button>
+                </Modal.Footer>
             </Modal>
         </>);
 }

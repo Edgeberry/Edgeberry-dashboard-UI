@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
-import { api_things_getThingDescription, api_things_updateThingDescription } from "../api/things";
+import { api_things_delete, api_things_getThingDescription, api_things_updateThingDescription } from "../api/things";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const AssetAttributes = ( props:{assetId:string, assetShadow:any })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
@@ -57,10 +59,20 @@ const AssetAttributes = ( props:{assetId:string, assetShadow:any })=>{
         return setDisabled(false);
     }
 
+    // Delete Asset
+    async function deleteAsset(){
+        if( !window.confirm("Delete '"+props.assetId+"'?")) return;
+    
+        const result = await api_things_delete( props.assetId );
+        if( result.message ){
+            // TODO: do something with the error
+            console.log(result.message);
+        }
+    }
+
     return (
         <>
-            <h2>Device Attributes</h2>
-            <p className="text-subtitle">The attributes of this Edgeberry device</p>
+            <h2>Device</h2>
             <Form>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Device name</Form.Label>
@@ -81,7 +93,10 @@ const AssetAttributes = ( props:{assetId:string, assetShadow:any })=>{
                     </Col>
                 </Form.Group>
                 <NotificationBox message={message} isError={isError} />
-                <Button variant={'primary'} onClick={()=>{saveAttributes()}} disabled={disabled}>Save</Button>
+                <div style={{width:'100%', textAlign:'right'}}>
+                    <Button variant={'primary'} onClick={()=>{saveAttributes()}} disabled={disabled}>Save</Button>&nbsp;
+                    <Button variant={'danger'} onClick={()=>{deleteAsset()}}>Delete</Button>
+                </div>
             </Form>
         </>
     );

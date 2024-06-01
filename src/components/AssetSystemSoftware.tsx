@@ -74,7 +74,7 @@ const AssetSystemSoftware = (props:{assetId:string, assetShadow:any })=>{
     return(
         <>
             <h2>System software</h2>
-            <StatusIndicator message={appStatus==='online'?'Running':appStatus} type={appStatus==='online'?'success':'danger'}/>
+            {/*<StatusIndicator message={appStatus==='online'?'Running':appStatus} type={appStatus==='online'?'success':'danger'}/>*/}
             <Form>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>CPU usage</Form.Label>

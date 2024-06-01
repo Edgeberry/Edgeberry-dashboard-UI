@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
-import { direct_getConnectionParameters, direct_reconnect, direct_updateConnectionParameters } from "../api/directMethods";
+import { direct_getConnectionParameters, direct_reconnect, direct_reprovision, direct_updateConnectionParameters } from "../api/directMethods";
 import CertificateControl from "./CertificateControl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRetweet } from "@fortawesome/free-solid-svg-icons";
@@ -77,6 +77,7 @@ const AssetConnection = ( props:{assetId:string|null})=>{
         setDisabled(false);
     }
 
+    // Request device reconnection to Dashboard
     async function requestReconnect(){
         // First update the connection parameters
         await updateConnectionParameters();
@@ -84,26 +85,33 @@ const AssetConnection = ( props:{assetId:string|null})=>{
         direct_reconnect(deviceId);
     }
 
+    // Request device reprovisioning
+    async function requestReprovision(){
+        direct_reprovision(deviceId);
+    }
+
+
     return (
         <>
             <div style={{float:'right'}}>
                 <Button variant={'danger'} className="mb-2" onClick={()=>{requestReconnect()}} disabled={disabled}><FontAwesomeIcon icon={faRetweet}/> Reconnect</Button>&nbsp;
+                <Button variant={'danger'} className="mb-2" onClick={()=>{requestReprovision()}} disabled={disabled}><FontAwesomeIcon icon={faRetweet}/> Reprovision</Button>&nbsp;
             </div>
 
-            <h2>Connection</h2>
+            <h2>Dashboard connection</h2>
             <p className="text-subtitle">The settings of the device's cloud connection.</p>
             
             <Form>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Hostname</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'Hostname'} value={hostname} onChange={(e)=>{setHostname(e.target.value)}} required spellCheck={false} disabled={disabled}/>
+                        <Form.Control type={'text'} placeholder={'Hostname'} value={hostname} onChange={(e)=>{setHostname(e.target.value)}} required spellCheck={false} disabled/>
                     </Col>
                 </Form.Group>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Device ID</Form.Label>
                     <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'Device ID'} value={deviceId} onChange={(e)=>{setDeviceId(e.target.value)}} required spellCheck={false} disabled={disabled}/>
+                        <Form.Control type={'text'} placeholder={'Device ID'} value={deviceId} onChange={(e)=>{setDeviceId(e.target.value)}} required spellCheck={false} disabled/>
                     </Col>
                 </Form.Group>
                     <Form.Group as={Row} className="mb-2">
@@ -124,11 +132,7 @@ const AssetConnection = ( props:{assetId:string|null})=>{
                             <CertificateControl name={'Root Certificate'} value={rootca} onChange={(e:any)=>{setRootca(e.target.value)}} disabled={disabled}/>
                         </Col>
                     </Form.Group>
-
                 <NotificationBox message={message} isError={isError} />
-                {/*<div style={{width:'100%', textAlign:'right'}}>
-                    <Button variant={'primary'} type={'submit'} disabled={disabled}>Save</Button>
-                </div>*/}
             </Form>
         </>
     );
