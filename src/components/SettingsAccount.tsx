@@ -38,10 +38,16 @@ const SettingsAccount = (props:{user:any|null})=>{
                         <Form.Control type={'text'} placeholder={'E-mail'} value={props.user?.email} onChange={(e)=>{}} required disabled={disabled}/>
                     </Col>
                 </Form.Group>
+                <Form.Group as={Row} className="mb-2">
+                    <Form.Label column sm={2}></Form.Label>
+                    <Col sm={6}>
+                        <Button variant={'primary'} disabled={disabled}>Change password</Button>
+                    </Col>
+                </Form.Group>
                 <NotificationBox message={message} isError={isError} />
                 <div style={{width:'100%', textAlign:'right'}}>
-                    <Button variant={'primary'}>Save</Button>&nbsp;
-                    <Button variant={'danger'} onClick={()=>{setDDeleteModalShow(true)}}>Delete account</Button>
+                    <Button variant={'primary'} disabled={disabled}>Save</Button>&nbsp;
+                    <Button variant={'danger'} onClick={()=>{setDDeleteModalShow(true)}} disabled={disabled}>Delete account</Button>
                 </div>
             </Form>
 
