@@ -1,6 +1,7 @@
 import { Container } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
 import SettingsAccount from "./SettingsAccount";
+import SettingsDevices from "./SettingsDevices";
 
 const Settings = (props:{user:any|null})=>{
     // When no user is logged in, navigate to the
@@ -17,6 +18,8 @@ const Settings = (props:{user:any|null})=>{
                 <p className="text-subtitle">Settings for your Edgeberry Dashboard</p>
                 <hr/>
                 <SettingsAccount user={props.user} />
+                <hr/>
+                <SettingsDevices user={props.user} />
             </Container>
         </>
     );
