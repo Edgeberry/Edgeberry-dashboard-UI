@@ -2,18 +2,14 @@ import { useEffect, useState } from "react";
 import { Alert, Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMicrochip, faTrash, faWarning } from "@fortawesome/free-solid-svg-icons";
-import SettingsAccountDeleteModal from "./SettingsAccountDeleteModal";
+import { faMicrochip, faWarning } from "@fortawesome/free-solid-svg-icons";
 import CertificateControl from "./CertificateControl";
 import { api_dashboard_provisioningParameters } from "../api/dashboard";
 
 const SettingsDevices = (props:{user:any|null})=>{
-    const[ disabled, setDisabled ] = useState<boolean>(false);
+    // Notificaton
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
-
-    const[ deleteModalShow, setDDeleteModalShow ] = useState<boolean>(false);
-
     // Parameters
     const[ hostname, setHostname ] = useState<string>('');
     const[ cert, setCert ] = useState<string>('');
