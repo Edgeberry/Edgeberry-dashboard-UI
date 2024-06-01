@@ -2,7 +2,7 @@ import { SyntheticEvent, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "./Notification";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import { faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import SettingsAccountDeleteModal from "./SettingsAccountDeleteModal";
 
 const SettingsAccount = (props:{user:any|null})=>{
@@ -23,7 +23,7 @@ const SettingsAccount = (props:{user:any|null})=>{
 
     return (
         <>
-            <h2>Account</h2>
+            <h2><FontAwesomeIcon icon={faUser} /> Account</h2>
             <p className="text-subtitle">Your Edgeberry Dashboard user account settings </p>
             <Form>
                 <Form.Group as={Row} className="mb-2">
@@ -38,9 +38,11 @@ const SettingsAccount = (props:{user:any|null})=>{
                         <Form.Control type={'text'} placeholder={'E-mail'} value={props.user?.email} onChange={(e)=>{}} required disabled={disabled}/>
                     </Col>
                 </Form.Group>
-                <Button variant={'primary'}>Save</Button>
-                <Button variant={'danger'} style={{float:'right'}} onClick={()=>{setDDeleteModalShow(true)}}><FontAwesomeIcon icon={faTrash} /> Delete account</Button>
                 <NotificationBox message={message} isError={isError} />
+                <div style={{width:'100%', textAlign:'right'}}>
+                    <Button variant={'primary'}>Save</Button>&nbsp;
+                    <Button variant={'danger'} onClick={()=>{setDDeleteModalShow(true)}}>Delete account</Button>
+                </div>
             </Form>
 
             <SettingsAccountDeleteModal show={deleteModalShow} onClose={()=>{setDDeleteModalShow(false)}}/>
