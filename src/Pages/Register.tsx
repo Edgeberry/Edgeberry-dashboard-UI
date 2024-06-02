@@ -3,6 +3,7 @@ import { Button, Container, Form } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import logo from '../EdgeBerry_Logo_text.svg';
 import NotificationBox from '../components/Notification';
+import TermsAndConditionsModal from '../components/TermsAndConditionsModal';
 
 const Register = (props:{user:any, onLogin:Function }) => {
     const[ name, setName ] = useState("");
@@ -10,6 +11,9 @@ const Register = (props:{user:any, onLogin:Function }) => {
     const[ password, setPassword ] = useState("");
     const[ retypePassword, setRetypePassword ] = useState("");
     const[ message, setMessage] = useState('');
+
+    // Terms & Conditions modal
+    const[ show, setShow ] = useState<boolean>(false);
 
     // on submit ('log in'), post the username and password to the login api,
     const submit = async (e:SyntheticEvent) =>{
@@ -55,12 +59,13 @@ const Register = (props:{user:any, onLogin:Function }) => {
                     </Form.Group>
                     <hr/>
                     <Form.Group className="mb-2">
-                        <Form.Check type={'checkbox'} label={'Agree to terms & conditions'} />
+                        <Form.Check type={'checkbox'} label={<>Agree to <span style={{cursor:'pointer', color:'var(--edgeberry_blue)'}} onClick={()=>setShow(true)}>terms & conditions</span></>} />
                     </Form.Group>
                     <NotificationBox message={message} isError={true} />
                     <Button variant={'primary'} className="w-100 btn btn-lg" type="submit">Register</Button>
                 </Form>
             </Container>
+            <TermsAndConditionsModal show={show} onClose={()=>{setShow(false)}}/>
         </Container>
     )
 }
