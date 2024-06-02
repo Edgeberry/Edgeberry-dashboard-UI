@@ -22,7 +22,9 @@ const TermsAndConditionsModal = ( props:{ show:boolean, onClose:Function })=>{
                     <p>
                         Edgeberry values your privacy. We collect your name for identification within the platform, your e-mail address 
                         for account registration, communication and password recovery, and a password to secure your account. We use this 
-                        information to create and manage your account, communicate with you and ensure account security.
+                        information to create and manage your account, communicate with you and ensure account security. To manage your user 
+                        session while using the Service, we use a cookie with an access token on your device. This token helps us authenticate 
+                        your session and maintain secure access to the Service.
 
                         Your password is stored encrypted, and we use security measures to protect your data. We do not share your 
                         information with third parties, except as required by law.
@@ -69,10 +71,17 @@ const TermsAndConditionsModal = ( props:{ show:boolean, onClose:Function })=>{
                     </p>
                     <h4>The Service</h4>
                     <p>
-                        This service, Edgeberry Dashboard, is ...
-                        - limitations of Liability
+                        This Service, Edgeberry Dashboard, is designed as a device management tool for IoT devices running the Edgeberry device 
+                        software. The Service is provided "as is" without any warranties. We strive to keep the service running smoothly and 
+                        securely, but do not guarantee it will be free of errors or interruptions. We are not liable for any damages arising from 
+                        the use of this software. Use it at your own risk. The Edgeberry Dashboard is licensed under GPLv3, and by using it, you 
+                        agree to comply with the GPLv3 terms. We will make our best effort to maintain the service but cannot guarantee continuous 
+                        availability.
+                        <br/><br/>
+                        <strong>While the Edgeberry Dashboard is licensed under GPLv3, this license does NOT apply to your own inventions making use 
+                            of the EdgeBerry Dashboard. You retain full ownership and control over your work.
+                        </strong>
                     </p>
-                    <p></p>
                     <h4></h4>
                     <p></p>
                     <h4>Conclusion</h4>
