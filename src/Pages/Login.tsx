@@ -36,10 +36,10 @@ const Login = (props:{user:any, onLogin:Function }) => {
                     <br/>
                     <br/>
                     <Form.Group className="mb-2">
-                        <Form.Control type={'text'} placeholder={'E-mail'} value={email} onChange={(e)=>{setEmail(e.target.value)}} required/>
+                        <Form.Control type={'e-mail'} placeholder={'E-mail'} value={email} onChange={(e)=>{setEmail(e.target.value)}} autoComplete="username" required/>
                     </Form.Group>
                     <Form.Group className="mb-2">
-                        <Form.Control type={'password'} placeholder={'Password'} value={password} onChange={(e)=>{setPassword(e.target.value)}} required/>
+                        <Form.Control type={'password'} placeholder={'Password'} value={password} onChange={(e)=>{setPassword(e.target.value)}} autoComplete="current-password" required/>
                     </Form.Group>
                     <NotificationBox message={message} isError={true} />
                     <Button variant={'primary'} className="w-100 btn btn-lg mb-2" type="submit">Log in</Button>
