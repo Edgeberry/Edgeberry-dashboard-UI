@@ -79,7 +79,7 @@ const TermsAndConditionsModal = ( props:{ show:boolean, onClose:Function })=>{
                         availability.
                         <br/><br/>
                         <strong>While the Edgeberry Dashboard is licensed under GPLv3, this license does NOT apply to your own inventions making use 
-                            of the EdgeBerry Dashboard. You retain full ownership and control over your work.
+                            of the this Service. You retain full ownership and control over your work.
                         </strong>
                     </p>
                     <h4></h4>
