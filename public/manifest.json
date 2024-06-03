@@ -8,12 +8,17 @@
       "type": "image/x-icon"
     },
     {
-      "src": "Edgeberry_logo.png",
+      "src": "Edgeberry_icon_128x128.png",
       "type": "image/png",
       "sizes": "192x192"
     },
     {
-      "src": "Edgeberry_logo.png",
+      "src": "Edgeberry_icon_192x192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "Edgeberry_icon_512x512.png",
       "type": "image/png",
       "sizes": "512x512"
     }
