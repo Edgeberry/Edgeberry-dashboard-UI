@@ -86,8 +86,10 @@ const TermsAndConditionsModal = ( props:{ show:boolean, onClose:Function })=>{
                     <p></p>
                     <h4>Conclusion</h4>
                     <p>
-                        We do our best and your do your best, and we engage with each other with compassion and integrity, and we should
-                        do just fine!
+                        We strive to ensure your experience with Edgeberry Dashboard is seamless, useful and enjoyable. While this document outlines 
+                        the legalities, our main goal is to create a collaborative, innnovative and secure environment for you to explore your ideas. 
+                        By adhering to these guidelines, we can focus on what truly matters: building and sharing great technology together. Let's 
+                        enjoy the journey with mutual respect and creativity. Welcome to Edgeberry!
                     </p>
                 </Modal.Body>
                 <Modal.Footer>
