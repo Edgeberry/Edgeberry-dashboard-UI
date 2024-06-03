@@ -29,7 +29,7 @@ const TermsAndConditionsModal = ( props:{ show:boolean, onClose:Function })=>{
                         Your password is stored encrypted, and we use security measures to protect your data. We do not share your 
                         information with third parties, except as required by law.
                     </p>
-                    <h4>User responsabilities</h4>
+                    <h4>User responsiblities</h4>
                     <p>
                         By using the Service, you agree to use the Service only for lawful purposes and in accordance with these Terms. 
                         You are responsible for your actions while using the Service and for any content you create or transmit. You agree 
@@ -74,11 +74,12 @@ const TermsAndConditionsModal = ( props:{ show:boolean, onClose:Function })=>{
                         This Service, Edgeberry Dashboard, is designed as a device management tool for IoT devices running the Edgeberry device 
                         software. The Service is provided "as is" without any warranties. We strive to keep the service running smoothly and 
                         securely, but do not guarantee it will be free of errors or interruptions. We are not liable for any damages arising from 
-                        the use of this software. Use it at your own risk. The Edgeberry Dashboard is licensed under GPLv3, and by using it, you 
+                        the use of this software. Use it at your own risk. The Edgeberry Dashboard is licensed under GPLv3. By using it, you 
                         agree to comply with the GPLv3 terms. We will make our best effort to maintain the service but cannot guarantee continuous 
                         availability.
                         <br/><br/>
-                        <strong>While the Edgeberry Dashboard is licensed under GPLv3, this license does NOT apply to your own inventions making use 
+                        <strong>
+                            While the Edgeberry Dashboard is licensed under GPLv3, this license does NOT apply to your own inventions making use 
                             of the this Service. You retain full ownership and control over your work.
                         </strong>
                     </p>
