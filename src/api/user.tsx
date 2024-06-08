@@ -129,6 +129,28 @@ export async function api_user_updateProfile( username:string, email:string ){
 }
 
 /*
+ *  Update user password 
+ */
+export async function api_user_updatePassword( password:string, newPassword:string ){
+    const response = await fetch( window.location.origin+'/api/user/password',{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({
+            password:password,
+            newPassword: newPassword
+        })
+    });
+    try{
+        let content = await response.json();
+        content.ok = response.ok;
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
+
+/*
  *  Delete user account
  */
 export async function api_user_delete(){
