@@ -127,3 +127,21 @@ export async function api_user_updateProfile( username:string, email:string ){
         return {message:err.toString()};
     }
 }
+
+/*
+ *  Delete user account
+ */
+export async function api_user_delete(){
+    const response = await fetch( window.location.origin+'/api/user/user',{
+        method: 'DELETE',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include'
+    });
+    try{
+        let content = await response.json();
+        content.ok = response.ok;
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}

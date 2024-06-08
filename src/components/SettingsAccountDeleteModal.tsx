@@ -4,8 +4,11 @@ import NotificationBox from "./Notification";
 import { api_things_invokeDirectMethod } from "../api/things";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWarning } from "@fortawesome/free-solid-svg-icons";
+import { api_user_delete } from "../api/user";
+import { useNavigate } from "react-router-dom";
 
 const SettingsAccountDeleteModal = ( props:{ show:boolean, onClose:Function })=>{
+    const navigate = useNavigate();
     // User feedback
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
@@ -34,7 +37,14 @@ const SettingsAccountDeleteModal = ( props:{ show:boolean, onClose:Function })=>
 
     // Delete the account
     async function deleteUserAccount(){
-        // TODO: implement
+        const result = await api_user_delete();
+        if( result.message !== 'success'){
+            setIsError(true);
+            return setMessage(result.message);
+        }
+        setIsError(false);
+        setMessage("Account successfully deleted!");
+        setTimeout(()=>{navigate('/dashboard/logout')});
     }
 
     return(<>
