@@ -4,6 +4,7 @@ import { Navigate } from 'react-router-dom';
 import logo from '../EdgeBerry_Logo_text.svg';
 import NotificationBox from '../components/Notification';
 import TermsAndConditionsModal from '../components/TermsAndConditionsModal';
+import { api_user_register } from '../api/user';
 
 const Register = (props:{user:any, onLogin:Function }) => {
     const[ name, setName ] = useState<string>("");
@@ -26,7 +27,7 @@ const Register = (props:{user:any, onLogin:Function }) => {
         },3500);
     },[message]);
 
-    // on submit ('log in'), post the username and password to the login api,
+    // Register user
     const submit = async (e:SyntheticEvent) =>{
         e.preventDefault();   // prevents page refresh
 
@@ -35,14 +36,17 @@ const Register = (props:{user:any, onLogin:Function }) => {
             setIsError(true);
             return setMessage("The passwords are not the same. Please ensure the passwords are provided correctly.");
         }
-        /*const content = await api_user_login( email, password );   // login user with API call
+        
+        // register the new user
+        const result = await api_user_register( email, password, name );
 
-        if(content.message !== 'success'){
-            setMessage(content.message);
+        if(result.message !== 'success'){
+            setIsError(true);
+            return setMessage(result.message);
         }
-        else {
-            props.onLogin(true);
-        }*/
+
+        setIsError(false);
+        return setMessage("Registration successful! Check your inbox for the activation e-mail.");
     }
     
     // if a user is logged in, redirect to home
@@ -73,7 +77,7 @@ const Register = (props:{user:any, onLogin:Function }) => {
                     <Form.Group className="mb-2">
                         <Form.Check required type={'checkbox'} label={<>Agree to <span style={{cursor:'pointer', color:'var(--edgeberry_blue)'}} onClick={()=>setShow(true)}>terms & conditions</span></>} />
                     </Form.Group>
-                    <NotificationBox message={message} isError={true} />
+                    <NotificationBox message={message} isError={isError} />
                     <Button variant={'primary'} className="w-100 btn btn-lg" type="submit">Register</Button>
                 </Form>
             </Container>

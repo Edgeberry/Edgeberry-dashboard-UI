@@ -3,6 +3,30 @@
  */
 
 /*
+ *  Register
+ *  Register a new user
+ */
+export async function api_user_register( email:string, password:string, name:string ){
+    const response = await fetch( window.location.origin+'/api/user/register',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({
+            email:email,
+            password: password,
+            name: name
+        })
+    });
+    try{
+        let content = await response.json();
+        content.ok = response.ok;
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
+
+/*
  *  Login
  *  On a successful login, the user object is returned and a JWT is created
  */
