@@ -105,3 +105,25 @@ export async function api_user_getAuthenticatedUser(){
         return {message:err.toString()};
     }
 }
+
+/*
+ *  Update user profile 
+ */
+export async function api_user_updateProfile( username:string, email:string ){
+    const response = await fetch( window.location.origin+'/api/user/user',{
+        method: 'PUT',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({
+            email:email,
+            username: username
+        })
+    });
+    try{
+        let content = await response.json();
+        content.ok = response.ok;
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
