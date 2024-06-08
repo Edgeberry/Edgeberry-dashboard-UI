@@ -27,6 +27,29 @@ export async function api_user_register( email:string, password:string, name:str
 }
 
 /*
+ *  Activate Account
+ *  Activate the user account by e-mail and token
+ */
+export async function api_user_activateAccount( email:string, token:string ){
+    const response = await fetch( window.location.origin+'/api/user/activate',{
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include',
+        body: JSON.stringify({
+            email:email,
+            token: token
+        })
+    });
+    try{
+        let content = await response.json();
+        content.ok = response.ok;
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
+
+/*
  *  Login
  *  On a successful login, the user object is returned and a JWT is created
  */

@@ -29,6 +29,7 @@ import { api_user_getAuthenticatedUser } from './api/user';
 import { useEffect, useState } from 'react';
 import Logout from './Pages/Logout';
 import Register from './Pages/Register';
+import ActivateAccount from './Pages/ActivateAccount';
 
 function App() {
   const[ user, setUser ] = useState<any|null>(null);
@@ -61,6 +62,7 @@ function App() {
         {/* Dashboard: nested routes */}
         <Route path='/dashboard/login' element={<Login user={user} onLogin={()=>{onLogin()}}/>} />
         <Route path='/dashboard/register' element={<Register user={user} onLogin={()=>{onLogin()}}/>} />
+        <Route path='/dashboard/activate' element={<ActivateAccount user={user} />} />
         <Route path='/dashboard' element={<Dashboard user={user}/>}>
           <Route index element={<Navigate to="/dashboard/assets" />} />
           <Route path='/dashboard/login' element={<Login user={user} onLogin={()=>{onLogin()}}/>} />
