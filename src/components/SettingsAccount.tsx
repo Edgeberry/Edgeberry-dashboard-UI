@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
 import SettingsAccountDeleteModal from "./SettingsAccountDeleteModal";
 import { api_user_updateProfile } from "../api/user";
+import SettingsAccountUpdatePasswordModal from "./SettingsAccountUpdatePasswordModal";
 
 const SettingsAccount = (props:{user:any|null})=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
@@ -15,6 +16,8 @@ const SettingsAccount = (props:{user:any|null})=>{
     const[ email, setEmail ] = useState<string>('');
     // Delete user modal
     const[ deleteModalShow, setDDeleteModalShow ] = useState<boolean>(false);
+    // Update password modal
+    const[ passwordModalShow, setPasswordModalShow ] = useState<boolean>(false);
 
     useEffect(()=>{
         if(typeof(props.user?.username) === 'string') setUsername(props.user.username);
@@ -67,7 +70,7 @@ const SettingsAccount = (props:{user:any|null})=>{
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}></Form.Label>
                     <Col sm={6}>
-                        <Button variant={'primary'} disabled={disabled}>Change password</Button>
+                        <Button variant={'primary'} disabled={disabled} onClick={()=>{setPasswordModalShow(true)}}>Change password</Button>
                     </Col>
                 </Form.Group>
                 <NotificationBox message={message} isError={isError} />
@@ -78,6 +81,7 @@ const SettingsAccount = (props:{user:any|null})=>{
             </Form>
 
             <SettingsAccountDeleteModal show={deleteModalShow} onClose={()=>{setDDeleteModalShow(false)}}/>
+            <SettingsAccountUpdatePasswordModal show={passwordModalShow} onClose={()=>{setPasswordModalShow(false)}} />
         </>
     );
 }
