@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import NotificationBox from "./Notification";
-import StatusIndicator from "./StatusIndicator";
-import { direct_getSystemApplicationInfo, direct_updateSystemApplication } from "../api/directMethods";
+import NotificationBox from "../Notification";
+import { direct_getSystemApplicationInfo, direct_updateSystemApplication } from "../../api/directMethods";
 
 const AssetSystemSoftware = (props:{assetId:string, assetShadow:any })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
-import NotificationBox from "./Notification";
+import NotificationBox from "../Notification";
 
 const AssetSystemHardware = (props:{assetId:string, assetShadow:any })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);

@@ -2,9 +2,9 @@ import { useState } from "react";
 import { Alert, Button, Carousel, Form, FormGroup, Modal } from "react-bootstrap";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { api_things_claim } from "../api/things";
-import LoaderOverlay from "./LoadingOverlay";
-import NotificationBox from "./Notification";
+import { api_things_claim } from "../../api/things";
+import LoaderOverlay from "../LoadingOverlay";
+import NotificationBox from "../Notification";
 
 const AssetAddNewModal = ( props:{ show:boolean, onClose:Function })=>{
     // device ID

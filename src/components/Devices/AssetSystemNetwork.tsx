@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Col, Form, Row } from "react-bootstrap";
-import NotificationBox from "./Notification";
-import { direct_getSystemNetworkInfo } from "../api/directMethods";
+import NotificationBox from "../Notification";
+import { direct_getSystemNetworkInfo } from "../../api/directMethods";
 
 
 const AssetSystemNetwork = (props:{assetId:string, assetShadow:any })=>{

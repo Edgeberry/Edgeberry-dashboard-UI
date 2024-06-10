@@ -1,10 +1,10 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import NotificationBox from "./Notification";
+import NotificationBox from "../Notification";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faUser } from "@fortawesome/free-solid-svg-icons";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 import SettingsAccountDeleteModal from "./SettingsAccountDeleteModal";
-import { api_user_updateProfile } from "../api/user";
+import { api_user_updateProfile } from "../../api/user";
 import SettingsAccountUpdatePasswordModal from "./SettingsAccountUpdatePasswordModal";
 
 const SettingsAccount = (props:{user:any|null})=>{

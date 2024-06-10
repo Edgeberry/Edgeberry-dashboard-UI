@@ -1,7 +1,7 @@
 import { SyntheticEvent, useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import NotificationBox from "./Notification";
-import { api_user_updatePassword } from "../api/user";
+import NotificationBox from "../Notification";
+import { api_user_updatePassword } from "../../api/user";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faKey } from "@fortawesome/free-solid-svg-icons";

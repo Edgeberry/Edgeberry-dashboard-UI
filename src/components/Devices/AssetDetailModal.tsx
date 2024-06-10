@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { Button, Modal, Tab, Tabs } from "react-bootstrap";
-import CommandModal from "./CommandModal";
+import CommandModal from "../CommandModal";
 import AssetApplication from "./AssetApplication";
 import { faArrowRightArrowLeft, faLocationDot, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AssetConnection from "./AssetConnection";
 import AssetSystem from "./AssetSystem";
-import StatusIndicator from "./StatusIndicator";
-import { api_things_getThingDescription, api_things_getThingShadow } from "../api/things";
+import StatusIndicator from "../StatusIndicator";
+import { api_things_getThingDescription, api_things_getThingShadow } from "../../api/things";
 import AssetSystemNetwork from "./AssetSystemNetwork";
-import NotificationBox from "./Notification";
-import { direct_identifySystem, direct_restartSystem } from "../api/directMethods";
+import NotificationBox from "../Notification";
+import { direct_identifySystem, direct_restartSystem } from "../../api/directMethods";
 
 const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Function })=>{
     const[ description, setDescription ] = useState<any|null>(null);

@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
-import NotificationBox from "./Notification";
-import StatusIndicator from "./StatusIndicator";
-import { direct_getApplicationInfo, direct_restartApplication, direct_stopApplication } from "../api/directMethods";
+import NotificationBox from "../Notification";
+import StatusIndicator from "../StatusIndicator";
+import { direct_getApplicationInfo, direct_restartApplication, direct_stopApplication } from "../../api/directMethods";
 
 const AssetApplication = (props:{assetId:string})=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);

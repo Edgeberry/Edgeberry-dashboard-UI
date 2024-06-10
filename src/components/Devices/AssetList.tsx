@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { api_things_getThingIndex, api_things_getThingShadow, api_things_getThingsList } from "../api/things";
-import NotificationBox from "./Notification";
+import { api_things_getThingIndex, api_things_getThingShadow, api_things_getThingsList } from "../../api/things";
+import NotificationBox from "../Notification";
 import { useNavigate } from "react-router-dom";
-import StatusIndicator from "./StatusIndicator";
+import StatusIndicator from "../StatusIndicator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLocationDot, faPencil, faPowerOff } from "@fortawesome/free-solid-svg-icons";
-import { direct_identifySystem, direct_restartSystem } from "../api/directMethods";
-import LoaderOverlay from "./LoadingOverlay";
+import { direct_identifySystem, direct_restartSystem } from "../../api/directMethods";
+import LoaderOverlay from "../LoadingOverlay";
 
 const AssetList = (props:{selected?:string})=>{
     const[ message, setMessage ] = useState<string>('');

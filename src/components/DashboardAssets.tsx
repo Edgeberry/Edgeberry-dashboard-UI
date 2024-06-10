@@ -1,12 +1,12 @@
 import { Button, Container } from "react-bootstrap";
-import AssetList from "./AssetList";
+import AssetList from "./Devices/AssetList";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import AssetDetailModal from "./AssetDetailModal";
-import AssetListHeader from "./AssetListHeader";
+import AssetDetailModal from "./Devices/AssetDetailModal";
+import AssetListHeader from "./Devices/AssetListHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import AssetAddNewModal from "./AssetAddNewModal";
+import AssetAddNewModal from "./Devices/AssetAddNewModal";
 
 const Assets = (props:{user:any})=>{
     const { assetId } = useParams();

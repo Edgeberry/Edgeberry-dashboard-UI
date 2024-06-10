@@ -1,8 +1,8 @@
-import { SyntheticEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import NotificationBox from "./Notification";
-import { direct_getConnectionParameters, direct_reconnect, direct_reprovision, direct_updateConnectionParameters } from "../api/directMethods";
-import CertificateControl from "./CertificateControl";
+import NotificationBox from "../Notification";
+import { direct_getConnectionParameters, direct_reconnect, direct_reprovision, direct_updateConnectionParameters } from "../../api/directMethods";
+import CertificateControl from "../CertificateControl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRetweet } from "@fortawesome/free-solid-svg-icons";
 

@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import NotificationBox from "./Notification";
-import { api_things_delete, api_things_getThingDescription, api_things_updateThingDescription } from "../api/things";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import NotificationBox from "../Notification";
+import { api_things_delete, api_things_getThingDescription, api_things_updateThingDescription } from "../../api/things";
 
 const AssetAttributes = ( props:{assetId:string, assetShadow:any })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);

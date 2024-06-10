@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Alert, Button, Col, Form, Row } from "react-bootstrap";
-import NotificationBox from "./Notification";
+import NotificationBox from "../Notification";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrochip, faWarning } from "@fortawesome/free-solid-svg-icons";
-import CertificateControl from "./CertificateControl";
-import { api_dashboard_provisioningParameters } from "../api/dashboard";
+import CertificateControl from "../CertificateControl";
+import { api_dashboard_provisioningParameters } from "../../api/dashboard";
 
 const SettingsDevices = (props:{user:any|null})=>{
     // Notificaton

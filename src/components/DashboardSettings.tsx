@@ -1,7 +1,7 @@
 import { Container } from "react-bootstrap";
 import { Navigate } from "react-router-dom";
-import SettingsAccount from "./SettingsAccount";
-import SettingsDevices from "./SettingsDevices";
+import SettingsAccount from "./Settings/SettingsAccount";
+import SettingsDevices from "./Settings/SettingsDevices";
 
 const Settings = (props:{user:any|null})=>{
     // When no user is logged in, navigate to the
