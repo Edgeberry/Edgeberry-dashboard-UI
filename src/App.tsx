@@ -30,6 +30,7 @@ import { useEffect, useState } from 'react';
 import Logout from './Pages/Logout';
 import Register from './Pages/Register';
 import ActivateAccount from './Pages/ActivateAccount';
+import Admin from './Pages/Admin';
 
 function App() {
   const[ user, setUser ] = useState<any|null>(null);
@@ -65,7 +66,7 @@ function App() {
         <Route path='/dashboard/activate' element={<ActivateAccount user={user} />} />
         <Route path='/dashboard' element={<Dashboard user={user}/>}>
           <Route index element={<Navigate to="/dashboard/assets" />} />
-          <Route path='/dashboard/login' element={<Login user={user} onLogin={()=>{onLogin()}}/>} />
+          <Route path='/dashboard/admin' element={<Admin user={user} />} />
           <Route path='/dashboard/logout' element={<Logout user={user} onLogout={()=>{onLogin()}}/>} />
           <Route path='/dashboard/assets' element={<Assets user={user}/>} />
           <Route path='/dashboard/assets/:assetId' element={<Assets user={user}/>} />
