@@ -1,7 +1,7 @@
 import { Button, Container, ListGroup, Nav, Navbar, Offcanvas } from "react-bootstrap";
 import logo from '../EdgeBerry_Logo_text.svg';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars, faGear, faMicrochip, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faCogs, faGear, faMicrochip, faSignOutAlt, faUnlockKeyhole } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -32,15 +32,20 @@ const NavigationBar = (props:{user:any|null})=>{
                 </Offcanvas.Header>
                 <Offcanvas.Body style={{padding:'0px'}}>
                     <ListGroup>
-                        <ListGroup.Item as={Link} to='/dashboard/settings' onClick={()=>{setShow(false)}}>
-                            <FontAwesomeIcon icon={faGear} /> Settings
-                        </ListGroup.Item>
                         <ListGroup.Item as={Link} to='/dashboard/assets' onClick={()=>{setShow(false)}}>
                             <FontAwesomeIcon icon={faMicrochip} /> Devices
+                        </ListGroup.Item>
+                        <ListGroup.Item as={Link} to='/dashboard/settings' onClick={()=>{setShow(false)}}>
+                            <FontAwesomeIcon icon={faCogs} /> Settings
                         </ListGroup.Item>
                         <ListGroup.Item as={Link} to='/dashboard/logout' onClick={()=>{setShow(false)}}>
                             <FontAwesomeIcon icon={faSignOutAlt} /> Log out
                         </ListGroup.Item>
+                        {props.user?.roles.filter((role:string)=>{role.includes("admin")})?<>
+                        <hr/>
+                        <ListGroup.Item as={Link} to='/dashboard/admin' onClick={()=>{setShow(false)}}>
+                            <FontAwesomeIcon icon={faUnlockKeyhole} /> Admin
+                        </ListGroup.Item></>:<></>}
                     </ListGroup>
                     <Container className="container-bottom" style={{fontSize:'0.8vw'}}>
                         <hr/>
