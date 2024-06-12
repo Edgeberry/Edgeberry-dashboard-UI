@@ -2,6 +2,7 @@ import { Alert, Container, Tab, Tabs } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle, faMicrochip, faUnlockKeyhole, faUser } from '@fortawesome/free-solid-svg-icons';
 import { Navigate } from 'react-router-dom';
+import AdminDevices from '../components/Admin/AdminDevices';
 
 function Admin(props:{user:any}) {
 
@@ -23,6 +24,7 @@ function Admin(props:{user:any}) {
           </Tab>
           <Tab eventKey="devices" title={<><FontAwesomeIcon icon={faMicrochip}/> Devices</>}>
             <Alert><FontAwesomeIcon icon={faInfoCircle}/> Tools for managing the devices.</Alert>
+            <AdminDevices user={props.user} />
           </Tab>
         </Tabs>
       </Container>
