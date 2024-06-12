@@ -18,7 +18,7 @@ function Admin(props:{user:any}) {
         <h2><FontAwesomeIcon icon={faUnlockKeyhole}/> Admin tools</h2>
         <p>Tools for administration of the Edgeberry Dashboard</p>
         <hr/>
-        <Tabs defaultActiveKey="users" className="mb-3">
+        <Tabs defaultActiveKey="devices" className="mb-3">
           <Tab eventKey="users" title={<><FontAwesomeIcon icon={faUser} /> Users</>}>
             <Alert><FontAwesomeIcon icon={faInfoCircle}/> Tools for managing the Dashboard users.</Alert>
           </Tab>

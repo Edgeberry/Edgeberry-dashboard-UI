@@ -3,6 +3,7 @@ import { Button, Col, Form, Modal, Row } from "react-bootstrap";
 import NotificationBox from "../Notification";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrochip } from "@fortawesome/free-solid-svg-icons";
+import { api_admin_onboardDevice } from "../../api/admin";
 
 const AdminDeviceOnboardingModal = ( props:{ show:boolean, onClose:Function })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
@@ -12,6 +13,7 @@ const AdminDeviceOnboardingModal = ( props:{ show:boolean, onClose:Function })=>
     // Fields
     const[ deviceId, setDeviceId ] = useState<string>('');
     const[ hardwareVersion, setHardwareVersion ] = useState<string>('');
+    const[ batchNumber, setBatchNumber ] = useState<string>('');
 
     // Disappearing messages
     useEffect(()=>{
@@ -27,11 +29,18 @@ const AdminDeviceOnboardingModal = ( props:{ show:boolean, onClose:Function })=>
         e.preventDefault();   // prevents page refresh
         setDisabled(true);
 
-        setTimeout(()=>{
+        const result = await api_admin_onboardDevice( deviceId, hardwareVersion, batchNumber);
+
+        if( result.message !== 'success'){
             setDisabled(false);
-            setIsError(false);
-            setMessage("Device onboarding was successful!")
-        },750);
+            setIsError(true);
+            setMessage(result.message);
+            return;
+        }
+        setDisabled(false);
+        setIsError(false);
+        setMessage("Device onboarding was successful!");
+        return;
     }
 
    
@@ -54,17 +63,10 @@ const AdminDeviceOnboardingModal = ( props:{ show:boolean, onClose:Function })=>
                                 <Form.Control type={'text'} placeholder={'e.g. 1.6'} value={hardwareVersion} onChange={(e)=>{setHardwareVersion(e.target.value)}} required disabled={disabled}/>
                             </Col>
                         </Form.Group>
-                        <hr/>
                         <Form.Group as={Row} className="mb-2">
-                            <Form.Label column sm={4}>Manufacturer</Form.Label>
+                            <Form.Label column sm={4}>Batch number</Form.Label>
                             <Col sm={6}>
-                                <Form.Control type={'text'} placeholder={'e.g. Seeed Studio'} value={hardwareVersion} onChange={(e)=>{setHardwareVersion(e.target.value)}} required disabled={disabled}/>
-                            </Col>
-                        </Form.Group>
-                        <Form.Group as={Row} className="mb-2">
-                            <Form.Label column sm={4}>Batch ID</Form.Label>
-                            <Col sm={6}>
-                                <Form.Control type={'text'} placeholder={'e.g. 1428420'} value={hardwareVersion} onChange={(e)=>{setHardwareVersion(e.target.value)}} required disabled={disabled}/>
+                                <Form.Control type={'text'} placeholder={'e.g. 1428420'} value={batchNumber} onChange={(e)=>{setBatchNumber(e.target.value)}} required disabled={disabled}/>
                             </Col>
                         </Form.Group>
                         <hr/>
