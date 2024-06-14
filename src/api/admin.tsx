@@ -25,3 +25,21 @@ export async function api_admin_onboardDevice( id:string, version:string, batch:
         return {message:err.toString()};
     }
 }
+
+/*
+ *  List Users
+ *  List all the users of the Edgeberry Dashboard
+ */
+export async function api_admin_getUserList(){
+    const response = await fetch( window.location.origin+'/api/admin/users/list',{
+        method: 'GET',
+        headers: {'Content-Type': 'application/json'},
+        credentials: 'include'
+    });
+    try{
+        let content = await response.json();
+        return content;
+    } catch(err:any){
+        return {message:err.toString()};
+    }
+}
