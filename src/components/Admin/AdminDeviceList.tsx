@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
-import { api_things_getThingIndex, api_things_getThingShadow, api_things_getThingsList } from "../../api/things";
+import { Card, Col, Container, Row } from "react-bootstrap";
+import { api_things_getThingIndex, api_things_getThingShadow} from "../../api/things";
 import NotificationBox from "../Notification";
-import { useNavigate } from "react-router-dom";
 import StatusIndicator from "../StatusIndicator";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPencil, faPowerOff } from "@fortawesome/free-solid-svg-icons";
-import { direct_identifySystem, direct_restartSystem } from "../../api/directMethods";
+import { direct_identifySystem } from "../../api/directMethods";
 import LoaderOverlay from "../LoadingOverlay";
+import { api_admin_getDeviceList } from "../../api/admin";
 
 const AdminDeviceList = (props:{selected?:string})=>{
     const[ message, setMessage ] = useState<string>('');
@@ -20,7 +18,7 @@ const AdminDeviceList = (props:{selected?:string})=>{
 
     /* Get the list of things from the API */
     async function getThingsList(){
-        const result = await api_things_getThingsList();
+        const result = await api_admin_getDeviceList();
         if( result.message ){
             setIsError(true);
             setMessage(result.message);
