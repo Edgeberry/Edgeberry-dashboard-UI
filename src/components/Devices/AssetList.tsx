@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { Button, Card, Col, Container, Row } from "react-bootstrap";
+import { Alert, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { api_things_getThingIndex, api_things_getThingShadow, api_things_getThingsList } from "../../api/things";
 import NotificationBox from "../Notification";
 import { useNavigate } from "react-router-dom";
 import StatusIndicator from "../StatusIndicator";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLocationDot, faPencil, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faInfoCircle, faLocationDot, faPencil, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { direct_identifySystem, direct_restartSystem } from "../../api/directMethods";
 import LoaderOverlay from "../LoadingOverlay";
 
@@ -32,9 +32,14 @@ const AssetList = (props:{selected?:string})=>{
     return(
         <Container>
             <NotificationBox message={message} isError={isError}/>
-            <Row className="asset-cartdeck" >
-                {thingList.map((thing:any, index:number)=>{return <AssetListItem thing={thing} key={thing.name+'-'+index} selected={props.selected===thing.thingName}/>})}
-            </Row>
+            {thingList.length >= 1?
+                <Row className="asset-cartdeck" >
+                    {thingList.map((thing:any, index:number)=>{return <AssetListItem thing={thing} key={thing.name+'-'+index} selected={props.selected===thing.thingName}/>})}
+                </Row>:
+                <Alert>
+                    <FontAwesomeIcon icon={faInfoCircle} /> <strong>You don't seem to have any devices yet</strong>. To add your first device, click the 'Add device' button below.
+                </Alert>
+            }
         </Container>
     );
 }
