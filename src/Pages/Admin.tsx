@@ -9,7 +9,7 @@ function Admin(props:{user:any}) {
 
   // If someone gets here without administration access,
   // return to the main page of the dashboard
-  if(!props.user || !props.user?.roles.filter((role:string)=>{role.includes("admin")})){
+  if(props?.user?.roles?.indexOf("admin") <= -1){
     return <Navigate to="/dashboard"/>
   }
 

@@ -41,7 +41,7 @@ const NavigationBar = (props:{user:any|null})=>{
                         <ListGroup.Item as={Link} to='/dashboard/logout' onClick={()=>{setShow(false)}}>
                             <FontAwesomeIcon icon={faSignOutAlt} /> Log out
                         </ListGroup.Item>
-                        {props.user?.roles.filter((role:string)=>{role.includes("admin")})?<>
+                        {props?.user?.roles?.indexOf("admin") > -1?<>
                         <hr/>
                         <ListGroup.Item as={Link} to='/dashboard/admin' onClick={()=>{setShow(false)}}>
                             <FontAwesomeIcon icon={faUnlockKeyhole} /> Admin
