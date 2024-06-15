@@ -84,12 +84,12 @@ const AssetAttributes = ( props:{assetId:string, assetShadow:any })=>{
                         <Form.Control type={'text'} placeholder={'Device Group'} value={deviceGroup} onChange={(e)=>{setDeviceGroup(e.target.value)}} disabled={disabled}/>
                     </Col>
                 </Form.Group>
-                <Form.Group as={Row} className="mb-2">
+                {/*<Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Device owner ID</Form.Label>
                     <Col sm={6}>
                         <Form.Control type={'text'} placeholder={'Device owner ID'} value={deviceOwnerId} disabled/>
                     </Col>
-                </Form.Group>
+    </Form.Group>*/}
                 <NotificationBox message={message} isError={isError} />
                 <div style={{width:'100%', textAlign:'right'}}>
                     <Button variant={'primary'} onClick={()=>{saveAttributes()}} disabled={disabled}>Save</Button>&nbsp;
