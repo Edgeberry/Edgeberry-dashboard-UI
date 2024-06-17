@@ -140,7 +140,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
                     <Button variant={'primary'} className="asset-card-menu-btn" onClick={navigateToAssetDetails}><FontAwesomeIcon icon={faPencil}/></Button>
                     <Button variant={'danger'} className="asset-card-menu-btn" onClick={restartDevice}><FontAwesomeIcon icon={faPowerOff}/></Button>
                 </div>
-                <Card.Img variant="top" src={process.env.PUBLIC_URL+'/Edgeberry_rendering.png'} style={{minHeight:'200px'}} onClick={()=>{direct_identifySystem(props.thing.thingName)}} />
+                <Card.Img variant="top" src={process.env.PUBLIC_URL+'/Edgeberry_rendering.png'} style={{minHeight:'200px'}} onClick={navigateToAssetDetails} />
                 <Card.Body className="asset-card-body">
                 <Card.Title className="asset-card-title">
                     <StatusIndicator noText message={connected?"Online":"Offline"} type={connected?"success":"danger"} />&nbsp;
