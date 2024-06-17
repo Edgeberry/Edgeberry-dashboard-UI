@@ -127,7 +127,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     // When 'power' is clicked, reboot the device
     function restartDevice(){
         // Ask the user if they are sure; they love that
-        if( !window.confirm("Restart '"+deviceName?deviceName:props.thing.thingName+"'?")) return;
+        if( !window.confirm('Restart this device?')) return;
         direct_restartSystem(props.thing.thingName);
     }
 
