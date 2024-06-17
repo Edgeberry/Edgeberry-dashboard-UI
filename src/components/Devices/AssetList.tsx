@@ -107,7 +107,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
             return setSpinner(true, result.message, 'Retry later...');
         }
         // The device hardware platform is also in this info
-        setDevicePlatform(result?.state?.reported?.system?.system?.platform);
+        setDevicePlatform(result?.state?.reported?.system?.system?.board+" Rev.:"+result?.state?.reported?.system?.system?.board_version);
 
         // The system state is maybe too deeply nested in the
         // 'thing shadow', but here it is. If the system is not 'running',
