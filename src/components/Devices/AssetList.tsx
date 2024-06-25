@@ -121,7 +121,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     // When 'edit' is clicked, navigate to details
     const navigate = useNavigate();
     function navigateToAssetDetails(){
-        navigate('/dashboard/assets/'+props.thing.thingName);
+        navigate('/assets/'+props.thing.thingName);
     }
 
     // When 'power' is clicked, reboot the device
