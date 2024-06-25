@@ -4,7 +4,7 @@
 The user interface for the [Edgeberry Dashboard](https://github.com/SpuQ/Edgeberry-dashboard) web application.
 
 ## License & Collaboration
-**Copyright© 2024 Sanne 'SpuQ' Santens**. The Edgeberry Dashboard project is licensed under the **[GNU GPLv3](LICENSE.txt)**.
+**Copyright© 2024 Sanne 'SpuQ' Santens**. The Edgeberry Dashboard project is licensed under the **[GNU GPLv3](LICENSE.txt)**. The [Rules & Guidelines](https://github.com/Edgeberry/.github/blob/main/brand/Edgeberry_Trademark_Rules_and_Guidelines.md) apply to the usage of the Edgeberry™ brand.
 
 If you'd like to contribute to this project, please follow these guidelines:
 1. Fork the repository and create your branch from `main`.
