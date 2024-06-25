@@ -32,7 +32,8 @@ body {
 .App {
   text-align: center;
   min-height: 100vh;
-  background-image: url('/public/Edgeberry_octopus.png');
+  background-image: url('/public/Laika_Guevara.png');
+  background-size: 25vw;
   background-repeat: no-repeat;
   background-position: bottom right;
 }
