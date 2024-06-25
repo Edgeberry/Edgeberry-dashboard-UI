@@ -13,8 +13,8 @@ const NavigationBar = (props:{user:any|null})=>{
         <>
             <Navbar sticky="top" bg={'dark'} data-bs-theme={'dark'}>
                 <Container className="container-fluid" style={{paddingRight:'10px', paddingLeft:'10px'}}>
-                    <Navbar.Brand href='/dashboard'>
-                        <img src={logo} alt="EdgeBerry.io" height={'32px'}/>
+                    <Navbar.Brand href='/'>
+                        <img src={logo} alt="Edgeberry Dashboard" height={'32px'}/>
                     </Navbar.Brand>
 
                     {props.user?<>
