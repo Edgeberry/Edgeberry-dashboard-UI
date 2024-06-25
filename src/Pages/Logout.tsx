@@ -16,7 +16,7 @@ const Logout = (props:{user:any|null, onLogout:Function }) => {
         // Call the onLogout function
         props.onLogout();
         // Navigate to login
-        navigate('/dashboard/login');
+        navigate('/login');
     }
 
     return(<p>Logging out...</p>);

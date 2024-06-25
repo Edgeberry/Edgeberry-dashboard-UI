@@ -32,24 +32,24 @@ const NavigationBar = (props:{user:any|null})=>{
                 </Offcanvas.Header>
                 <Offcanvas.Body style={{padding:'0px'}}>
                     <ListGroup>
-                        <ListGroup.Item as={Link} to='/dashboard/assets' onClick={()=>{setShow(false)}}>
+                        <ListGroup.Item as={Link} to='/assets' onClick={()=>{setShow(false)}}>
                             <FontAwesomeIcon icon={faMicrochip} /> Devices
                         </ListGroup.Item>
-                        <ListGroup.Item as={Link} to='/dashboard/settings' onClick={()=>{setShow(false)}}>
+                        <ListGroup.Item as={Link} to='/settings' onClick={()=>{setShow(false)}}>
                             <FontAwesomeIcon icon={faCogs} /> Settings
                         </ListGroup.Item>
-                        <ListGroup.Item as={Link} to='/dashboard/logout' onClick={()=>{setShow(false)}}>
+                        <ListGroup.Item as={Link} to='/logout' onClick={()=>{setShow(false)}}>
                             <FontAwesomeIcon icon={faSignOutAlt} /> Log out
                         </ListGroup.Item>
                         {props?.user?.roles?.indexOf("admin") > -1?<>
                         <hr/>
-                        <ListGroup.Item as={Link} to='/dashboard/admin' onClick={()=>{setShow(false)}}>
+                        <ListGroup.Item as={Link} to='/admin' onClick={()=>{setShow(false)}}>
                             <FontAwesomeIcon icon={faUnlockKeyhole} /> Admin
                         </ListGroup.Item></>:<></>}
                     </ListGroup>
                     <Container className="container-bottom" style={{fontSize:'0.8vw'}}>
                         <hr/>
-                        <p>Edgeberry Dashboard is open-source software. The source code is available on the <a href={'https://github.com/edgeberry/'} target={'_blank'}>Edgeberry GitHub</a>.</p>
+                        <p>Edgeberry Dashboard is open-source software. The source code is available on the <a href={'https://github.com/Edgeberry/'} target={'_blank'}>Edgeberry GitHub</a>.</p>
                     </Container>
                 </Offcanvas.Body>
             </Offcanvas>

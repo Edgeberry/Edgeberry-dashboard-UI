@@ -26,11 +26,11 @@ const Assets = (props:{user:any})=>{
 
     const navigate = useNavigate();
     function clearSelected(){
-        navigate('/dashboard/assets');
+        navigate('/assets');
     }
 
     if( !props.user ){
-        return <Navigate to='/dashboard/login' />;
+        return <Navigate to='/login' />;
     }
     return (
         <>

@@ -25,7 +25,7 @@ const Login = (props:{user:any, onLogin:Function }) => {
     
     // if a user is logged in, redirect to home
     if( props.user ){
-        return (<Navigate to='/dashboard/assets' />);
+        return (<Navigate to='/assets' />);
     }
 
     return(
@@ -43,7 +43,7 @@ const Login = (props:{user:any, onLogin:Function }) => {
                     </Form.Group>
                     <NotificationBox message={message} isError={true} />
                     <Button variant={'primary'} className="w-100 btn btn-lg mb-2" type="submit">Log in</Button>
-                    <p>No account yet? <Link to='/dashboard/register'>Register</Link> now</p>
+                    <p>No account yet? <Link to='/register'>Register</Link> now</p>
                 </Form>
             </Container>
         </Container>

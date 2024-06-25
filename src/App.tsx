@@ -59,19 +59,19 @@ function App() {
     <div className="App">
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Routes>
-      <Route index element={<Navigate to="/dashboard/assets" />} />
+      <Route index element={<Navigate to="/assets" />} />
         {/* Dashboard: nested routes */}
-        <Route path='/dashboard/login' element={<Login user={user} onLogin={()=>{onLogin()}}/>} />
-        <Route path='/dashboard/register' element={<Register user={user} onLogin={()=>{onLogin()}}/>} />
-        <Route path='/dashboard/activate' element={<ActivateAccount user={user} />} />
-        <Route path='/dashboard' element={<Dashboard user={user}/>}>
+        <Route path='/login' element={<Login user={user} onLogin={()=>{onLogin()}}/>} />
+        <Route path='/register' element={<Register user={user} onLogin={()=>{onLogin()}}/>} />
+        <Route path='/activate' element={<ActivateAccount user={user} />} />
+        <Route path='/' element={<Dashboard user={user}/>}>
           <Route index element={<Navigate to="/dashboard/assets" />} />
-          <Route path='/dashboard/admin' element={<Admin user={user} />} />
-          <Route path='/dashboard/logout' element={<Logout user={user} onLogout={()=>{onLogin()}}/>} />
-          <Route path='/dashboard/assets' element={<Assets user={user}/>} />
-          <Route path='/dashboard/assets/:assetId' element={<Assets user={user}/>} />
-          <Route path='/dashboard/settings' element={<Settings user={user} />}/>
-          <Route path='/dashboard/*' element={<NotFound />} />
+          <Route path='/admin' element={<Admin user={user} />} />
+          <Route path='/logout' element={<Logout user={user} onLogout={()=>{onLogin()}}/>} />
+          <Route path='/assets' element={<Assets user={user}/>} />
+          <Route path='/assets/:assetId' element={<Assets user={user}/>} />
+          <Route path='/settings' element={<Settings user={user} />}/>
+          <Route path='/*' element={<NotFound />} />
         </Route>
         <Route path='*' element={<NotFound />} />
       </Routes>
