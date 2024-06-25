@@ -1,5 +1,4 @@
-![EdgeBerry](assets/Edgeberry_banner.png)
-
+![EdgeBerry Banner](https://raw.githubusercontent.com/Edgeberry/.github/main/brand/Edgeberry_banner_dashboard.png)
 
 The user interface for the [Edgeberry Dashboard](https://github.com/SpuQ/Edgeberry-dashboard) web application.
 
