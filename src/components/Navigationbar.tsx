@@ -47,7 +47,7 @@ const NavigationBar = (props:{user:any|null})=>{
                             <FontAwesomeIcon icon={faUnlockKeyhole} /> Admin
                         </ListGroup.Item></>:<></>}
                     </ListGroup>
-                    <Container className="container-bottom" style={{fontSize:'0.8vw'}}>
+                    <Container className="container-bottom" style={{fontSize:'12px'}}>
                         <hr/>
                         <p>Edgeberry Dashboard is open-source software. The source code is available on the <a href={'https://github.com/Edgeberry/'} target={'_blank'}>Edgeberry GitHub</a>.</p>
                     </Container>
