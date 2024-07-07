@@ -132,7 +132,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     }
 
     return(
-        <Col className="asset-card-container" xl='3' lg='4' md='6' sm='6' xs='12'>
+        <Col className="asset-card-container" xl='3' lg='4' md='4' sm='6' xs='6'>
             <Card className="asset-card">
                 <LoaderOverlay text={text} subtext={subText} spinner hidden={hidden}/>
                 <div className="asset-card-menu">
