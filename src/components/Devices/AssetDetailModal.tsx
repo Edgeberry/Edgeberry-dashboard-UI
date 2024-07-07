@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Button, Modal, Tab, Tabs } from "react-bootstrap";
+import { Alert, Button, Modal, Tab, Tabs } from "react-bootstrap";
 import CommandModal from "../CommandModal";
 import AssetApplication from "./AssetApplication";
-import { faArrowRightArrowLeft, faLocationDot, faPowerOff } from "@fortawesome/free-solid-svg-icons";
+import { faArrowRightArrowLeft, faInfoCircle, faLocationDot, faPowerOff } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import AssetConnection from "./AssetConnection";
 import AssetSystem from "./AssetSystem";
@@ -97,7 +97,7 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
 
     return(<>
             <Modal size={'xl'} onHide={()=>{props.onClose()}} show={props.show} >
-                <Modal.Body>
+                <Modal.Body style={{minHeight:'50vh'}}>
                         <div style={{float:'right'}}>
                             <Button variant={'primary'} className="mb-2" onClick={()=>{setShow(true)}}><FontAwesomeIcon icon={faArrowRightArrowLeft}/></Button>&nbsp;
                             <Button variant={'primary'} className="mb-2" onClick={()=>{requestSystemIdentifycation()}} disabled={disabled}><FontAwesomeIcon icon={faLocationDot}/></Button>&nbsp;
@@ -114,9 +114,14 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
                          <CommandModal show={show} deviceId={description?.thingName?description.thingName:''} onClose={()=>{setShow(false)}}/>
 
                         <Tabs defaultActiveKey="application" className="mb-3">
+                        
                             <Tab eventKey="application" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.application?.state === 'running')?'success':'danger'}/> Application</>}>
-                                <AssetApplication assetId={props.assetId} />
+                                {/*<AssetApplication assetId={props.assetId} />*/}
+                                <Alert variant="info">
+                                    <FontAwesomeIcon icon={faInfoCircle} /> Here come the features for interaction with the device its application.
+                                </Alert>
                             </Tab>
+                
                             <Tab eventKey="connection" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.connection?.connection === 'connected')?'success':'danger'}/> Connection</>}>
                                 <AssetSystemNetwork assetId={props.assetId} assetShadow={shadow} />
                                 <hr/>
