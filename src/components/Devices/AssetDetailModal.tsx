@@ -110,7 +110,7 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
                             {shadow && shadow?.state?.reported?.system?.system?.version? shadow?.state?.reported?.system?.system?.version:'No hardware platform'} &nbsp;
                             ({shadow && shadow?.state?.reported?.system?.system?.platform? shadow?.state?.reported?.system?.system?.platform:'No hardware platform'})
                         </p>
-                        <NotificationBox message={message} isError={isError} />
+                        {/*<NotificationBox message={message} isError={isError} />*/}
                          <CommandModal show={show} deviceId={description?.thingName?description.thingName:''} onClose={()=>{setShow(false)}}/>
 
                         <Tabs defaultActiveKey="application" className="mb-3">
