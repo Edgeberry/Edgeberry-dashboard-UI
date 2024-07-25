@@ -59,7 +59,7 @@ const Register = (props:{user:any, onLogin:Function }) => {
     
     // if a user is logged in, redirect to home
     if( props.user ){
-        return (<Navigate to='/dashboard/assets' />);
+        return (<Navigate to='/assets' />);
     }
 
     return(
