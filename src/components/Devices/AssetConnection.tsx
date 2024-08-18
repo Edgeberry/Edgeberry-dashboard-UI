@@ -95,7 +95,7 @@ const AssetConnection = ( props:{assetId:string|null})=>{
         <>
             <div style={{float:'right'}}>
                 <Button variant={'danger'} className="mb-2" onClick={()=>{requestReconnect()}} disabled={disabled}><FontAwesomeIcon icon={faRetweet}/> Reconnect</Button>&nbsp;
-                <Button variant={'danger'} className="mb-2" onClick={()=>{requestReprovision()}} disabled={disabled}><FontAwesomeIcon icon={faRetweet}/> Reprovision</Button>&nbsp;
+                {/*<Button variant={'danger'} className="mb-2" onClick={()=>{requestReprovision()}} disabled={disabled}><FontAwesomeIcon icon={faRetweet}/> Reprovision</Button>&nbsp; */}
             </div>
 
             <h2>Dashboard connection</h2>
