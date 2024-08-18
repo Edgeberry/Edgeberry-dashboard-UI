@@ -12,7 +12,7 @@ import AssetSystemNetwork from "./AssetSystemNetwork";
 import NotificationBox from "../Notification";
 import { direct_identifySystem, direct_restartSystem } from "../../api/directMethods";
 
-const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Function })=>{
+const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Function, onChange?:Function })=>{
     const[ description, setDescription ] = useState<any|null>(null);
     const[ shadow, setShadow ] = useState<any|null>(null);
 
@@ -128,7 +128,7 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
                                 <AssetConnection assetId={props.assetId} />
                             </Tab>
                             <Tab eventKey="System" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.system?.state === 'running')?'success':'danger'}/> System</>}>
-                                <AssetSystem assetId={props.assetId} assetShadow={shadow} />
+                                <AssetSystem assetId={props.assetId} assetShadow={shadow} onChange={props.onChange}/>
                             </Tab>
                         </Tabs>
                 </Modal.Body>

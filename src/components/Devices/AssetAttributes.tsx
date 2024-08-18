@@ -3,7 +3,7 @@ import { Button, Col, Form, Row } from "react-bootstrap";
 import NotificationBox from "../Notification";
 import { api_things_delete, api_things_getThingDescription, api_things_updateThingDescription } from "../../api/things";
 
-const AssetAttributes = ( props:{assetId:string, assetShadow:any })=>{
+const AssetAttributes = ( props:{assetId:string, assetShadow:any, onChange?:Function })=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
@@ -66,6 +66,7 @@ const AssetAttributes = ( props:{assetId:string, assetShadow:any })=>{
             // TODO: do something with the error
             console.log(result.message);
         }
+        if(typeof(props.onChange)==='function')  props.onChange();
     }
 
     return (

@@ -6,7 +6,7 @@ import { api_things_claim } from "../../api/things";
 import LoaderOverlay from "../LoadingOverlay";
 import NotificationBox from "../Notification";
 
-const AssetAddNewModal = ( props:{ show:boolean, onClose:Function })=>{
+const AssetAddNewModal = ( props:{ show:boolean, onClose:Function, onChange?:Function })=>{
     // device ID
     const[ deviceId, setDeviceId ] = useState<string>('');
     // Loading overlay
@@ -32,6 +32,7 @@ const AssetAddNewModal = ( props:{ show:boolean, onClose:Function })=>{
             setLoading(false);
             return;
         }
+        if(typeof props.onChange === 'function') props.onChange();
         setIsError(false);
         setMessage('The device was successfully claimed!');
         setText('');

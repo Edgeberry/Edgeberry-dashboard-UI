@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { forwardRef, useEffect, useImperativeHandle, useState } from "react";
 import { Alert, Button, Card, Col, Container, Row } from "react-bootstrap";
 import { api_things_getThingIndex, api_things_getThingShadow, api_things_getThingsList } from "../../api/things";
 import NotificationBox from "../Notification";
@@ -9,10 +9,15 @@ import { faInfoCircle, faLocationDot, faPencil, faPowerOff } from "@fortawesome/
 import { direct_identifySystem, direct_restartSystem } from "../../api/directMethods";
 import LoaderOverlay from "../LoadingOverlay";
 
-const AssetList = (props:{selected?:string})=>{
+const AssetList = forwardRef((props:{selected?:string},ref)=>{
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
     const[ thingList, setThingList ] = useState<any[]>([]);
+
+    // Function callable by parent
+    useImperativeHandle(ref,()=>({
+        refresh(){ getThingsList()}       
+    }));
 
     useEffect(()=>{
         getThingsList();
@@ -20,6 +25,7 @@ const AssetList = (props:{selected?:string})=>{
 
     /* Get the list of things from the API */
     async function getThingsList(){
+        setThingList([]);
         const result = await api_things_getThingsList();
         if( result.message ){
             setIsError(true);
@@ -42,7 +48,7 @@ const AssetList = (props:{selected?:string})=>{
             }
         </Container>
     );
-}
+});
 
 
 export default AssetList;
