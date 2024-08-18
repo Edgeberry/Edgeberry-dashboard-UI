@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import AssetDetailModal from "./Devices/AssetDetailModal";
 import AssetListHeader from "./Devices/AssetListHeader";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faRetweet } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import AssetAddNewModal from "./Devices/AssetAddNewModal";
 
 const Assets = (props:{user:any})=>{
@@ -19,7 +19,6 @@ const Assets = (props:{user:any})=>{
 
     // Refresh the asset list
     function refreshAssetList(){
-        setSelectedAsset(null);
         // allow the system to implement changes (dirty?...)
         setTimeout(()=>{assetListRef.current?.refresh()},700);
     }
@@ -50,12 +49,11 @@ const Assets = (props:{user:any})=>{
                 <AssetList ref={assetListRef} selected={assetId}/>
                 <hr/>
                 <Button variant={"primary"} onClick={()=>setShowAddNew(true)}><FontAwesomeIcon icon={faPlus} />Add device</Button>
-                <Button variant={"primary"} className="mx-2" onClick={()=>refreshAssetList()}><FontAwesomeIcon icon={faRetweet} /> Refresh</Button>
             </Container>
 
             {/*Asset details Modal*/}
-            <AssetDetailModal assetId={selectedAsset?selectedAsset:''} show={selectedAsset?true:false} onClose={()=>{clearSelected()}} onChange={()=>{refreshAssetList()}}/>
-            <AssetAddNewModal show={showAddNew} onClose={()=>{setShowAddNew(false)}} onChange={()=>{refreshAssetList()}}/>
+            <AssetDetailModal assetId={selectedAsset?selectedAsset:''} show={selectedAsset?true:false} onClose={()=>{clearSelected()}} onChange={(close?:boolean)=>{refreshAssetList();if(close)setSelectedAsset(null)}}/>
+            <AssetAddNewModal show={showAddNew} onClose={()=>{setShowAddNew(false)}} onChange={(close?:boolean)=>{refreshAssetList()}}/>
         </>
     );
 }

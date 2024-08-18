@@ -52,6 +52,7 @@ const AssetAttributes = ( props:{assetId:string, assetShadow:any, onChange?:Func
             setMessage(result.message);
             return setDisabled(false);
         }
+        if(typeof(props.onChange)==='function')  props.onChange();
         setIsError(false);
         setMessage("Device attributes successfully updated!");
         return setDisabled(false);
@@ -66,7 +67,7 @@ const AssetAttributes = ( props:{assetId:string, assetShadow:any, onChange?:Func
             // TODO: do something with the error
             console.log(result.message);
         }
-        if(typeof(props.onChange)==='function')  props.onChange();
+        if(typeof(props.onChange)==='function') props.onChange(true);
     }
 
     return (
