@@ -18,8 +18,8 @@ const Settings = (props:{user:any|null})=>{
                 <p className="text-subtitle">Settings for your Edgeberry Dashboard</p>
                 <hr/>
                 <SettingsAccount user={props.user} />
-                <hr/>
-                <SettingsDevices user={props.user} />
+                {/*<hr/>
+                <SettingsDevices user={props.user} />*/}
             </Container>
         </>
     );
