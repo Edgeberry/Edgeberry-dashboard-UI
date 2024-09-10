@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import { Alert, Button, Col, Container, Form, Row } from "react-bootstrap";
 import NotificationBox from "../Notification";
-import StatusIndicator from "../StatusIndicator";
 import { direct_getApplicationInfo, direct_restartApplication, direct_stopApplication } from "../../api/directMethods";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle, faWarning } from "@fortawesome/free-solid-svg-icons";
+import { faWarning } from "@fortawesome/free-solid-svg-icons";
 
 const AssetApplication = (props:{assetId:string})=>{
     const[ disabled, setDisabled ] = useState<boolean>(false);
@@ -12,14 +11,10 @@ const AssetApplication = (props:{assetId:string})=>{
     const[ message, setMessage ] = useState<string>('');
     const[ isError, setIsError ] = useState<boolean>(false);
 
-    const[ repository, setRepository ] = useState<string>('');
-    const[ accessToken, setAccessToken ] = useState<string>('');
-    const[ privateRepo, setPrivateRepo ] = useState<boolean>(false);
     const[ appName, setAppName ] = useState<string>('');
     // Application info
     const[ appVersion, setAppVersion ] = useState<string>('');
     const[ appDescription, setAppDescription ] = useState<string>('');
-
 
     useEffect(()=>{
         getApplicationInfo();
@@ -98,29 +93,6 @@ const AssetApplication = (props:{assetId:string})=>{
                 <Button variant={'danger'} onClick={()=>{stopApplication()}}>Stop</Button>
             </div>
             <h1>Application</h1>
-            {/*<StatusIndicator message={appStatus==='online'?'Running':appStatus} type={appStatus==='online'?'success':'danger'}/>
-
-            <br/>
-            <Form.Group as={Row} className="mb-2">
-                    <Form.Label column sm={2}>Repository (tarball)</Form.Label>
-                    <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'Repository'} value={repository} onChange={(e)=>{setRepository(e.target.value)}} required disabled={disabled}/>
-                    </Col>
-                </Form.Group>
-                <Form.Group as={Row} className="mb-2">
-                    <Form.Label column sm={2}>Private repository</Form.Label>
-                    <Col sm={6}>
-                        <Form.Check type={'switch'} checked={privateRepo} onChange={(e)=>{setPrivateRepo(e.target.checked)}}/>
-                    </Col>
-                </Form.Group>
-                {privateRepo?
-                <Form.Group as={Row} className="mb-2">
-                    <Form.Label column sm={2}>Access Token</Form.Label>
-                    <Col sm={6}>
-                        <Form.Control type={'text'} placeholder={'Access Token'} value={accessToken} onChange={(e)=>{setAccessToken(e.target.value)}} required disabled={disabled}/>
-                    </Col>
-                </Form.Group>:<></>}
-                <hr/>*/}
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Application name</Form.Label>
                     <Col sm={6}>
