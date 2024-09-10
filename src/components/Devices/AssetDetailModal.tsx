@@ -105,10 +105,10 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
                         </div>
                         <h2>{description && description?.attributes?.deviceName?description.attributes.deviceName:props.assetId}</h2>
                         <p className="text-subtitle">
-                            {/*<b>{shadow?.state?.reported?.system?.system?.uuid}</b><br/>*/}
-                            {description && description?.thingTypeName? description.thingTypeName:'No asset type'} &nbsp;
+                            {/*{description && description?.thingTypeName? description.thingTypeName:'No asset type'} &nbsp;
                             {shadow && shadow?.state?.reported?.system?.system?.version? shadow?.state?.reported?.system?.system?.version:'No hardware platform'} &nbsp;
-                            ({shadow && shadow?.state?.reported?.system?.system?.platform? shadow?.state?.reported?.system?.system?.platform:'No hardware platform'})
+                            (*/}
+                            {shadow && shadow?.state?.reported?.system?.system?.platform? shadow?.state?.reported?.system?.system?.platform:'No hardware platform'} {/*})*/}
                         </p>
                         {/*<NotificationBox message={message} isError={isError} />*/}
                          <CommandModal show={show} deviceId={description?.thingName?description.thingName:''} onClose={()=>{setShow(false)}}/>
