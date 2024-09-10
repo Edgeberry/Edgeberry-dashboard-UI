@@ -116,10 +116,7 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
                         <Tabs defaultActiveKey="application" className="mb-3">
                         
                             <Tab eventKey="application" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.application?.state === 'running')?'success':'danger'}/> Application</>}>
-                                {/*<AssetApplication assetId={props.assetId} />*/}
-                                <Alert variant="info">
-                                    <FontAwesomeIcon icon={faInfoCircle} /> Here come the features for interaction with the device its application.
-                                </Alert>
+                                <AssetApplication assetId={props.assetId} />
                             </Tab>
                 
                             <Tab eventKey="connection" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.connection?.connection === 'connected')?'success':'danger'}/> Connection</>}>
