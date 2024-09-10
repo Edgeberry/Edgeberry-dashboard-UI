@@ -89,10 +89,10 @@ const AssetApplication = (props:{assetId:string})=>{
         <Container>
             {appName?<>
             <div style={{float:'right'}}>
-                <Button variant={'danger'} onClick={()=>{restartApplication()}}>Restart</Button>&nbsp;
-                <Button variant={'danger'} onClick={()=>{stopApplication()}}>Stop</Button>
+                <Button variant={'danger'} onClick={()=>{restartApplication()}} disabled>Restart</Button>&nbsp;
+                <Button variant={'danger'} onClick={()=>{stopApplication()}} disabled>Stop</Button>
             </div>
-            <h1>Application</h1>
+            <h2>Application</h2>
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}>Application name</Form.Label>
                     <Col sm={6}>
@@ -114,7 +114,7 @@ const AssetApplication = (props:{assetId:string})=>{
                 <Form.Group as={Row} className="mb-2">
                     <Form.Label column sm={2}></Form.Label>
                     <Col sm={6}>
-                        <Button variant={'danger'}>Update</Button>
+                        <Button variant={'danger'} disabled>Update</Button>
                     </Col>
                 </Form.Group>
             </>:<Alert variant={'warning'}><FontAwesomeIcon icon={faWarning}/> <strong>No application</strong> is registered to the Edgeberry service.</Alert>}
