@@ -63,6 +63,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     const[ hidden, setHidden ] = useState<boolean>(true);
     const[ text, setText ] = useState<string>('Loading');
     const[ subText, setSubText ] = useState<string>('Loading');
+    const[ spinner, showSpinner ] = useState<boolean>(true);
 
     useEffect(()=>{
         updateAsset();
@@ -71,10 +72,11 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     },[]);
 
     // Set the spinner
-    function setSpinner( visible:boolean, text?:string, subtext?:string ){
+    function setSpinner( visible:boolean, text?:string, subtext?:string, spinner?:boolean ){
         setHidden(!visible);
         setText(text?text:'');
         setSubText(subtext?subtext:'');
+        showSpinner(spinner===false?false:true);
     }
 
     // Update Asset
@@ -119,6 +121,10 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
         // 'thing shadow', but here it is. If the system is not 'running',
         // keep the spinner going and report the last known system state
         if( result?.state?.reported?.system?.system?.state !== 'running'){
+            console.log(result);
+            if( result?.metadata?.reported?.system?.system?.state?.timestamp < Math.floor((Date.now()-1000*60*5)/1000)){
+                return setSpinner(true, 'Offline', new Date(result?.metadata?.reported?.system?.system?.state?.timestamp*1000).toUTCString(),false );
+            }
             return setSpinner(true, result?.state?.reported?.system?.system?.state );
         }
         return setSpinner(false, result?.state?.reported?.system?.system?.state );
@@ -140,7 +146,7 @@ const AssetListItem = (props:{thing:any, selected:boolean})=>{
     return(
         <Col className="asset-card-container" xl='3' lg='4' md='4' sm='6' xs='6'>
             <Card className="asset-card">
-                <LoaderOverlay text={text} subtext={subText} spinner hidden={hidden}/>
+                <LoaderOverlay text={text} subtext={subText} spinner={spinner} hidden={hidden}/>
                 <div className="asset-card-menu">
                     <Button variant={'primary'} className="asset-card-menu-btn" onClick={()=>{direct_identifySystem(props.thing.thingName)}}><FontAwesomeIcon icon={faLocationDot}/></Button>
                     <Button variant={'primary'} className="asset-card-menu-btn" onClick={navigateToAssetDetails}><FontAwesomeIcon icon={faPencil}/></Button>
