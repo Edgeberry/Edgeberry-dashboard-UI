@@ -115,7 +115,7 @@ const AssetDetailModal = ( props:{ assetId:string, show:boolean, onClose:Functio
 
                         <Tabs defaultActiveKey="application" className="mb-3">
                         
-                            <Tab eventKey="application" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.application?.state === 'running')?'success':'danger'}/> Application</>}>
+                            <Tab eventKey="application" title={<><StatusIndicator message="b" noText type={(shadow && shadow?.state?.reported?.system?.application?.state === 'ok')?'success':'danger'}/> Application</>}>
                                 <AssetApplication assetId={props.assetId} />
                             </Tab>
                 
